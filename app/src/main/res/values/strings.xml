@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Pview</string>
+    <string name="slogan">내 손안에 피부 진단</string>
+    <string name="personalInfo">피부 진단을 위해 기본 정보를 입력해 주세요</string>
+    <string name="personalInfoSex">성별</string>
+    <string name="personalInfoAge">나이(만)</string>
+    <string name="clear">완료</string>
+    <string name="loadPicture">가져오기</string>
+    <string name="startPicture">촬영하기</string>
+    <string name="customCosmetics">화장품 커스텀</string>
+
+</resources>
