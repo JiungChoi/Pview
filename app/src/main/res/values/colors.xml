@@ -15,5 +15,7 @@
     <color name="textColor">#FF555555</color>
     <color name="transparent">#00000000</color>
 
+    <color name="black_24">#3D000000</color>
+
 
 </resources>

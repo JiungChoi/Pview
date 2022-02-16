@@ -64,6 +64,10 @@ class BodyActivity:AppCompatActivity() {
         findViewById(R.id.loadPictureButton)
     }
 
+    private val startPictureButton: AppCompatButton by lazy{
+        findViewById(R.id.startPictureButton)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_body)
@@ -82,7 +86,7 @@ class BodyActivity:AppCompatActivity() {
 
     private fun setInitialComponents(){
         setTab()
-        setStartPictureButton()
+        setPictureButton()
     }
 
     private fun setTab(){
@@ -113,7 +117,7 @@ class BodyActivity:AppCompatActivity() {
         })
     }
 
-    private fun setStartPictureButton(){
+    private fun setPictureButton(){
         loadPictureButton.setOnClickListener{
             when{
                 ContextCompat.checkSelfPermission(
@@ -131,6 +135,10 @@ class BodyActivity:AppCompatActivity() {
                     requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1000)
                 }
             }
+        }
+        startPictureButton.setOnClickListener {
+            val intent = Intent(this, PictureActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -186,7 +194,6 @@ class BodyActivity:AppCompatActivity() {
             2000 -> {
                 val selectedImageUri: Uri? = data?.data
                 if (selectedImageUri != null) {
-                    Log.d("here", "here")
                     setSeekBar()
                 } else {
                     Toast.makeText(this, "사진을 가져오지 못 했습니다.", Toast.LENGTH_SHORT).show()

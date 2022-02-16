@@ -8,5 +8,6 @@
     <string name="loadPicture">가져오기</string>
     <string name="startPicture">촬영하기</string>
     <string name="customCosmetics">화장품 커스텀</string>
+    <string name="image_preview">이미지미리보기</string>
 
 </resources>
