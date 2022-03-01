@@ -1,41 +1,39 @@
 package jiung.fastcampus.aop.part2.pview
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.hardware.display.DisplayManager
 import android.icu.text.SimpleDateFormat
 import android.media.MediaScannerConnection
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.camera.camera2.internal.annotation.CameraExecutor
+import androidx.appcompat.app.AlertDialog
 import androidx.camera.core.*
 import androidx.camera.core.impl.ImageOutputConfig
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import jiung.fastcampus.aop.part2.pview.databinding.ActivityMainBinding
 import jiung.fastcampus.aop.part2.pview.databinding.ActivityPictureBinding
 import jiung.fastcampus.aop.part2.pview.extensions.loadCenterCrop
 import jiung.fastcampus.aop.part2.pview.util.PathUtil
+import org.w3c.dom.Text
 
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.*
-import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import java.util.jar.Manifest
+import android.content.Context as Context1
+import android.content.Intent as Intent
 
 @Suppress("DEPRECATION")
 class PictureActivity : AppCompatActivity() {
@@ -43,16 +41,22 @@ class PictureActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var imageCapture: ImageCapture
 
+    private var personalSex: String? = null
+    private var personalAge: Int? = null
+
+    private var imgUrl: String = ""
+
     private val cameraMainExecutor by lazy {
         ContextCompat.getMainExecutor(this)
     }
     private val cameraProviderFuture by lazy { ProcessCameraProvider.getInstance(this) }
 
-    private val displayListener = object : DisplayManager.DisplayListener{
+    private val displayListener = object : DisplayManager.DisplayListener {
         override fun onDisplayChanged(displayId: Int) {
-            if (this@PictureActivity.displayId == displayId){
-                if (::imageCapture.isInitialized && root != null){
-                    imageCapture.targetRotation = root?.display?.rotation ?: ImageOutputConfig.INVALID_ROTATION
+            if (this@PictureActivity.displayId == displayId) {
+                if (::imageCapture.isInitialized && root != null) {
+                    imageCapture.targetRotation =
+                        root?.display?.rotation ?: ImageOutputConfig.INVALID_ROTATION
                 }
             }
         }
@@ -73,7 +77,7 @@ class PictureActivity : AppCompatActivity() {
     private var root: View? = null
 
     private val displayManager by lazy {
-        getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
+        getSystemService(Context1.DISPLAY_SERVICE) as DisplayManager
     }
 
     private val uriList = mutableListOf<Uri>()
@@ -85,18 +89,105 @@ class PictureActivity : AppCompatActivity() {
         root = binding.root
 
         setContentView(binding.root)
+        startPictureContextPopup()
 
-        if (allPermissionGranted()){
+        if (allPermissionGranted()) {
             startCamera(binding.viewFinder)
         } else {
-            Log.d("here", "here!!")
             ActivityCompat.requestPermissions(
                 this, REQUESTED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
         }
     }
 
-    private fun allPermissionGranted() = Companion.REQUESTED_PERMISSIONS.all{
+    private fun startPictureContextPopup() {
+        val layoutInflater = LayoutInflater.from(this)
+        val view = layoutInflater.inflate(R.layout.start_picture_context_popup, null)
+
+        val alertDialog = AlertDialog.Builder(this, R.style.CustomAlertDialog)
+            .setView(view)
+            .create()
+
+        val guideTextView = view.findViewById<TextView>(R.id.guideTextView)
+
+        val buttonConfirm =  view.findViewById<TextView>(R.id.button_confirm)
+
+        guideTextView.text = PICTURE_GUIDE_QUOTE
+
+        buttonConfirm.text = "확인"
+        buttonConfirm.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
+    }
+
+    private fun isCaringSkinContextPopup(){
+        val layoutInflater = LayoutInflater.from(this)
+        val view = layoutInflater.inflate(R.layout.caring_picture_context_popup, null)
+
+        val alertDialog = AlertDialog.Builder(this, R.style.CustomAlertDialog)
+            .setView(view)
+            .create()
+
+        val caringPercentTextView = view.findViewById<TextView>(R.id.caringPercentTextView)
+
+
+        startCountDown(caringPercentTextView, alertDialog)
+        alertDialog.show()
+    }
+
+    private fun finishPictureContextPopup(){
+
+        val layoutInflater = LayoutInflater.from(this)
+        val view = layoutInflater.inflate(R.layout.finish_picture_context_popup, null)
+
+        val alertDialog = AlertDialog.Builder(this, R.style.CustomAlertDialog)
+            .setView(view)
+            .create()
+
+        val buttonConfirm =  view.findViewById<TextView>(R.id.button_confirm)
+
+        buttonConfirm.text = "확인"
+        buttonConfirm.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+
+        alertDialog.show()
+
+    }
+
+    private var currentCountDownTimer: CountDownTimer? = null
+
+    private fun startCountDown(caringPercentTextView: TextView, alertDialog: AlertDialog) {
+        currentCountDownTimer = createCountDownTimer(1000, caringPercentTextView, alertDialog)
+        currentCountDownTimer?.start()
+    }
+
+    private fun createCountDownTimer(initialMillis: Int, caringPercentTextView: TextView, alertDialog: AlertDialog): android.os.CountDownTimer {
+        return object : android.os.CountDownTimer(initialMillis.toLong(), 10L) {
+            override fun onTick(millisUntilFinished: Long) {
+                updateRemainPercent(initialMillis-millisUntilFinished, caringPercentTextView)
+            }
+
+            override fun onFinish() {
+                stopCountDown(alertDialog)
+            }
+        }
+    }
+
+
+    private fun updateRemainPercent(percent: Long, textView : TextView) { textView.text = "%02d".format(percent/10) }
+
+    private fun stopCountDown(alertDialog: AlertDialog) {
+        currentCountDownTimer?.cancel()
+        currentCountDownTimer = null
+        alertDialog.dismiss()
+    }
+
+
+
+    private fun allPermissionGranted() = Companion.REQUESTED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
             baseContext, it
         ) == PackageManager.PERMISSION_GRANTED
@@ -112,9 +203,10 @@ class PictureActivity : AppCompatActivity() {
     }
 
 
-    private fun bindCameraUseCase() = with(binding){
+    private fun bindCameraUseCase() = with(binding) {
         val rotation = viewFinder.display.rotation
-        val cameraSelector = CameraSelector.Builder().requireLensFacing(LENS_FACING).build() // 카메라 설정 완료
+        val cameraSelector =
+            CameraSelector.Builder().requireLensFacing(LENS_FACING).build() // 카메라 설정 완료
 
         cameraProviderFuture.addListener({
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
@@ -146,28 +238,36 @@ class PictureActivity : AppCompatActivity() {
     }
 
 
-    private fun bindCaptureListener() = with(binding){
-        captureButton.setOnClickListener{
-            if (isCapturing.not()){
+    private fun bindCaptureListener() = with(binding) {
+        captureButton.setOnClickListener {
+            if (isCapturing.not()) {
                 isCapturing = true
                 captureCamera()
+                isCaringSkinContextPopup()
+                Handler().postDelayed({ finishPictureContextPopup() }, 2000L)
             }
         }
     }
 
-    private fun updateSavedImageContent(){
+    private fun updateSavedImageContent() {
         contentUri?.let {
             isCapturing = try {
                 val file = File(PathUtil.getPath(this, it) ?: throw FileNotFoundException())
-                MediaScannerConnection.scanFile(this, arrayOf(file.path), arrayOf("image/jpeg"), null)
-                Handler(Looper.getMainLooper()).post{
+                MediaScannerConnection.scanFile(this,
+                    arrayOf(file.path),
+                    arrayOf("image/jpeg"),
+                    null)
+
+
+                Handler(Looper.getMainLooper()).post {
+                    imgUrl = it.toString()
                     binding.previewImageView.loadCenterCrop(url = it.toString(), corner = 4f)
                 }
+
+
                 uriList.add(it)
-                val intent = Intent(this, BodyActivity::class.java)
-                startActivity(intent)
                 false
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
                 Toast.makeText(this, "파일이 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
                 false
@@ -188,39 +288,45 @@ class PictureActivity : AppCompatActivity() {
         )
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-        imageCapture.takePicture(outputOptions, cameraExecutor, object : ImageCapture.OnImageSavedCallback{
-            override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                val savedUri = outputFileResults.savedUri ?: Uri.fromFile(photoFile)
-                contentUri = savedUri
-                updateSavedImageContent()
-            }
+        imageCapture.takePicture(outputOptions,
+            cameraExecutor,
+            object : ImageCapture.OnImageSavedCallback {
+                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                    val savedUri = outputFileResults.savedUri ?: Uri.fromFile(photoFile)
+                    contentUri = savedUri
+                    updateSavedImageContent()
+                }
 
-            override fun onError(exception: ImageCaptureException) {
-                exception.printStackTrace()
-                isCapturing = false
-            }
+                override fun onError(exception: ImageCaptureException) {
+                    exception.printStackTrace()
+                    isCapturing = false
+                }
 
-        })
+            })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == REQUEST_CODE_PERMISSIONS){
-            if (allPermissionGranted()){
-                Log.d("he2","he2")
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            if (allPermissionGranted()) {
                 startCamera(binding.viewFinder)
             } else {
-                Log.d("he3","he3")
                 Toast.makeText(this, "현재 카메라 권한이 없습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    companion object{
+    companion object {
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUESTED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA)
         private const val LENS_FACING: Int = CameraSelector.LENS_FACING_BACK
+        private const val PICTURE_GUIDE_QUOTE =
+                "정확한 진단을 위해\n" +
+                "피뷰 렌즈 장착을 하신 후\n" +
+                "뺨의 넓은 부분을\n" +
+                "촬영해주시기 바랍니다."
+
 
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm--ss-SSS"
     }

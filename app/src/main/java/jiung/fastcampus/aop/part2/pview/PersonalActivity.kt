@@ -36,7 +36,7 @@ class PersonalActivity:AppCompatActivity() {
         spinnerSet(ageSpinner, ageSpinnerTextView)
 
         clearPersonalInfoButton.setOnClickListener {
-            val intent = Intent(this, BodyActivity::class.java)
+            val intent = Intent(this, ReferenceActivity::class.java)
             intent
                 .putExtra("sex", sexSpinnerTextView.text)
                 .putExtra("age", ageSpinnerTextView.text)

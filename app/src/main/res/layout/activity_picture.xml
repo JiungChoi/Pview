@@ -34,13 +34,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.85" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/captureButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="촬영"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/circle_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,6 +49,7 @@
     <ImageView
         android:id="@+id/previewImageView"
         android:layout_width="48dp"
+        android:layout_marginStart="20dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/button_round_corner_4_black_24"

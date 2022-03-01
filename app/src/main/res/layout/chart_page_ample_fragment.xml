@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/userIconImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/img_user_round_btn2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/resultGuideTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="15dp"
+                android:text="얼굴나이 동나이 기준"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/userIconImageView"
+                app:layout_constraintStart_toEndOf="@+id/userIconImageView"
+                app:layout_constraintTop_toTopOf="@id/userIconImageView" />
+
+            <TextView
+                android:id="@+id/userLankTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상위 36%"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/resultGuideTextView"
+                app:layout_constraintTop_toBottomOf="@id/resultGuideTextView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="2022/02/25\n13:13:40 측정"
+                android:textColor="@color/textColor_light"
+                app:layout_constraintBottom_toBottomOf="@id/userLankTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/userLankTextView" />
+
+            <View
+                android:id="@+id/chartPageTopLineView"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/gray_alpha"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userIconImageView" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/chartPageTopLineView">
+
+                <ImageView
+                    android:id="@+id/chartPageAcneImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_chart_acne"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="진정"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageAcneImageView"
+                    app:layout_constraintStart_toEndOf="@+id/chartPageAcneImageView"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageAcneImageView" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:text="(여드름)"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageAcneImageView"
+                    app:layout_constraintStart_toEndOf="@+id/chartPageAcneImageView" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

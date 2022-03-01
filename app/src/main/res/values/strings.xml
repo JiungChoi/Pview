@@ -9,5 +9,8 @@
     <string name="startPicture">촬영하기</string>
     <string name="customCosmetics">화장품 커스텀</string>
     <string name="image_preview">이미지미리보기</string>
+    <string name="personal_login_btn_text">로그인</string>
+    <string name="find_id_button_text">아이디 찾기</string>
+    <string name="find_pw_button_text">비밀번호 찾기</string>
 
 </resources>

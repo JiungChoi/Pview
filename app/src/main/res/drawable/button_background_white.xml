@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/buttonPressBlue">
+    android:color="@color/white">
 
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
             <size android:width="200dp"/>
-            <gradient android:startColor="@color/gradient_cyan_start"
-                android:endColor="@color/gradient_cyan_end"/>
-            <corners android:radius="100dp"/>
+            <solid android:color="@color/white"/>
+            <corners android:radius="30dp"/>
             <stroke android:width="1dp"
-                android:color="@color/buttonBlue"/>
+                android:color="@color/buttonGray"/>
         </shape>
     </item>
 

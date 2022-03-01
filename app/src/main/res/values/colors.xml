@@ -10,12 +10,33 @@
 
     <color name="buttonGray">#f2f2f2</color>
     <color name="buttonPressGray">#e2e2e2</color>
-    <color name="buttonBlue">#469CDC</color>
-    <color name="buttonPressBlue">#3D649F</color>
+    <color name="buttonBlue">#1E9BAC</color>
+    <color name="buttonPressBlue">#187B88</color>
     <color name="textColor">#FF555555</color>
+    <color name="textColor_light">#959595</color>
     <color name="transparent">#00000000</color>
 
     <color name="black_24">#3D000000</color>
+    <color name="gray_24">#3D515151</color>
+    <color name="gray_alert">#B8B8B8</color>
+    <color name="gray_alpha">#B7D1D1D1</color>
+
+    <color name="thumb_10">#27E7FF</color>
+    <color name="thumb_30">#0BF437</color>
+    <color name="thumb_50">#F6FF00</color>
+    <color name="thumb_80">#FF6F00</color>
+    <color name="thumb_100">#FF1100</color>
+
+    <color name="gradient_cyan_start">#1EA7AC</color>
+    <color name="gradient_cyan_mid">#2B9ED3</color>
+    <color name="gradient_cyan_end">#3987CC</color>
+    <color name="gradient_cyan_alpha">#A927E7FF</color>
+
+    <color name="red_md_pick">#FF501A</color>
+
+
+
+    <color name="alpha00">#00ff0000</color>
 
 
 </resources>
