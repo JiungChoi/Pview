@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -70,6 +71,7 @@
                 app:layout_constraintTop_toBottomOf="@id/userIconImageView" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageAcneLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
@@ -99,16 +101,695 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
+                    android:layout_marginBottom="10dp"
                     android:text="(여드름)"
                     android:textColor="@color/gradient_cyan_start"
-                    android:layout_marginBottom="10dp"
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="@+id/chartPageAcneImageView"
                     app:layout_constraintStart_toEndOf="@+id/chartPageAcneImageView" />
 
+                <TextView
+                    android:id="@+id/chartPageUserAcneResultTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:text="A3"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageAcneImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/chartPageAcneImageView" />
+
+                <ImageView
+                    android:id="@+id/chartPageAcneUpDownImageView"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/white"
+                    android:rotation="270"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageAcneImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageAcneImageView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageAcneChartLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_alpha2"
+                android:paddingBottom="20dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/chartPageAcneLayout"
+                tools:visibility="visible">
+
+                <SeekBar
+                    android:id="@+id/chartPageAcneSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="30dp"
+                    android:elevation="3dp"
+                    android:max="4"
+                    android:progress="3"
+                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
+                    android:thumb="@drawable/ic_thumb_circle"
+                    android:tickMark="@drawable/drawable_tick_mark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TableLayout
+                    android:layout_width="0dp"
+                    android:layout_height="11dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintEnd_toEndOf="@id/chartPageAcneSeekBar"
+                    app:layout_constraintStart_toStartOf="@id/chartPageAcneSeekBar"
+                    app:layout_constraintTop_toBottomOf="@id/chartPageAcneSeekBar">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="A1"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="A2"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="A3"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="A4"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </TableRow>
+                </TableLayout>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chartPageAcneLineChart"
+                    android:exported="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintTop_toBottomOf="@+id/chartPageAcneSeekBar"
+
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/chartPageAcneLineView"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_alpha"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chartPageAcneChartLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageStimulusLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/chartPageAcneChartLayout">
+
+
+                <ImageView
+                    android:id="@+id/chartPageStimulusImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_chart_stimulus"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="진정"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageStimulusImageView"
+                    app:layout_constraintStart_toEndOf="@+id/chartPageStimulusImageView"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageStimulusImageView" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="(자극완화)"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageStimulusImageView"
+                    app:layout_constraintStart_toEndOf="@+id/chartPageStimulusImageView" />
+
+                <TextView
+                    android:id="@+id/chartPageUserStimulusResultTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:text="B1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/chartPageStimulusImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageStimulusImageView" />
+
+
+                <ImageView
+                    android:id="@+id/chartPageStimulusUpDownImageView"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/white"
+                    android:rotation="270"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="@id/chartPageStimulusImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageStimulusImageView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageStimulusChartLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_alpha2"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/chartPageStimulusLayout"
+                tools:visibility="visible">
+
+                <SeekBar
+                    android:id="@+id/chartPageStimulusSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="30dp"
+                    android:elevation="3dp"
+                    android:max="3"
+                    android:progress="1"
+                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
+                    android:thumb="@drawable/ic_thumb_circle"
+                    android:tickMark="@drawable/drawable_tick_mark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TableLayout
+                    android:layout_width="0dp"
+                    android:layout_height="11dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintEnd_toEndOf="@id/chartPageStimulusSeekBar"
+                    app:layout_constraintStart_toStartOf="@id/chartPageStimulusSeekBar"
+                    app:layout_constraintTop_toBottomOf="@id/chartPageStimulusSeekBar">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="B1"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="B2"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="B3"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+
+                </TableLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/chartPageStimulusLineView"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_alpha"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chartPageStimulusChartLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageWhiteningLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/chartPageStimulusChartLayout">
+
+                <ImageView
+                    android:id="@+id/chartPageWhiteningImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_chart_whitening"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="미백"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageWhiteningImageView"
+                    app:layout_constraintStart_toEndOf="@+id/chartPageWhiteningImageView"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageWhiteningImageView" />
+
+                <TextView
+                    android:id="@+id/chartPageUserWhiteningResultTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:text="C1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageWhiteningImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageWhiteningImageView" />
+
+                <ImageView
+                    android:id="@+id/chartPageWhiteningUpDownImageView"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/white"
+                    android:rotation="270"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageWhiteningImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageWhiteningImageView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageWhiteningChartLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/gray_alpha2"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/chartPageWhiteningLayout"
+                tools:visibility="visible">
+
+                <SeekBar
+                    android:id="@+id/chartPageWhiteningSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="30dp"
+                    android:elevation="3dp"
+                    android:max="3"
+                    android:progress="1"
+                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
+                    android:thumb="@drawable/ic_thumb_circle"
+                    android:tickMark="@drawable/drawable_tick_mark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TableLayout
+                    android:layout_width="0dp"
+                    android:layout_height="11dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintEnd_toEndOf="@id/chartPageWhiteningSeekBar"
+                    app:layout_constraintStart_toStartOf="@id/chartPageWhiteningSeekBar"
+                    app:layout_constraintTop_toBottomOf="@id/chartPageWhiteningSeekBar">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="C1"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="C2"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="C3"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/chartPageWhiteningLineView"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_alpha"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chartPageWhiteningChartLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageWrinkleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/chartPageWhiteningChartLayout">
+
+                <ImageView
+                    android:id="@+id/chartPageWrinkleImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_chart_wrinkle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="주름"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageWrinkleImageView"
+                    app:layout_constraintStart_toEndOf="@+id/chartPageWrinkleImageView"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageWrinkleImageView" />
+
+                <TextView
+                    android:id="@+id/chartPageUserWrinkleResultTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:text="D1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageWrinkleImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageWrinkleImageView" />
+
+                <ImageView
+                    android:id="@+id/chartPageWrinkleUpDownImageView"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/white"
+                    android:rotation="270"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageWrinkleImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageWrinkleImageView" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageWrinkleChartLayout"
+                android:layout_width="match_parent"
+                tools:visibility="visible"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/gray_alpha2"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/chartPageWrinkleLayout">
+
+                <SeekBar
+                    android:id="@+id/chartPageWrinkleSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="30dp"
+                    android:elevation="3dp"
+                    android:max="2"
+                    android:progress="1"
+                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
+                    android:thumb="@drawable/ic_thumb_circle"
+                    android:tickMark="@drawable/drawable_tick_mark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TableLayout
+                    android:layout_width="0dp"
+                    android:layout_height="11dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintEnd_toEndOf="@id/chartPageWrinkleSeekBar"
+                    app:layout_constraintStart_toStartOf="@id/chartPageWrinkleSeekBar"
+                    app:layout_constraintTop_toBottomOf="@id/chartPageWrinkleSeekBar">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="D1"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="D2"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+
+                </TableLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/chartPageWrinkleLineView"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_alpha"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chartPageWrinkleChartLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageMoistureLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/chartPageWrinkleChartLayout">
+
+                <ImageView
+                    android:id="@+id/chartPageMoistureImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_chart_moisture"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="수분"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageMoistureImageView"
+                    app:layout_constraintStart_toEndOf="@+id/chartPageMoistureImageView"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageMoistureImageView" />
+
+                <TextView
+                    android:id="@+id/chartPageUserMoistureResultTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:text="E2"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageMoistureImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageMoistureImageView" />
+
+                <ImageView
+                    android:id="@+id/chartPageMoistureUpDownImageView"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/white"
+                    android:rotation="270"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageMoistureImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageMoistureImageView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageMoistureChartLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/gray_alpha2"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/chartPageMoistureLayout">
+
+                <SeekBar
+                    android:id="@+id/chartPageMoistureSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginHorizontal="12dp"
+                    android:elevation="3dp"
+                    android:max="2"
+                    android:progress="2"
+                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
+                    android:thumb="@drawable/ic_thumb_circle"
+                    android:tickMark="@drawable/drawable_tick_mark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginTop="30dp" />
+
+                <TableLayout
+                    android:layout_width="0dp"
+                    android:layout_height="11dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintEnd_toEndOf="@id/chartPageMoistureSeekBar"
+                    app:layout_constraintStart_toStartOf="@id/chartPageMoistureSeekBar"
+                    app:layout_constraintTop_toBottomOf="@id/chartPageMoistureSeekBar">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="E1"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="E2"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+
+                </TableLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/chartPageMoistureLineView"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_alpha"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chartPageMoistureChartLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

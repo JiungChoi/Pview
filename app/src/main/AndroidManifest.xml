@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pview"
         android:name=".PictureInit">
-        <activity android:name=".StartAppActivity">
+        <activity android:name=".StartAppActivity"
+
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

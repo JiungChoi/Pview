@@ -97,6 +97,9 @@ class PictureActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(
                 this, REQUESTED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
+            if(allPermissionGranted()){
+                startCamera(binding.viewFinder)
+            }
         }
     }
 
@@ -262,6 +265,8 @@ class PictureActivity : AppCompatActivity() {
                 Handler(Looper.getMainLooper()).post {
                     imgUrl = it.toString()
                     binding.previewImageView.loadCenterCrop(url = it.toString(), corner = 4f)
+                    //TODO, url = it, url 던져주고 진단값 받아오기
+
                 }
 
 

@@ -20,6 +20,8 @@
     <color name="gray_24">#3D515151</color>
     <color name="gray_alert">#B8B8B8</color>
     <color name="gray_alpha">#B7D1D1D1</color>
+    <color name="gray_alpha2">#85EDEDED</color>
+
 
     <color name="thumb_10">#27E7FF</color>
     <color name="thumb_30">#0BF437</color>
