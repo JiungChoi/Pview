@@ -1,6 +1,7 @@
 package jiung.fastcampus.aop.part2.pview
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -11,7 +12,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
+import androidx.camera.core.CameraSelector
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import org.w3c.dom.Text
 
@@ -83,13 +87,26 @@ class MainActivity : AppCompatActivity() {
             }
         }
         mainPictureButton.setOnClickListener {
-            startActivity(Intent(this, PictureActivity::class.java))
+            if (allPermissionGranted()) {
+                startActivity(Intent(this, PictureActivity::class.java))
+            } else {
+                ActivityCompat.requestPermissions(
+                    this, PictureActivity.REQUESTED_PERMISSIONS, PictureActivity.REQUEST_CODE_PERMISSIONS
+                )
+            }
+
+
         }
         mainChartButton.setOnClickListener {
             startActivity(Intent(this, ChartActivity::class.java))
         }
     }
 
+    private fun allPermissionGranted() = PictureActivity.REQUESTED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(
+            baseContext, it
+        ) == PackageManager.PERMISSION_GRANTED
+    }
 
     /** * Extension method to set View's height. */
     private fun View.setHeight(value: Int) {
@@ -111,7 +128,6 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
-
+        private val REQUESTED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA)
     }
-
 }
