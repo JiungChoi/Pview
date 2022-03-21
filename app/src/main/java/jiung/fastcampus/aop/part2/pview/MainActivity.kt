@@ -90,9 +90,10 @@ class MainActivity : AppCompatActivity() {
             if (allPermissionGranted()) {
                 startActivity(Intent(this, PictureActivity::class.java))
             } else {
-                ActivityCompat.requestPermissions(
-                    this, PictureActivity.REQUESTED_PERMISSIONS, PictureActivity.REQUEST_CODE_PERMISSIONS
-                )
+                ActivityCompat.requestPermissions(this, PictureActivity.REQUESTED_PERMISSIONS, PictureActivity.REQUEST_CODE_PERMISSIONS)
+                if (allPermissionGranted()){
+                    startActivity(Intent(this, PictureActivity::class.java))
+                }
             }
 
 
