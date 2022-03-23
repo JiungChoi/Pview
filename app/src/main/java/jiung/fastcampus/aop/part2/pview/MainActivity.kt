@@ -2,25 +2,29 @@ package jiung.fastcampus.aop.part2.pview
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
-import androidx.camera.core.CameraSelector
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import org.w3c.dom.Text
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.Locale
+
+
+
+
 
 class MainActivity : AppCompatActivity() {
-    private val mainCareDateTextView: TextView by lazy {
+
+
+    public val mainCareDateTextView: TextView by lazy {
         findViewById(R.id.mainCareDateTextView)
     }
 
@@ -58,7 +62,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setComponent()
+        updateCareTime()
     }
+
 
     private var mainBottomSimpleHeight: Int? = null
     private var mainCenterRectangleViewSimpleHeight: Int? = null
@@ -85,15 +91,16 @@ class MainActivity : AppCompatActivity() {
                 mainCenterRectangleControllerTextView.text = "상세보기"
 
             }
+
         }
         mainPictureButton.setOnClickListener {
             if (allPermissionGranted()) {
+                caring = true
                 startActivity(Intent(this, PictureActivity::class.java))
             } else {
-                ActivityCompat.requestPermissions(this, PictureActivity.REQUESTED_PERMISSIONS, PictureActivity.REQUEST_CODE_PERMISSIONS)
-                if (allPermissionGranted()){
-                    startActivity(Intent(this, PictureActivity::class.java))
-                }
+                ActivityCompat.requestPermissions(this,
+                    PictureActivity.REQUESTED_PERMISSIONS,
+                    PictureActivity.REQUEST_CODE_PERMISSIONS)
             }
 
 
@@ -127,8 +134,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun nowTime(): String? {
+        val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd hh:mm:ss", Locale.KOREAN)
+        dateFormat.timeZone = TimeZone.getTimeZone("Asia/Seoul")
+        return dateFormat.format(Date())
+    }
+
+    private fun updateCareTime(){
+        if (caring){
+            mainCareDateTextView.text =  nowTime() + " 측정"
+            caring = false
+        }
+    }
 
     companion object {
-        private val REQUESTED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA)
+        private var caring: Boolean = false
     }
 }

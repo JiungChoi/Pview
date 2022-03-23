@@ -23,11 +23,8 @@ import androidx.camera.core.*
 import androidx.camera.core.impl.ImageOutputConfig
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import jiung.fastcampus.aop.part2.pview.databinding.ActivityPictureBinding
@@ -55,7 +52,6 @@ class PictureActivity : AppCompatActivity() {
 
     private var personalSex: String? = null
     private var personalAge: Int? = null
-
 
     private var imgUrl: String = ""
 
@@ -106,6 +102,7 @@ class PictureActivity : AppCompatActivity() {
         startPictureContextPopup()
         startCamera(binding.viewFinder)
     }
+
 
     private fun startPictureContextPopup() {
         val layoutInflater = LayoutInflater.from(this)
@@ -308,11 +305,11 @@ class PictureActivity : AppCompatActivity() {
                     binding.previewImageView.loadCenterCrop(url = it.toString(), corner = 4f)
                 }
 
-
                 uriList.add(it)
                 flashLight(false)
                 logInToServer()
-                postUriToServer(it)
+                //postUriToServer(file)
+
                 false
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -328,8 +325,8 @@ class PictureActivity : AppCompatActivity() {
 
     private fun logInToServer() {
         //1. Json 문자열
-        val user = ("{\"email\":\"123@123.com\","
-                + "\"pw\":\"123\""
+        val user = ("{\"email\":\"${id}\","
+                + "\"pw\":\"${password}\""
                 + "}"
                 )
 
@@ -346,49 +343,50 @@ class PictureActivity : AppCompatActivity() {
         service.login(jsonObj).enqueue(object : Callback<getTokenDto> {
             override fun onResponse(call: Call<getTokenDto>, response: Response<getTokenDto>) {
                 val result: getTokenDto? = response.body()
-                Log.d("로그인", "${result.toString()}")
+                Log.d("myTag Login01", "${result.toString()}")
             }
 
             override fun onFailure(call: Call<getTokenDto>, t: Throwable) {
-                Log.e("로그인", "${t.localizedMessage}")
+                Log.e("myTag Login02", "${t.localizedMessage}")
             }
         })
     }
 
 
-    private fun postUriToServer(imgUriToString: Uri) {
-
+    private fun postUriToServer(file: File) {
         //creating a file
-        val file = File(imgUriToString.toString())
-        var fileName = "skinImg.jpg"
 
-        var requestBody : RequestBody = RequestBody.create(MediaType.parse("image/*"),file)
-        var body : MultipartBody.Part = MultipartBody.Part.createFormData("uploaded_file",fileName,requestBody)
-
-        //The gson builder
-        var gson : Gson =  GsonBuilder()
-            .setLenient()
-            .create()
+        //multipart/form-data or image/*
+        var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
+        var body: MultipartBody.Part = MultipartBody.Part.createFormData("uploaded_file",
+            file.name,
+            requestBody)
 
         //creating our api
         val service = ApiClient.getApiClient().create(RetrofitService::class.java)
 
-        // 파일, 사용자 아이디, 파일이름
-
-        service.postSkinImg(body).enqueue(object:Callback<String>{
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("레트로핏 결과1","${t.localizedMessage}")
-            }
-
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                if (response?.isSuccessful) {
-                    Toast.makeText(applicationContext, "File Uploaded Successfully...", Toast.LENGTH_LONG).show();
-                    Log.d("레트로핏 결과2",""+response?.body().toString())
-                } else {
-                    Toast.makeText(applicationContext, "Some error occurred...", Toast.LENGTH_LONG).show();
+        if (file.exists()) {
+            service.postSkinImg(body).enqueue(object : Callback<String> {
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.d("myTag PostImg01", "${t.localizedMessage}")
                 }
-            }
-        })
+
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if (response?.isSuccessful) {
+                        Toast.makeText(applicationContext,
+                            "File Uploaded Successfully...",
+                            Toast.LENGTH_LONG).show()
+                        Log.d("myTag PostImg02", "" + response?.body().toString())
+                    } else {
+                        Toast.makeText(applicationContext,
+                            "Some error occurred...",
+                            Toast.LENGTH_LONG).show()
+                    }
+                }
+            })
+        } else {
+            Log.d("myTAG 03", "파일이 존재하지 않음")
+        }
     }
 
     private var contentUri: Uri? = null
@@ -403,6 +401,7 @@ class PictureActivity : AppCompatActivity() {
             ).format(System.currentTimeMillis()) + ".jpg"
         )
 
+
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
         if (isFlashEnabled) flashLight(true)
         imageCapture.takePicture(outputOptions,
@@ -411,6 +410,7 @@ class PictureActivity : AppCompatActivity() {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val savedUri = outputFileResults.savedUri ?: Uri.fromFile(photoFile)
                     contentUri = savedUri
+
                     updateSavedImageContent()
 
                 }
@@ -453,7 +453,7 @@ class PictureActivity : AppCompatActivity() {
                     "뺨의 넓은 부분을\n" +
                     "촬영해주시기 바랍니다."
 
-        private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm--ss-SSS"
+        internal const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm--ss-SSS"
     }
 }
 

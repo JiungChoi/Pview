@@ -25,5 +25,6 @@ public interface RetrofitService {
          @Part imageFile : MultipartBody.Part
     ) : Call<String>
 
-
+    @POST("api/pview/testjson")
+    fun postString(@Header("token") token: String): Call<String>
 }
