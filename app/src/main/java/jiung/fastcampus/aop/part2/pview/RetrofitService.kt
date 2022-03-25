@@ -12,6 +12,12 @@ public interface RetrofitService {
     // Http Method 'GET / POST / PUT / DELETE / HEAD 중에서 무슨 작업인지'
     // @GET( 전체 URL 에서 URI 제외한 EndPoint )
 
+    @Multipart
+    @POST("/api/pview/skin")
+    fun postSkinImg(
+        @Part imageFile : MultipartBody.Part
+    ) : Call<getResoponseDto>
+
     @GET("{location}")
     fun getPosts(
         @Path("location") post: String?
@@ -20,10 +26,10 @@ public interface RetrofitService {
     @POST("api/auth/login/email")
     fun login(@Body user: JsonObject): Call<getTokenDto>
 
-    @Multipart
-    @POST("testimg")
-    fun postSkinImg(
-         @Part imageFile : MultipartBody.Part
-    ) : Call<getResoponseDto>
+    @POST("/api/pview/testjson")
+    fun test(): Call<getResoponseDto>
+
+
+
 
 }

@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
                 val result: getTokenDto? = response.body()
 
                 apiClient.setAuthToken(result.toString())
-                Log.d("myTag Login01", apiClient.getAuthToken())
+                Log.d("myTag Login01", "successfully received token")
             }
 
             override fun onFailure(call: Call<getTokenDto>, t: Throwable) {

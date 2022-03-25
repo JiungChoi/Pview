@@ -311,7 +311,9 @@ class PictureActivity : AppCompatActivity() {
                 uriList.add(it)
                 flashLight(false)
 
-                postUriToServer(file)
+                val fileUriAry = "$it".split("://")
+
+                postUriToServer("${fileUriAry.last()}")
                 Log.d("myTag PostImage", "PostImage 완료")
 
                 false
@@ -324,8 +326,9 @@ class PictureActivity : AppCompatActivity() {
 
 
 
-    private fun postUriToServer(file: File) {
+    private fun postUriToServer(filePath: String) {
         //creating a file
+        val file = File(filePath)
 
         //multipart/form-data or image/*
         var requestBody: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"),
@@ -338,17 +341,19 @@ class PictureActivity : AppCompatActivity() {
         //creating our api
         val service = ApiClient.getApiClient().create(RetrofitService::class.java)
 
-        val retrofit = Retrofit.Builder().baseUrl("http://118.67.131.29:5000/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
-        val service2 = retrofit.create(RetrofitService::class.java)
-
-
         if (file.exists()) {
             service.postSkinImg(body).enqueue(object : Callback<getResoponseDto> {
+
                 override fun onResponse(
                     call: Call<getResoponseDto>,
                     response: Response<getResoponseDto>,
                 ) {
+                    if (response == null){
+                        Log.d("myTag PostImg 02-2", "response is null")
+                    } else {
+                        Log.d("myTag PostImg 02-1", response.toString())
+                    }
+
                     if (response?.isSuccessful) {
                         Toast.makeText(applicationContext,
                             "File Uploaded Successfully...",

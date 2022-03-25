@@ -34,8 +34,8 @@ object ApiClient {
         if (retrofit == null){
             retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(provideOkHttpClient(AppInterceptor()))
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(provideOkHttpClient(AppInterceptor()))
                 .build()
         }
 
