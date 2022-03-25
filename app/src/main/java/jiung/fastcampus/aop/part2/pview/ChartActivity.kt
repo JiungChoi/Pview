@@ -21,7 +21,6 @@ import jiung.fastcampus.aop.part2.pview.databinding.ActivityMainBinding
 class ChartActivity : AppCompatActivity() {
 
     private lateinit var chartPageAcneLayout: ConstraintLayout
-    private val fragmentManager:FragmentManager = supportFragmentManager
 
     private val chartPageAcneUpDownImageViewList: List<ImageView> by lazy {
         mutableListOf<ImageView>().apply {
@@ -55,7 +54,6 @@ class ChartActivity : AppCompatActivity() {
         // ViewPager2의 adapter 설정
         viewPager.adapter = viewpagerFragmentAdapter
 
-        Log.d("HERE", "${viewpagerFragmentAdapter}")
 
         // ###### TabLayout과 ViewPager2를 연결
         // 1. 탭메뉴의 이름을 리스트로 생성해둔다.

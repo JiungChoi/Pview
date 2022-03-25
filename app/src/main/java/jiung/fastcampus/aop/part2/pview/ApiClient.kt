@@ -1,7 +1,9 @@
 package jiung.fastcampus.aop.part2.pview
 
+import android.util.Log
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
+import okhttp3.Interceptor.Chain
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
@@ -12,6 +14,15 @@ import java.io.IOException
 object ApiClient {
     private const val BASE_URL = "http://118.67.131.29:5000/"
     private var retrofit: Retrofit? = null
+    private var authToken: String? = " "
+
+    fun setAuthToken(token: String){
+        authToken = token
+    }
+
+    fun getAuthToken(): String {
+        return "$authToken"
+    }
 
     fun getApiClient(): Retrofit {
 
@@ -24,7 +35,7 @@ object ApiClient {
             retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(provideOkHttpClient(AppInterceptor()))
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
         }
 
@@ -39,12 +50,12 @@ object ApiClient {
     }
 
     class AppInterceptor : Interceptor {
+
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain) : Response = with(chain) {
             val newRequest = request().newBuilder()
-                .addHeader("Authorization", "Key")
+                .addHeader("Authorization", authToken)
                 .build()
-
             return chain.proceed(newRequest)
         }
     }

@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:name=".PictureInit"
         android:allowBackup="true"
@@ -19,17 +18,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pview"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".StartAppActivity"
-
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!--<activity android:name=".ReferenceActivity"/>-->
+        </activity> <!-- <activity android:name=".ReferenceActivity"/> -->
         <activity android:name=".PersonalActivity" />
         <activity android:name=".PictureActivity" />
         <activity android:name=".LoginActivity" />

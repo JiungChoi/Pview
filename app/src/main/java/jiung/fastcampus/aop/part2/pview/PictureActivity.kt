@@ -33,9 +33,12 @@ import jiung.fastcampus.aop.part2.pview.util.PathUtil
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.*
@@ -307,57 +310,27 @@ class PictureActivity : AppCompatActivity() {
 
                 uriList.add(it)
                 flashLight(false)
-                logInToServer()
-                //postUriToServer(file)
+
+                postUriToServer(file)
+                Log.d("myTag PostImage", "PostImage 완료")
 
                 false
             } catch (e: Exception) {
                 e.printStackTrace()
-                Toast.makeText(this, "파일이 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
                 false
             }
         }
     }
 
-    // Login To Server && Get JWT
-    private val id: String = "123@123.com"
-    private val password: String = "123"
-
-    private fun logInToServer() {
-        //1. Json 문자열
-        val user = ("{\"email\":\"${id}\","
-                + "\"pw\":\"${password}\""
-                + "}"
-                )
-
-        //2. Parser
-        val jsonParser = JsonParser()
-
-
-        //4. To JsonObject
-        val jsonObj = jsonParser.parse(user) as JsonObject
-
-        val service = ApiClient.getApiClient().create(RetrofitService::class.java)
-
-
-        service.login(jsonObj).enqueue(object : Callback<getTokenDto> {
-            override fun onResponse(call: Call<getTokenDto>, response: Response<getTokenDto>) {
-                val result: getTokenDto? = response.body()
-                Log.d("myTag Login01", "${result.toString()}")
-            }
-
-            override fun onFailure(call: Call<getTokenDto>, t: Throwable) {
-                Log.e("myTag Login02", "${t.localizedMessage}")
-            }
-        })
-    }
 
 
     private fun postUriToServer(file: File) {
         //creating a file
 
         //multipart/form-data or image/*
-        var requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
+        var requestBody: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"),
+            file)
+
         var body: MultipartBody.Part = MultipartBody.Part.createFormData("uploaded_file",
             file.name,
             requestBody)
@@ -365,23 +338,31 @@ class PictureActivity : AppCompatActivity() {
         //creating our api
         val service = ApiClient.getApiClient().create(RetrofitService::class.java)
 
-        if (file.exists()) {
-            service.postSkinImg(body).enqueue(object : Callback<String> {
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.d("myTag PostImg01", "${t.localizedMessage}")
-                }
+        val retrofit = Retrofit.Builder().baseUrl("http://118.67.131.29:5000/")
+            .addConverterFactory(GsonConverterFactory.create()).build()
+        val service2 = retrofit.create(RetrofitService::class.java)
 
-                override fun onResponse(call: Call<String>, response: Response<String>) {
+
+        if (file.exists()) {
+            service.postSkinImg(body).enqueue(object : Callback<getResoponseDto> {
+                override fun onResponse(
+                    call: Call<getResoponseDto>,
+                    response: Response<getResoponseDto>,
+                ) {
                     if (response?.isSuccessful) {
                         Toast.makeText(applicationContext,
                             "File Uploaded Successfully...",
                             Toast.LENGTH_LONG).show()
-                        Log.d("myTag PostImg02", "" + response?.body().toString())
+                        Log.d("myTag PostImg01", response?.body().toString())
                     } else {
                         Toast.makeText(applicationContext,
                             "Some error occurred...",
                             Toast.LENGTH_LONG).show()
                     }
+                }
+
+                override fun onFailure(call: Call<getResoponseDto>, t: Throwable) {
+                    Log.d("myTag PostImg02", "${t.localizedMessage}")
                 }
             })
         } else {
@@ -430,6 +411,8 @@ class PictureActivity : AppCompatActivity() {
             camera?.cameraControl?.enableTorch(light)
         }
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
