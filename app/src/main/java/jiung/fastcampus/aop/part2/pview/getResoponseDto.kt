@@ -19,10 +19,10 @@ class getResoponseDto(token: String) {
     override fun toString(): String {
 
         return "wrinkle : $wrinkle\n" +
-                "skin_tone$skin_tone\n" +
-                "pore_detect$pore_detect\n" +
-                "dead_skin$dead_skin\n" +
-                "oilly$oilly\n" +
-                "pih$pih"
+                "skin_tone : $skin_tone\n" +
+                "pore_detect : $pore_detect\n" +
+                "dead_skin : $dead_skin\n" +
+                "oilly : $oilly\n" +
+                "pih : $pih"
     }
 }

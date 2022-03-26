@@ -330,30 +330,38 @@ class PictureActivity : AppCompatActivity() {
         //creating a file
         val file = File(filePath)
 
-        //multipart/form-data or image/*
+
+
+        //multipart/form-data
         var requestBody: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"),
             file)
 
-        var body: MultipartBody.Part = MultipartBody.Part.createFormData("uploaded_file",
+
+        var body: MultipartBody.Part = MultipartBody.Part.createFormData("file",
             file.name,
             requestBody)
 
+        val body2 : RequestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("uploaded_file", file.name,
+                RequestBody.create(MediaType.parse("multipart/form-data"), file)
+                ).build()
+
+
         //creating our api
-        val service = ApiClient.getApiClient().create(RetrofitService::class.java)
+        val apiClient = ApiClient
+        val service = apiClient.getApiClient().create(RetrofitService::class.java)
+        //apiClient.setBody(body)
 
         if (file.exists()) {
-            service.postSkinImg(body).enqueue(object : Callback<getResoponseDto> {
+            val call:Call<getResoponseDto> = service.postSkinImg(body)
+
+            call.enqueue(object : Callback<getResoponseDto> {
 
                 override fun onResponse(
                     call: Call<getResoponseDto>,
                     response: Response<getResoponseDto>,
                 ) {
-                    if (response == null){
-                        Log.d("myTag PostImg 02-2", "response is null")
-                    } else {
-                        Log.d("myTag PostImg 02-1", response.toString())
-                    }
-
                     if (response?.isSuccessful) {
                         Toast.makeText(applicationContext,
                             "File Uploaded Successfully...",
