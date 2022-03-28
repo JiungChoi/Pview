@@ -5,7 +5,9 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -20,25 +22,13 @@ import jiung.fastcampus.aop.part2.pview.databinding.ActivityMainBinding
 
 class ChartActivity : AppCompatActivity() {
 
-    private lateinit var chartPageAcneLayout: ConstraintLayout
-
-    private val chartPageAcneUpDownImageViewList: List<ImageView> by lazy {
-        mutableListOf<ImageView>().apply {
-            add(findViewById(R.id.chartPageAcneUpDownImageView))
-            add(findViewById(R.id.chartPageStimulusUpDownImageView))
-            add(findViewById(R.id.chartPageWhiteningUpDownImageView))
-            add(findViewById(R.id.chartPageWrinkleUpDownImageView))
-            add(findViewById(R.id.chartPageMoistureUpDownImageView))
-        }
-    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chart)
 
         setComponent()
     }
+
 
     private fun setComponent() {
         setViewPager2()

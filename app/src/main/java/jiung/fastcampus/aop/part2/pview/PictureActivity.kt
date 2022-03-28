@@ -140,7 +140,6 @@ class PictureActivity : AppCompatActivity() {
 
         val caringPercentTextView = view.findViewById<TextView>(R.id.caringPercentTextView)
 
-
         startCountDown(caringPercentTextView, alertDialog)
         alertDialog.show()
     }

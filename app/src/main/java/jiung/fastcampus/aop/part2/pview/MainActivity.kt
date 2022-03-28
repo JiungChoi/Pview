@@ -2,10 +2,12 @@ package jiung.fastcampus.aop.part2.pview
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -16,16 +18,37 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Locale
-
-
-
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
 
+    private val mainCenterGuideTextView: TextView by lazy {
+        findViewById(R.id.mainCenterGuideTextView)
+    }
 
-    public val mainCareDateTextView: TextView by lazy {
+    private val mainCenterNumberTextView: TextView by lazy {
+        findViewById(R.id.mainCenterNumberTextView)
+    }
+
+    private val mainCenterNumberPercentage: TextView by lazy {
+        findViewById(R.id.mainCenterNumberPercentage)
+    }
+
+    private val mainCareDateTextView: TextView by lazy {
         findViewById(R.id.mainCareDateTextView)
+    }
+
+    private val mainSimpleSkinTextureInfo: TextView by lazy {
+        findViewById(R.id.mainSimpleSkinTextureInfo)
+    }
+
+    private val mainSimpleSkinToneInfo: TextView by lazy {
+        findViewById(R.id.mainSimpleSkinToneInfo)
+    }
+
+    private val mainSimpleSkinOilInfo: TextView by lazy {
+        findViewById(R.id.mainSimpleSkinOilInfo)
     }
 
     private val mainCenterRectangleControllerTextView: Button by lazy {
@@ -62,7 +85,28 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setComponent()
-        updateCareTime()
+        updateCareTime(mainCareDateTextView)
+    }
+
+    private fun updateSimpleInfoLayout() {
+        updateTextView(mainSimpleSkinTextureInfo, 1)
+        updateTextView(mainSimpleSkinToneInfo, 2)
+        updateTextView(mainSimpleSkinOilInfo, 3)
+
+        mainCenterNumberPercentage.isVisible = true
+        mainCenterGuideTextView.isVisible = true
+        mainCenterNumberTextView.text = "36"
+        mainCenterNumberTextView.textSize = 55f
+        mainCenterNumberTextView.setTextColor(Color.rgb(30, 167, 172))
+
+    }
+
+    private fun updateTextView(textView: TextView, idx: Int){
+        val simpleTextViewList : ArrayList<String> = arrayListOf("관리\n필요", "균형\n잡힘", "건조함")
+
+        textView.text = simpleTextViewList[idx-1]
+        textView.textSize = 25f
+        textView.setTextColor(Color.rgb(30, 167, 172))
     }
 
 
@@ -134,20 +178,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateCareTime(textView: TextView){
+        if (caring){
+            mainCareDate = nowTime().toString()
+            textView.text = "$mainCareDate 측정"
+            updateSimpleInfoLayout()
+            caring = false
+        }
+    }
+
+
     private fun nowTime(): String? {
         val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd hh:mm:ss", Locale.KOREAN)
         dateFormat.timeZone = TimeZone.getTimeZone("Asia/Seoul")
         return dateFormat.format(Date())
     }
 
-    private fun updateCareTime(){
-        if (caring){
-            mainCareDateTextView.text =  nowTime() + " 측정"
-            caring = false
-        }
-    }
-
     companion object {
         private var caring: Boolean = false
+
+        internal var mainCareDate : String = "미측정"
+
+        internal var careResultAcne : String = "미측정"
+        internal var careResultStimulus : String = "미측정"
+        internal var careResultWhitening : String = "미측정"
+        internal var careResultWrinkle : String = "미측정"
+        internal var careResultMoisture : String = "미측정"
     }
 }

@@ -10,7 +10,6 @@ class getTokenDto(token: String) {
 
     @SerializedName("Authorization") private var authorization: String? = token
 
-
     override fun toString(): String {
         return "${authorization?.split(" ")!!.last()}"
     }

@@ -26,9 +26,16 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.utils.Utils
+import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.mainCareDate
 import java.security.KeyStore
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ChartPageAmpleLineFragment : Fragment() {
+
+    private lateinit var chartCareDateTextView: TextView
 
     private lateinit var chartPageAcneLayout: ConstraintLayout
     private lateinit var chartPageStimulusLayout: ConstraintLayout
@@ -65,18 +72,36 @@ class ChartPageAmpleLineFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         val view: View = inflater.inflate(R.layout.chart_page_ample_fragment, container, false)
+
         setComponents(view)
 
         return view
     }
+
 
     private fun setComponents(view: View) {
         setLayouts(view)
         setImageVies(view)
         setSeekBars(view)
         setLineCharts(view)
+        setTextViews(view)
+
     }
 
+    private fun setTextViews(view: View) {
+        this.chartCareDateTextView = view.findViewById(R.id.charPageCareDateTextView)
+        updateCareTime(chartCareDateTextView)
+    }
+
+    private fun updateCareTime(textView: TextView){
+        val time = mainCareDate?.split(" ")
+        if (time.size == 2){
+            textView.text = time?.first() + "\n" + time?.last() + " 측정"
+        } else {
+            textView.text = "미측정"
+        }
+
+    }
     private fun setLayouts(view: View) {
         this.chartPageAcneLayout = view.findViewById(R.id.chartPageAcneLayout)
         this.chartPageStimulusLayout = view.findViewById(R.id.chartPageStimulusLayout)

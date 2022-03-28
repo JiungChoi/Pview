@@ -82,33 +82,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="36"
-                android:textColor="@color/gradient_cyan_start"
-                android:textSize="55sp"
+                android:text="진단을 받고싶으신가요?\n하단의 측정 버튼을 눌러\n진단을 받아보세요!"
+                android:textColor="@color/red_md_pick"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/mainCenterCircleImageView"
                 app:layout_constraintEnd_toEndOf="@+id/mainCenterCircleImageView"
                 app:layout_constraintStart_toStartOf="@+id/mainCenterCircleImageView"
                 app:layout_constraintTop_toTopOf="@+id/mainCenterCircleImageView" />
 
             <TextView
+                android:id="@+id/mainCenterNumberPercentage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="bottom"
                 android:text="%"
+                android:visibility="gone"
                 android:textColor="@color/gradient_cyan_start"
                 android:textSize="25sp"
                 app:layout_constraintBottom_toBottomOf="@+id/mainCenterNumberTextView"
                 app:layout_constraintStart_toEndOf="@+id/mainCenterNumberTextView" />
 
             <TextView
+                android:id="@+id/mainCenterGuideTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="피부나이 상위"
                 android:textColor="@color/gradient_cyan_start"
                 android:textSize="13sp"
+                android:visibility="gone"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/mainCenterNumberTextView"
                 app:layout_constraintEnd_toEndOf="@+id/mainCenterCircleImageView"
@@ -148,7 +152,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mainCenterCircleImageView"
-                tools:layout_height="530dp" />
+                tools:layout_height="200dp" />
 
             <!-- FIXME Simple Personal Info-->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -160,19 +164,20 @@
                 app:layout_constraintEnd_toEndOf="@id/mainCenterRectangleView"
                 app:layout_constraintStart_toStartOf="@id/mainCenterRectangleView"
                 app:layout_constraintTop_toBottomOf="@+id/centerRectangleTopLineView"
-                tools:visibility="gone">
+                tools:visibility="visible">
 
                 <TextView
                     android:id="@+id/mainSimpleSkinTextureInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
                     android:layout_marginTop="20dp"
-                    android:text="관리\n필요"
-                    android:textColor="@color/gradient_cyan_start"
-                    android:textSize="25sp"
+                    android:text="미측정"
+                    android:textColor="@color/red_md_pick"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinTextureTextView"
+                    app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinTextureTextView"
+                    app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
@@ -191,13 +196,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="균형\n잡힘"
-                    android:textColor="@color/gradient_cyan_start"
-                    android:textSize="25sp"
+                    android:text="미측정"
+                    android:textColor="@color/red_md_pick"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/mainSimpleSkinOilInfo"
-                    app:layout_constraintStart_toEndOf="@id/mainSimpleSkinTextureInfo"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinToneTextView"
+                    app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinToneTextView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
+                    />
 
                 <View
                     android:layout_width="2dp"
@@ -214,51 +221,55 @@
                     android:id="@+id/mainSimpleSkinOilInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="35dp"
-                    android:layout_marginEnd="40dp"
-                    android:text="건조함"
-                    android:textColor="@color/gradient_cyan_start"
-                    android:textSize="25sp"
+                    android:layout_marginTop="20dp"
+                    android:text="미측정"
+                    android:textColor="@color/red_md_pick"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinOilTextView"
+                    app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinOilTextView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
+                    />
 
                 <TextView
                     android:id="@+id/mainSimpleSkinTextureTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
                     android:text="피부결"
+                    android:layout_marginStart="36dp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinTextureInfo"
-                    app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinTextureInfo"
+                    app:layout_constraintEnd_toStartOf="@+id/mainSimpleSkinToneTextView"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/mainSimpleSkinTextureInfo" />
 
                 <TextView
                     android:id="@+id/mainSimpleSkinToneTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
+
                     android:text="피부톤"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinToneInfo"
-                    app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinToneInfo"
+                    app:layout_constraintStart_toEndOf="@+id/mainSimpleSkinTextureTextView"
+                    app:layout_constraintEnd_toStartOf="@+id/mainSimpleSkinOilTextView"
                     app:layout_constraintTop_toBottomOf="@+id/mainSimpleSkinToneInfo" />
 
                 <TextView
                     android:id="@+id/mainSimpleSkinOilTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
+                    android:layout_marginEnd="36dp"
                     android:text="유분수치"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinOilInfo"
-                    app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinOilInfo"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/mainSimpleSkinToneTextView"
                     app:layout_constraintTop_toTopOf="@+id/mainSimpleSkinTextureTextView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -274,7 +285,7 @@
                 app:layout_constraintEnd_toEndOf="@id/mainCenterRectangleView"
                 app:layout_constraintStart_toStartOf="@id/mainCenterRectangleView"
                 app:layout_constraintTop_toBottomOf="@+id/centerRectangleTopLineView"
-                tools:visibility="visible">
+                tools:visibility="gone">
 
                 <TextView
                     android:id="@+id/ampleLineTextView"
@@ -970,7 +981,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="2022/02/25 13:13:40 측정"
+                android:text="미측정"
                 android:textColor="@color/textColor_light"
                 android:translationZ="2dp"
                 app:layout_constraintEnd_toEndOf="parent"

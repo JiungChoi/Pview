@@ -48,11 +48,12 @@
                 app:layout_constraintTop_toBottomOf="@id/resultGuideTextView" />
 
             <TextView
+                android:id="@+id/charPageCareDateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="2022/02/25\n13:13:40 측정"
+                android:text="미측정"
                 android:textColor="@color/textColor_light"
                 app:layout_constraintBottom_toBottomOf="@id/userLankTextView"
                 app:layout_constraintEnd_toEndOf="parent"
