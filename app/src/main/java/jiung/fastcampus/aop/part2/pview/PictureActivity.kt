@@ -329,12 +329,9 @@ class PictureActivity : AppCompatActivity() {
         //creating a file
         val file = File(filePath)
 
-
-
         //multipart/form-data
         var requestBody: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"),
             file)
-
 
         var body: MultipartBody.Part = MultipartBody.Part.createFormData("file",
             file.name,
@@ -345,7 +342,6 @@ class PictureActivity : AppCompatActivity() {
             .addFormDataPart("uploaded_file", file.name,
                 RequestBody.create(MediaType.parse("multipart/form-data"), file)
                 ).build()
-
 
         //creating our api
         val apiClient = ApiClient
@@ -378,7 +374,7 @@ class PictureActivity : AppCompatActivity() {
                 }
             })
         } else {
-            Log.d("myTAG 03", "파일이 존재하지 않음")
+            Log.d("myTAG PostImg03", "파일이 존재하지 않음")
         }
     }
 

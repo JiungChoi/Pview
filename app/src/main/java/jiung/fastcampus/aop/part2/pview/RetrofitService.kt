@@ -30,7 +30,4 @@ public interface RetrofitService {
     @POST("/api/pview/testjson")
     fun test(): Call<getResoponseDto>
 
-
-
-
 }
