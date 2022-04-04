@@ -27,6 +27,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.personalSkinRank
 import jiung.fastcampus.aop.part2.pview.databinding.ActivityPictureBinding
 import jiung.fastcampus.aop.part2.pview.extensions.loadCenterCrop
 import jiung.fastcampus.aop.part2.pview.util.PathUtil
@@ -44,6 +45,7 @@ import java.io.FileNotFoundException
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.collections.ArrayList
 import android.content.Context as Context1
 
 
@@ -337,16 +339,9 @@ class PictureActivity : AppCompatActivity() {
             file.name,
             requestBody)
 
-        val body2 : RequestBody = MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
-            .addFormDataPart("uploaded_file", file.name,
-                RequestBody.create(MediaType.parse("multipart/form-data"), file)
-                ).build()
-
         //creating our api
         val apiClient = ApiClient
         val service = apiClient.getApiClient().create(RetrofitService::class.java)
-        //apiClient.setBody(body)
 
         if (file.exists()) {
             val call:Call<getResoponseDto> = service.postSkinImg(body)
@@ -361,12 +356,25 @@ class PictureActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext,
                             "File Uploaded Successfully...",
                             Toast.LENGTH_LONG).show()
-                        Log.d("myTag PostImg01", response?.body().toString())
+                        Log.d("myTag PostImg01", response?.body().toString().split("^").toString())
+
+                        parsingData(response?.body().toString().split("^"))
                     } else {
                         Toast.makeText(applicationContext,
                             "Some error occurred...",
                             Toast.LENGTH_LONG).show()
                     }
+                }
+
+                private fun parsingData(resultArray: List<String>) {
+                    personalSkinRank = resultArray[0]
+
+                    val skinData = resultArray[1]
+                        .replace("[{","")
+                        .replace("}]","")
+                        .split(",")
+
+                    Log.d("myTag PostImg TEST2", "$skinData")
                 }
 
                 override fun onFailure(call: Call<getResoponseDto>, t: Throwable) {

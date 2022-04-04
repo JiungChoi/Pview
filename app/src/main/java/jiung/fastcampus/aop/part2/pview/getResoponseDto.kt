@@ -22,14 +22,8 @@ class getResoponseDto(rank:String, skindata: JsonObject, recommand: JsonObject) 
     @SerializedName("rank") private var rank: String? = rank
     @SerializedName("skindata") private var skindata:JsonObject? = skindata
     @SerializedName("recommand") private var recommand: JsonObject? = recommand
-    //@SerializedName("recommand") private var recommand: String? = token
 
     override fun toString(): String {
-        if (rank == null){
-            Log.d("myTag PostImgDTO", "NULL")
-        }
-        Log.d("myTag PostImgDTO", "${skindata}")
-
-        return "nn"
+        return "$rank" + "^" + "${skindata.toString().split(",")}" + "^" + "${recommand.toString().split(",")}"
     }
 }

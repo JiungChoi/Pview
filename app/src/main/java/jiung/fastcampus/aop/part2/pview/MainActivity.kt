@@ -199,10 +199,20 @@ class MainActivity : AppCompatActivity() {
 
         internal var mainCareDate : String = "미측정"
 
+        internal var personalSkinRank : String = "미측정"
+
         internal var careResultAcne : String = "미측정"
         internal var careResultStimulus : String = "미측정"
         internal var careResultWhitening : String = "미측정"
         internal var careResultWrinkle : String = "미측정"
         internal var careResultMoisture : String = "미측정"
+
+        internal var skinDataWrinkle: String = "None"
+        internal var skinDataSkinTone: String = "None"
+        internal var skinDataPoreDetect: String = "None"
+        internal var skinDataDeadSkin: String = "None"
+        internal var skinDataOilly: String = "None"
+        internal var skinDataPih: String = "None"
+
     }
 }
