@@ -4,8 +4,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.SeekBar
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
@@ -70,8 +72,36 @@ class MainActivity : AppCompatActivity() {
     private val mainBottomView: View by lazy {
         findViewById(R.id.mainBottomView)
     }
+    // SeekBars
+    private val ampleLineCalmAcneSeekBar: SeekBar by lazy {
+        findViewById(R.id.ampleLineCalmAcneSeekBar)
+    }
 
-    // FIXME : Bottom Buttons
+    private val ampleLineCalmStimulusSeekBar: SeekBar by lazy {
+        findViewById(R.id.ampleLineCalmStimulusSeekBar)
+    }
+
+    private val ampleLineWhiteningSeekBar: SeekBar by lazy {
+        findViewById(R.id.ampleLineWhiteningSeekBar)
+    }
+
+    private val ampleLineWrinkleSeekBar: SeekBar by lazy {
+        findViewById(R.id.ampleLineWrinkleSeekBar)
+    }
+
+    private val ampleLineMoistureSeekBar: SeekBar by lazy {
+        findViewById(R.id.ampleLineMoistureSeekBar)
+    }
+
+    private val skinLineMoisturizingSeekBar: SeekBar by lazy {
+        findViewById(R.id.skinLineMoisturizingSeekBar)
+    }
+
+    private val skinLineOilSeekBar: SeekBar by lazy {
+        findViewById(R.id.skinLineOilSeekBar)
+    }
+
+    // Bottom Buttons
     private val mainPictureButton: AppCompatImageButton by lazy {
         findViewById(R.id.mainPictureButton)
     }
@@ -152,7 +182,28 @@ class MainActivity : AppCompatActivity() {
         mainChartButton.setOnClickListener {
             startActivity(Intent(this, ChartActivity::class.java))
         }
+        setSeekBars()
     }
+
+    private fun setSeekBars() {
+        val careDataSeekBars = arrayOf(ampleLineCalmAcneSeekBar, ampleLineWhiteningSeekBar, ampleLineCalmStimulusSeekBar, ampleLineWrinkleSeekBar, ampleLineMoistureSeekBar, skinLineMoisturizingSeekBar, skinLineOilSeekBar)
+
+
+        recommendDataAry.forEachIndexed { index, it ->
+
+            upData(careDataSeekBars[index], it)
+            //Log.d("myTag ", "${index} : ${it}")
+        }
+    }
+
+    private fun upData(seekBar: SeekBar, it: String) {
+        if (it == "미측정"){
+            seekBar.isVisible = false
+        } else {
+            seekBar.progress = it.toInt()
+        }
+    }
+
 
     private fun allPermissionGranted() = PictureActivity.REQUESTED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
@@ -201,18 +252,12 @@ class MainActivity : AppCompatActivity() {
 
         internal var personalSkinRank : String = "미측정"
 
-        internal var careResultAcne : String = "미측정"
-        internal var careResultStimulus : String = "미측정"
-        internal var careResultWhitening : String = "미측정"
-        internal var careResultWrinkle : String = "미측정"
-        internal var careResultMoisture : String = "미측정"
+        // Acne, Whitening, Stimulus, Wrinkle, Moisture, Moisturizing, Oilly
+        internal var recommendDataAry: Array<String> = arrayOf("미측정", "미측정", "미측정", "미측정", "미측정", "미측정", "미측정")
 
-        internal var skinDataWrinkle: String = "None"
-        internal var skinDataSkinTone: String = "None"
-        internal var skinDataPoreDetect: String = "None"
-        internal var skinDataDeadSkin: String = "None"
-        internal var skinDataOilly: String = "None"
-        internal var skinDataPih: String = "None"
+
+        // Wrinkle, SkinTone, PoreDetect, DeadSkin, Oilly, Pih
+        internal var skinDataAry: Array<String> = arrayOf("None", "None", "None", "None", "None", "None")
 
     }
 }

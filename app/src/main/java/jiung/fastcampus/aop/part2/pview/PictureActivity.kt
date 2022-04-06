@@ -28,6 +28,8 @@ import androidx.core.view.isGone
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.personalSkinRank
+import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.recommendDataAry
+import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.skinDataAry
 import jiung.fastcampus.aop.part2.pview.databinding.ActivityPictureBinding
 import jiung.fastcampus.aop.part2.pview.extensions.loadCenterCrop
 import jiung.fastcampus.aop.part2.pview.util.PathUtil
@@ -370,11 +372,20 @@ class PictureActivity : AppCompatActivity() {
                     personalSkinRank = resultArray[0]
 
                     val skinData = resultArray[1]
-                        .replace("[{","")
-                        .replace("}]","")
+                        .replace("[{", "")
+                        .replace("}]", "")
+                        .split(",")
+                    val recommendData = resultArray[2]
+                        .replace("[{", "")
+                        .replace("}]", "")
                         .split(",")
 
-                    Log.d("myTag PostImg TEST2", "$skinData")
+
+                    skinData.forEachIndexed { index, it -> skinDataAry[index] = it.split(":")[1] }
+                    recommendData.forEachIndexed{ index, it -> recommendDataAry[index] = it.split(":")[1] }
+
+
+                    Log.d("myTag PostImg TEST2", "${skinDataAry[0]}" + "${skinDataAry[1]}")
                 }
 
                 override fun onFailure(call: Call<getResoponseDto>, t: Throwable) {

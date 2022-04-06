@@ -152,7 +152,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mainCenterCircleImageView"
-                tools:layout_height="200dp" />
+                tools:layout_height="680dp" />
 
             <!-- FIXME Simple Personal Info-->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -164,7 +164,7 @@
                 app:layout_constraintEnd_toEndOf="@id/mainCenterRectangleView"
                 app:layout_constraintStart_toStartOf="@id/mainCenterRectangleView"
                 app:layout_constraintTop_toBottomOf="@+id/centerRectangleTopLineView"
-                tools:visibility="visible">
+                tools:visibility="gone">
 
                 <TextView
                     android:id="@+id/mainSimpleSkinTextureInfo"
@@ -285,7 +285,7 @@
                 app:layout_constraintEnd_toEndOf="@id/mainCenterRectangleView"
                 app:layout_constraintStart_toStartOf="@id/mainCenterRectangleView"
                 app:layout_constraintTop_toBottomOf="@+id/centerRectangleTopLineView"
-                tools:visibility="gone">
+                tools:visibility="visible">
 
                 <TextView
                     android:id="@+id/ampleLineTextView"
