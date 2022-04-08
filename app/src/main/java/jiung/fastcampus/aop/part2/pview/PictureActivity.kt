@@ -25,6 +25,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
+import androidx.room.Room
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.personalSkinRank
@@ -32,6 +33,7 @@ import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.recommendDataAry
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.skinDataAry
 import jiung.fastcampus.aop.part2.pview.databinding.ActivityPictureBinding
 import jiung.fastcampus.aop.part2.pview.extensions.loadCenterCrop
+import jiung.fastcampus.aop.part2.pview.model.History
 import jiung.fastcampus.aop.part2.pview.util.PathUtil
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -384,7 +386,7 @@ class PictureActivity : AppCompatActivity() {
                     skinData.forEachIndexed { index, it -> skinDataAry[index] = it.split(":")[1] }
                     recommendData.forEachIndexed{ index, it -> recommendDataAry[index] = it.split(":")[1] }
 
-
+                    setAppdataBase()
                     Log.d("myTag PostImg TEST2", "${skinDataAry[0]}" + "${skinDataAry[1]}")
                 }
 
@@ -451,6 +453,12 @@ class PictureActivity : AppCompatActivity() {
                 Toast.makeText(this, "현재 카메라 권한이 없습니다.", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun setAppdataBase() {
+        Thread(Runnable {
+            MainActivity.db.historyDao().insertHistory(History(null, MainActivity.personalSex, MainActivity.personalAge, recommendDataAry[0], recommendDataAry[1], recommendDataAry[2], recommendDataAry[3], recommendDataAry[4], recommendDataAry[5], recommendDataAry[6]))
+        }).start()
     }
 
     companion object {

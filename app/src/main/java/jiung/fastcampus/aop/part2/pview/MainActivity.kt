@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.SeekBar
@@ -16,6 +17,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.room.Room
+import jiung.fastcampus.aop.part2.pview.model.History
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -110,33 +113,59 @@ class MainActivity : AppCompatActivity() {
         findViewById(R.id.mainChartButton)
     }
 
+    private val mainPersonalButton: AppCompatImageButton by lazy{
+        findViewById(R.id.mainPersonalButton)
+    }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initAppdataBase()
 
+        loadAppdataBase()
         setComponent()
         updateCareTime(mainCareDateTextView)
     }
 
-    private fun updateSimpleInfoLayout() {
-        updateTextView(mainSimpleSkinTextureInfo, 1)
-        updateTextView(mainSimpleSkinToneInfo, 2)
-        updateTextView(mainSimpleSkinOilInfo, 3)
-
-        mainCenterNumberPercentage.isVisible = true
-        mainCenterGuideTextView.isVisible = true
-        mainCenterNumberTextView.text = "36"
-        mainCenterNumberTextView.textSize = 55f
-        mainCenterNumberTextView.setTextColor(Color.rgb(30, 167, 172))
-
+    private fun initAppdataBase() {
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "historyDB"
+        ).build()
     }
 
-    private fun updateTextView(textView: TextView, idx: Int){
-        val simpleTextViewList : ArrayList<String> = arrayListOf("관리\n필요", "균형\n잡힘", "건조함")
+    // DB에서 모든 데이터 삭제하는 기능 : 개발자용
+    private fun deleteAppdataBase(){
+        Thread(Runnable{
+            db.historyDao().deleteAll()
+        }).start()
+    }
 
-        textView.text = simpleTextViewList[idx-1]
-        textView.textSize = 25f
-        textView.setTextColor(Color.rgb(30, 167, 172))
+    private fun loadAppdataBase() {
+        Thread(Runnable {
+            db.historyDao().getAll().reversed().let {
+                runOnUiThread {
+                    Log.d("myTag LoadAppData 00", "$it")
+                    if (it.isEmpty()) {
+
+                    } else {
+                        recommendDataAry[0] = it.first().Acne.toString()
+                        recommendDataAry[1] = it.first().Whitening.toString()
+                        recommendDataAry[2] = it.first().Stimulus.toString()
+                        recommendDataAry[3] = it.first().Wrinkle.toString()
+                        recommendDataAry[4] = it.first().Moisture.toString()
+                        recommendDataAry[5] = it.first().Moisturizing.toString()
+                        recommendDataAry[6] = it.first().Oilly.toString()
+
+                        updateSimpleInfoLayout()
+                        upDateSeekBars()
+                    }
+                }
+            }
+        }).start()
     }
 
 
@@ -182,25 +211,47 @@ class MainActivity : AppCompatActivity() {
         mainChartButton.setOnClickListener {
             startActivity(Intent(this, ChartActivity::class.java))
         }
-        setSeekBars()
+        mainPersonalButton.setOnClickListener {
+            startActivity(Intent(this, PersonalActivity::class.java))
+        }
     }
 
-    private fun setSeekBars() {
-        val careDataSeekBars = arrayOf(ampleLineCalmAcneSeekBar, ampleLineWhiteningSeekBar, ampleLineCalmStimulusSeekBar, ampleLineWrinkleSeekBar, ampleLineMoistureSeekBar, skinLineMoisturizingSeekBar, skinLineOilSeekBar)
+    private fun updateSimpleInfoLayout() {
+        updateTextView(mainSimpleSkinTextureInfo, 1)
+        updateTextView(mainSimpleSkinToneInfo, 2)
+        updateTextView(mainSimpleSkinOilInfo, 3)
 
+        mainCenterNumberPercentage.isVisible = true
+        mainCenterGuideTextView.isVisible = true
+        mainCenterNumberTextView.text = "36"
+        mainCenterNumberTextView.textSize = 55f
+        mainCenterNumberTextView.setTextColor(Color.rgb(30, 167, 172))
+
+    }
+
+    private fun updateTextView(textView: TextView, idx: Int){
+        val simpleTextViewList : ArrayList<String> = arrayListOf("관리\n필요", "균형\n잡힘", "건조함")
+
+        textView.text = simpleTextViewList[idx-1]
+        textView.textSize = 25f
+        textView.setTextColor(Color.rgb(30, 167, 172))
+    }
+
+    private fun upDateSeekBars() {
+        var careDataSeekBars = arrayOf(ampleLineCalmAcneSeekBar, ampleLineWhiteningSeekBar, ampleLineCalmStimulusSeekBar, ampleLineWrinkleSeekBar, ampleLineMoistureSeekBar, skinLineMoisturizingSeekBar, skinLineOilSeekBar)
 
         recommendDataAry.forEachIndexed { index, it ->
-
             upData(careDataSeekBars[index], it)
-            //Log.d("myTag ", "${index} : ${it}")
         }
+
     }
 
     private fun upData(seekBar: SeekBar, it: String) {
         if (it == "미측정"){
             seekBar.isVisible = false
         } else {
-            seekBar.progress = it.toInt()
+            seekBar.isVisible = true
+            seekBar.progress =  seekBar.max - it.toInt()
         }
     }
 
@@ -233,7 +284,6 @@ class MainActivity : AppCompatActivity() {
         if (caring){
             mainCareDate = nowTime().toString()
             textView.text = "$mainCareDate 측정"
-            updateSimpleInfoLayout()
             caring = false
         }
     }
@@ -259,5 +309,10 @@ class MainActivity : AppCompatActivity() {
         // Wrinkle, SkinTone, PoreDetect, DeadSkin, Oilly, Pih
         internal var skinDataAry: Array<String> = arrayOf("None", "None", "None", "None", "None", "None")
 
+        internal var personalSex = "여"
+        internal var personalAge = "24"
+
+        // Room
+        internal lateinit var db: AppDatabase
     }
 }
