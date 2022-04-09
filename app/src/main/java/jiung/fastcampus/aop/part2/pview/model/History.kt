@@ -16,6 +16,8 @@ data class History(
     @ColumnInfo(name= "wrinkle")val Wrinkle: String?,
     @ColumnInfo(name= "moisture")val Moisture: String?,
     @ColumnInfo(name= "moisturizing")val Moisturizing: String?,
-    @ColumnInfo(name= "oilly")val Oilly: String?
+    @ColumnInfo(name= "oilly")val Oilly: String?,
+
+    @ColumnInfo(name= "time")val time: String?
 
     )

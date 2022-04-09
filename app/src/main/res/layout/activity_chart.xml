@@ -79,10 +79,12 @@
         app:layout_constraintGuide_percent="0.9" />
 
     <ImageButton
+        android:id="@+id/mainHomeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="170dp"
         android:layout_marginBottom="15dp"
-        android:background="@color/alpha00"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/img_pview_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +95,6 @@
         android:layout_height="0dp"
         android:background="@color/gray_24"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintTop_toBottomOf="@+id/guideLine">
 
         <androidx.appcompat.widget.AppCompatImageButton

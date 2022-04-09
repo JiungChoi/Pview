@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.forEachIndexed
@@ -22,6 +23,10 @@ import jiung.fastcampus.aop.part2.pview.databinding.ActivityMainBinding
 
 class ChartActivity : AppCompatActivity() {
 
+    private val mainHomeButton: AppCompatImageButton by lazy {
+        findViewById(R.id.mainHomeButton)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chart)
@@ -32,6 +37,13 @@ class ChartActivity : AppCompatActivity() {
 
     private fun setComponent() {
         setViewPager2()
+        setButtons()
+    }
+
+    private fun setButtons() {
+        mainHomeButton.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 
 

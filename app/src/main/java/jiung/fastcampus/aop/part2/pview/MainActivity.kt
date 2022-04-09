@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
 
         loadAppdataBase()
         setComponent()
-        updateCareTime(mainCareDateTextView)
+
     }
 
     private fun initAppdataBase() {
@@ -152,6 +152,19 @@ class MainActivity : AppCompatActivity() {
                     if (it.isEmpty()) {
 
                     } else {
+                        if (it.size > 5){
+                            dbLog.clear()
+                            for (i in 0..4){
+                                dbLog.add(it[i])
+                            }
+
+                        } else {
+                            dbLog.clear()
+                            for (element in it) {
+                                dbLog.add(element)
+                            }
+                        }
+
                         recommendDataAry[0] = it.first().Acne.toString()
                         recommendDataAry[1] = it.first().Whitening.toString()
                         recommendDataAry[2] = it.first().Stimulus.toString()
@@ -160,8 +173,15 @@ class MainActivity : AppCompatActivity() {
                         recommendDataAry[5] = it.first().Moisturizing.toString()
                         recommendDataAry[6] = it.first().Oilly.toString()
 
-                        updateSimpleInfoLayout()
+                        mainCareDate = it.first().time.toString()
+
+                        // Update Sync
+                        var wait = true
+                        while (wait) {
+                            wait = updateSimpleInfoLayout()
+                        }
                         upDateSeekBars()
+                        updateCareTime(mainCareDateTextView)
                     }
                 }
             }
@@ -216,7 +236,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateSimpleInfoLayout() {
+    private fun updateSimpleInfoLayout() :Boolean{
         updateTextView(mainSimpleSkinTextureInfo, 1)
         updateTextView(mainSimpleSkinToneInfo, 2)
         updateTextView(mainSimpleSkinOilInfo, 3)
@@ -226,7 +246,7 @@ class MainActivity : AppCompatActivity() {
         mainCenterNumberTextView.text = "36"
         mainCenterNumberTextView.textSize = 55f
         mainCenterNumberTextView.setTextColor(Color.rgb(30, 167, 172))
-
+        return false
     }
 
     private fun updateTextView(textView: TextView, idx: Int){
@@ -281,30 +301,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateCareTime(textView: TextView){
-        if (caring){
-            mainCareDate = nowTime().toString()
-            textView.text = "$mainCareDate 측정"
-            caring = false
-        }
+        textView.text = "$mainCareDate"
     }
 
-
-    private fun nowTime(): String? {
-        val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd hh:mm:ss", Locale.KOREAN)
-        dateFormat.timeZone = TimeZone.getTimeZone("Asia/Seoul")
-        return dateFormat.format(Date())
-    }
 
     companion object {
         private var caring: Boolean = false
 
         internal var mainCareDate : String = "미측정"
-
         internal var personalSkinRank : String = "미측정"
 
         // Acne, Whitening, Stimulus, Wrinkle, Moisture, Moisturizing, Oilly
         internal var recommendDataAry: Array<String> = arrayOf("미측정", "미측정", "미측정", "미측정", "미측정", "미측정", "미측정")
-
 
         // Wrinkle, SkinTone, PoreDetect, DeadSkin, Oilly, Pih
         internal var skinDataAry: Array<String> = arrayOf("None", "None", "None", "None", "None", "None")
@@ -314,5 +322,6 @@ class MainActivity : AppCompatActivity() {
 
         // Room
         internal lateinit var db: AppDatabase
+        internal var dbLog : ArrayList<History> = arrayListOf()
     }
 }

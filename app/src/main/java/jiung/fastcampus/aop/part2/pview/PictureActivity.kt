@@ -28,6 +28,7 @@ import androidx.core.view.isGone
 import androidx.room.Room
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.mainCareDate
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.personalSkinRank
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.recommendDataAry
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.skinDataAry
@@ -46,6 +47,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.FileNotFoundException
+import java.text.DateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -236,7 +238,7 @@ class PictureActivity : AppCompatActivity() {
             }.build()
 
             val imageCaptureBuilder = ImageCapture.Builder()
-                .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY) // 지연을 최소화 한다.
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY) // 지연을 최소화 한다. -> 화질을 최대화 한다.
                 .setTargetAspectRatio(AspectRatio.RATIO_4_3) // 프리뷰에서 보이는 거랑 촬영했을 때 동일화시킨다.
                 .setTargetRotation(rotation)
                 .setFlashMode(ImageCapture.FLASH_MODE_AUTO)
@@ -251,11 +253,17 @@ class PictureActivity : AppCompatActivity() {
                 preview.setSurfaceProvider(viewFinder.surfaceProvider)
                 bindCaptureListener()
                 bindZoomListener()
+                bindFocusListener()
                 initFlashAndAddListener()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }, cameraMainExecutor)
+    }
+
+    //Tab to Focus
+    private fun bindFocusListener() = with(binding){
+
     }
 
     private fun bindZoomListener() = with(binding) {
@@ -314,7 +322,7 @@ class PictureActivity : AppCompatActivity() {
                 }
 
                 uriList.add(it)
-                flashLight(false)
+                if (isFlashEnabled) flashLight(false)
 
                 val fileUriAry = "$it".split("://")
 
@@ -435,8 +443,8 @@ class PictureActivity : AppCompatActivity() {
     }
 
     private fun flashLight(light: Boolean) {
-        val hasFlash = camera?.cameraInfo?.hasFlashUnit() ?: false
-        if (hasFlash) {
+        val hasFlash = camera?.cameraInfo?.hasFlashUnit()
+        if (true == hasFlash) {
             camera?.cameraControl?.enableTorch(light)
         }
     }
@@ -455,9 +463,28 @@ class PictureActivity : AppCompatActivity() {
         }
     }
 
+    private fun nowTime(): String? {
+        val dateFormat: DateFormat =
+            java.text.SimpleDateFormat("yyyy/MM/dd hh:mm:ss", Locale.KOREAN)
+        dateFormat.timeZone = TimeZone.getTimeZone("Asia/Seoul")
+        return dateFormat.format(Date())
+    }
+
     private fun setAppdataBase() {
+        mainCareDate = nowTime().toString()
+
         Thread(Runnable {
-            MainActivity.db.historyDao().insertHistory(History(null, MainActivity.personalSex, MainActivity.personalAge, recommendDataAry[0], recommendDataAry[1], recommendDataAry[2], recommendDataAry[3], recommendDataAry[4], recommendDataAry[5], recommendDataAry[6]))
+            MainActivity.db.historyDao().
+            insertHistory(
+                History(null, MainActivity.personalSex, MainActivity.personalAge,
+                    recommendDataAry[0],
+                    recommendDataAry[1],
+                    recommendDataAry[2],
+                    recommendDataAry[3],
+                    recommendDataAry[4],
+                    recommendDataAry[5],
+                    recommendDataAry[6],
+                    mainCareDate))
         }).start()
     }
 

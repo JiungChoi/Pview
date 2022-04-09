@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
+import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.mainCareDate
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.personalAge
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.personalSex
 import jiung.fastcampus.aop.part2.pview.model.History
@@ -74,7 +75,18 @@ class PersonalActivity:AppCompatActivity() {
             "historyDB"
         ).build()
         Thread(Runnable {
-            MainActivity.db.historyDao().insertHistory(History(null, personalSex, personalAge, MainActivity.recommendDataAry[0], MainActivity.recommendDataAry[1], MainActivity.recommendDataAry[2], MainActivity.recommendDataAry[3], MainActivity.recommendDataAry[4], MainActivity.recommendDataAry[5], MainActivity.recommendDataAry[6]))
+            MainActivity.db.historyDao()
+                .insertHistory(
+                    History(
+                        null, personalSex, personalAge,
+                        MainActivity.recommendDataAry[0],
+                        MainActivity.recommendDataAry[1],
+                        MainActivity.recommendDataAry[2],
+                        MainActivity.recommendDataAry[3],
+                        MainActivity.recommendDataAry[4],
+                        MainActivity.recommendDataAry[5],
+                        MainActivity.recommendDataAry[6],
+                        mainCareDate))
         }).start()
     }
 }

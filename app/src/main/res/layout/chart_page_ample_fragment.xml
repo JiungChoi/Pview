@@ -73,6 +73,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/chartPageAcneLayout"
+                android:background="@drawable/custom_ripple_effect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
@@ -147,74 +148,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/chartPageAcneLayout"
                 tools:visibility="visible">
 
-                <SeekBar
-                    android:id="@+id/chartPageAcneSeekBar"
-                    android:layout_width="0dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_marginTop="30dp"
-                    android:elevation="3dp"
-                    android:max="4"
-                    android:progress="3"
-                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
-                    android:thumb="@drawable/ic_thumb_circle"
-                    android:tickMark="@drawable/drawable_tick_mark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TableLayout
-                    android:layout_width="0dp"
-                    android:layout_height="11dp"
-                    android:layout_marginHorizontal="20dp"
-                    app:layout_constraintEnd_toEndOf="@id/chartPageAcneSeekBar"
-                    app:layout_constraintStart_toStartOf="@id/chartPageAcneSeekBar"
-                    app:layout_constraintTop_toBottomOf="@id/chartPageAcneSeekBar">
-
-                    <TableRow>
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="A1"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="A2"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="A3"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="A4"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-                    </TableRow>
-                </TableLayout>
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/chartPageAcneLineChart"
@@ -223,8 +156,8 @@
                     android:layout_height="200dp"
                     android:layout_marginHorizontal="40dp"
                     android:layout_marginTop="30dp"
-                    app:layout_constraintTop_toBottomOf="@+id/chartPageAcneSeekBar"
-
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -318,66 +251,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/chartPageStimulusLayout"
                 tools:visibility="visible">
 
-                <SeekBar
-                    android:id="@+id/chartPageStimulusSeekBar"
-                    android:layout_width="0dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginHorizontal="12dp"
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chartPageStimulusLineChart"
+                    android:exported="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="40dp"
                     android:layout_marginTop="30dp"
-                    android:elevation="3dp"
-                    android:max="3"
-                    android:progress="1"
-                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
-                    android:thumb="@drawable/ic_thumb_circle"
-                    android:tickMark="@drawable/drawable_tick_mark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TableLayout
-                    android:layout_width="0dp"
-                    android:layout_height="11dp"
-                    android:layout_marginHorizontal="20dp"
-                    app:layout_constraintEnd_toEndOf="@id/chartPageStimulusSeekBar"
-                    app:layout_constraintStart_toStartOf="@id/chartPageStimulusSeekBar"
-                    app:layout_constraintTop_toBottomOf="@id/chartPageStimulusSeekBar">
-
-                    <TableRow>
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="B1"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="B2"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="B3"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                    </TableRow>
-
-                </TableLayout>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:visibility="gone"
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
@@ -392,13 +276,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/chartPageStimulusChartLayout" />
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/chartPageWhiteningLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@id/chartPageStimulusChartLayout">
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/chartPageStimulusChartLayout"
+                tools:layout_editor_absoluteX="15dp">
 
                 <ImageView
                     android:id="@+id/chartPageWhiteningImageView"
@@ -446,8 +332,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/chartPageWhiteningChartLayout"
                 android:layout_width="match_parent"
@@ -459,67 +343,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/chartPageWhiteningLayout"
                 tools:visibility="visible">
 
-                <SeekBar
-                    android:id="@+id/chartPageWhiteningSeekBar"
-                    android:layout_width="0dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginHorizontal="12dp"
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chartPageWhiteningLineChart"
+                    android:exported="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="40dp"
                     android:layout_marginTop="30dp"
-                    android:elevation="3dp"
-                    android:max="3"
-                    android:progress="1"
-                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
-                    android:thumb="@drawable/ic_thumb_circle"
-                    android:tickMark="@drawable/drawable_tick_mark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TableLayout
-                    android:layout_width="0dp"
-                    android:layout_height="11dp"
-                    android:layout_marginHorizontal="20dp"
-                    app:layout_constraintEnd_toEndOf="@id/chartPageWhiteningSeekBar"
-                    app:layout_constraintStart_toStartOf="@id/chartPageWhiteningSeekBar"
-                    app:layout_constraintTop_toBottomOf="@id/chartPageWhiteningSeekBar">
-
-                    <TableRow>
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="C1"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="C2"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="C3"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                    </TableRow>
-
-                </TableLayout>
-
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:visibility="gone"
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
@@ -600,56 +435,17 @@
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/chartPageWrinkleLayout">
 
-                <SeekBar
-                    android:id="@+id/chartPageWrinkleSeekBar"
-                    android:layout_width="0dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginHorizontal="12dp"
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chartPageWrinkleLineChart"
+                    android:exported="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="40dp"
                     android:layout_marginTop="30dp"
-                    android:elevation="3dp"
-                    android:max="2"
-                    android:progress="1"
-                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
-                    android:thumb="@drawable/ic_thumb_circle"
-                    android:tickMark="@drawable/drawable_tick_mark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TableLayout
-                    android:layout_width="0dp"
-                    android:layout_height="11dp"
-                    android:layout_marginHorizontal="20dp"
-                    app:layout_constraintEnd_toEndOf="@id/chartPageWrinkleSeekBar"
-                    app:layout_constraintStart_toStartOf="@id/chartPageWrinkleSeekBar"
-                    app:layout_constraintTop_toBottomOf="@id/chartPageWrinkleSeekBar">
-
-                    <TableRow>
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="D1"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="D2"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                    </TableRow>
-
-                </TableLayout>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:visibility="gone"
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
@@ -728,56 +524,17 @@
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/chartPageMoistureLayout">
 
-                <SeekBar
-                    android:id="@+id/chartPageMoistureSeekBar"
-                    android:layout_width="0dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginHorizontal="12dp"
-                    android:elevation="3dp"
-                    android:max="2"
-                    android:progress="2"
-                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
-                    android:thumb="@drawable/ic_thumb_circle"
-                    android:tickMark="@drawable/drawable_tick_mark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chartPageMoistureLineChart"
+                    android:exported="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="30dp"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_goneMarginTop="30dp" />
-
-                <TableLayout
-                    android:layout_width="0dp"
-                    android:layout_height="11dp"
-                    android:layout_marginHorizontal="20dp"
-                    app:layout_constraintEnd_toEndOf="@id/chartPageMoistureSeekBar"
-                    app:layout_constraintStart_toStartOf="@id/chartPageMoistureSeekBar"
-                    app:layout_constraintTop_toBottomOf="@id/chartPageMoistureSeekBar">
-
-                    <TableRow>
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="E1"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="E2"
-                            android:textColor="@color/textColor"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                    </TableRow>
-
-                </TableLayout>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:visibility="gone"
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
