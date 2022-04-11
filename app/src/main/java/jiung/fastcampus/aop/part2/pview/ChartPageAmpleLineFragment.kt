@@ -1,32 +1,30 @@
 package jiung.fastcampus.aop.part2.pview
 
+import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.AxisBase
-import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.components.*
 import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.formatter.IValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.utils.ViewPortHandler
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.dbLog
+import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.gradient
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.mainCareDate
-import kotlin.collections.ArrayList
 
 class ChartPageAmpleLineFragment : Fragment() {
 
@@ -56,6 +54,8 @@ class ChartPageAmpleLineFragment : Fragment() {
     private lateinit var chartPageWhiteningLineChart: LineChart
     private lateinit var chartPageWrinkleLineChart: LineChart
     private lateinit var chartPageMoistureLineChart: LineChart
+
+
 
 
     override fun onCreateView(
@@ -213,12 +213,17 @@ class ChartPageAmpleLineFragment : Fragment() {
 
         mpLineChart.setDrawGridBackground(true)
         mpLineChart.setDrawBorders(true)
-        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16), Integer.parseInt("ED", 16), Integer.parseInt("ED", 16), Integer.parseInt("ED", 16)))
+        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16),
+            Integer.parseInt("ED", 16),
+            Integer.parseInt(
+                "ED",
+                16),
+            Integer.parseInt("ED", 16)))
         mpLineChart.setBorderWidth(4f)
 
         val description : Description = Description()
         description.text = "Pview"
-        description.textColor = Color.CYAN
+        description.textColor = Color.WHITE
         description.textSize = 20f
         mpLineChart.description = description
 
@@ -239,26 +244,44 @@ class ChartPageAmpleLineFragment : Fragment() {
         acneLineDataSet.circleRadius = 3f
         acneLineDataSet.circleHoleRadius = 2f
         acneLineDataSet.fillAlpha = 50
+        acneLineDataSet.fillFormatter
         acneLineDataSet.setDrawFilled(true)
-        acneLineDataSet.fillColor = Color.CYAN
+        acneLineDataSet.fillDrawable = gradient
+        acneLineDataSet.valueTextSize = 10f
 
         mpLineChart.setDrawGridBackground(true)
 
 
+        var limitLine = LimitLine(2f, "Average")
+        limitLine.lineWidth = 2f
+        limitLine.enableDashedLine(10f, 10f, 0f)
+        limitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
+        limitLine.textSize = 10f
+        limitLine.lineColor = Color.GREEN
 
         // ** Axis
         val xAxis : XAxis = mpLineChart.xAxis
         val yAxis : YAxis = mpLineChart.axisLeft
         mpLineChart.axisRight.isEnabled = false
-        xAxis.valueFormatter = AxisValueFormatter()
+        xAxis.valueFormatter = XAxisValueFormatter(5)
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+//        xAxis.textSize = 10f
+//        yAxis.textSize = 5f
+        yAxis.setDrawGridLines(true)
+        yAxis.axisMaximum = 4f
+        yAxis.axisMinimum = 0f
+        yAxis.axisLineWidth= 1f
+        yAxis.setDrawLimitLinesBehindData(true)
+        yAxis.addLimitLine(limitLine)
 
 
         val data : LineData = LineData(acneLineDataSet)
         data.setValueFormatter(ValueFormatter())
         mpLineChart.data = data
-        mpLineChart.animateX(5000)
+//        mpLineChart.animateX(1000)
         mpLineChart.invalidate()
     }
+
 
     private fun ampleAcneDataValue() : ArrayList<Entry>{
         val entry : ArrayList<Entry> = arrayListOf()
@@ -269,7 +292,7 @@ class ChartPageAmpleLineFragment : Fragment() {
             var time = dbLog[i].time?.split(" ")?.last()?.split(":")
 
             entry.add(Entry(i.toFloat(), dbLog[i].Acne?.toFloat()!!))
-            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
+//            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
         }
         return entry
     }
@@ -281,14 +304,18 @@ class ChartPageAmpleLineFragment : Fragment() {
         val dataSets : ArrayList<ILineDataSet> = arrayListOf()
         dataSets.add(stimulusLineDataSet)
 
-
         // ** STYLE
         mpLineChart.setNoDataText("No Data")
         //mpLineChart.setNoDataTextColor(Color.RED)
 
         mpLineChart.setDrawGridBackground(true)
         mpLineChart.setDrawBorders(true)
-        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16), Integer.parseInt("ED", 16), Integer.parseInt("ED", 16), Integer.parseInt("ED", 16)))
+        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16),
+            Integer.parseInt("ED", 16),
+            Integer.parseInt(
+                "ED",
+                16),
+            Integer.parseInt("ED", 16)))
         mpLineChart.setBorderWidth(4f)
 
         val description : Description = Description()
@@ -314,24 +341,41 @@ class ChartPageAmpleLineFragment : Fragment() {
         stimulusLineDataSet.circleRadius = 3f
         stimulusLineDataSet.circleHoleRadius = 2f
         stimulusLineDataSet.fillAlpha = 50
+        stimulusLineDataSet.fillFormatter
         stimulusLineDataSet.setDrawFilled(true)
-        stimulusLineDataSet.fillColor = Color.CYAN
+        stimulusLineDataSet.fillDrawable = gradient
+        stimulusLineDataSet.valueTextSize = 10f
 
         mpLineChart.setDrawGridBackground(true)
 
 
+        var limitLine = LimitLine(2f, "Average")
+        limitLine.lineWidth = 2f
+        limitLine.enableDashedLine(10f, 10f, 0f)
+        limitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
+        limitLine.textSize = 10f
+        limitLine.lineColor = Color.GREEN
 
         // ** Axis
         val xAxis : XAxis = mpLineChart.xAxis
         val yAxis : YAxis = mpLineChart.axisLeft
         mpLineChart.axisRight.isEnabled = false
-        xAxis.valueFormatter = AxisValueFormatter()
+        xAxis.valueFormatter = XAxisValueFormatter(5)
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+//        xAxis.textSize = 10f
+//        yAxis.textSize = 5f
+        yAxis.setDrawGridLines(true)
+        yAxis.axisMaximum = 3f
+        yAxis.axisMinimum = 0f
+        yAxis.axisLineWidth= 1f
+        yAxis.setDrawLimitLinesBehindData(true)
+        yAxis.addLimitLine(limitLine)
 
 
         val data : LineData = LineData(stimulusLineDataSet)
         data.setValueFormatter(ValueFormatter())
         mpLineChart.data = data
-        mpLineChart.animateX(5000)
+//        mpLineChart.animateX(1000)
         mpLineChart.invalidate()
     }
 
@@ -344,7 +388,7 @@ class ChartPageAmpleLineFragment : Fragment() {
             var time = dbLog[i].time?.split(" ")?.last()?.split(":")
 
             entry.add(Entry(i.toFloat(), dbLog[i].Stimulus?.toFloat()!!))
-            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
+//            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
         }
         return entry
     }
@@ -355,14 +399,18 @@ class ChartPageAmpleLineFragment : Fragment() {
         val dataSets : ArrayList<ILineDataSet> = arrayListOf()
         dataSets.add(whiteningLineDataSet)
 
-
-        // ** STYLE
+// ** STYLE
         mpLineChart.setNoDataText("No Data")
         //mpLineChart.setNoDataTextColor(Color.RED)
 
         mpLineChart.setDrawGridBackground(true)
         mpLineChart.setDrawBorders(true)
-        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16), Integer.parseInt("ED", 16), Integer.parseInt("ED", 16), Integer.parseInt("ED", 16)))
+        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16),
+            Integer.parseInt("ED", 16),
+            Integer.parseInt(
+                "ED",
+                16),
+            Integer.parseInt("ED", 16)))
         mpLineChart.setBorderWidth(4f)
 
         val description : Description = Description()
@@ -388,24 +436,41 @@ class ChartPageAmpleLineFragment : Fragment() {
         whiteningLineDataSet.circleRadius = 3f
         whiteningLineDataSet.circleHoleRadius = 2f
         whiteningLineDataSet.fillAlpha = 50
+        whiteningLineDataSet.fillFormatter
         whiteningLineDataSet.setDrawFilled(true)
-        whiteningLineDataSet.fillColor = Color.CYAN
+        whiteningLineDataSet.fillDrawable = gradient
+        whiteningLineDataSet.valueTextSize = 10f
 
         mpLineChart.setDrawGridBackground(true)
 
 
+        var limitLine = LimitLine(2f, "Average")
+        limitLine.lineWidth = 2f
+        limitLine.enableDashedLine(10f, 10f, 0f)
+        limitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
+        limitLine.textSize = 10f
+        limitLine.lineColor = Color.GREEN
 
         // ** Axis
         val xAxis : XAxis = mpLineChart.xAxis
         val yAxis : YAxis = mpLineChart.axisLeft
         mpLineChart.axisRight.isEnabled = false
-        xAxis.valueFormatter = AxisValueFormatter()
+        xAxis.valueFormatter = XAxisValueFormatter(5)
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+//        xAxis.textSize = 10f
+//        yAxis.textSize = 5f
+        yAxis.setDrawGridLines(true)
+        yAxis.axisMaximum = 2f
+        yAxis.axisMinimum = 0f
+        yAxis.axisLineWidth= 1f
+        yAxis.setDrawLimitLinesBehindData(true)
+        yAxis.addLimitLine(limitLine)
 
 
         val data : LineData = LineData(whiteningLineDataSet)
         data.setValueFormatter(ValueFormatter())
         mpLineChart.data = data
-        mpLineChart.animateX(5000)
+//        mpLineChart.animateX(1000)
         mpLineChart.invalidate()
     }
 
@@ -418,7 +483,7 @@ class ChartPageAmpleLineFragment : Fragment() {
             var time = dbLog[i].time?.split(" ")?.last()?.split(":")
 
             entry.add(Entry(i.toFloat(), dbLog[i].Whitening?.toFloat()!!))
-            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
+//            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
         }
         return entry
     }
@@ -436,7 +501,12 @@ class ChartPageAmpleLineFragment : Fragment() {
 
         mpLineChart.setDrawGridBackground(true)
         mpLineChart.setDrawBorders(true)
-        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16), Integer.parseInt("ED", 16), Integer.parseInt("ED", 16), Integer.parseInt("ED", 16)))
+        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16),
+            Integer.parseInt("ED", 16),
+            Integer.parseInt(
+                "ED",
+                16),
+            Integer.parseInt("ED", 16)))
         mpLineChart.setBorderWidth(4f)
 
         val description : Description = Description()
@@ -462,24 +532,41 @@ class ChartPageAmpleLineFragment : Fragment() {
         wrinkleLineDataSet.circleRadius = 3f
         wrinkleLineDataSet.circleHoleRadius = 2f
         wrinkleLineDataSet.fillAlpha = 50
+        wrinkleLineDataSet.fillFormatter
         wrinkleLineDataSet.setDrawFilled(true)
-        wrinkleLineDataSet.fillColor = Color.CYAN
+        wrinkleLineDataSet.fillDrawable = gradient
+        wrinkleLineDataSet.valueTextSize = 10f
 
         mpLineChart.setDrawGridBackground(true)
 
 
+        var limitLine = LimitLine(2f, "Average")
+        limitLine.lineWidth = 2f
+        limitLine.enableDashedLine(10f, 10f, 0f)
+        limitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
+        limitLine.textSize = 10f
+        limitLine.lineColor = Color.GREEN
 
         // ** Axis
         val xAxis : XAxis = mpLineChart.xAxis
         val yAxis : YAxis = mpLineChart.axisLeft
         mpLineChart.axisRight.isEnabled = false
-        xAxis.valueFormatter = AxisValueFormatter()
+        xAxis.valueFormatter = XAxisValueFormatter(5)
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+//        xAxis.textSize = 10f
+//        yAxis.textSize = 5f
+        yAxis.setDrawGridLines(true)
+        yAxis.axisMaximum = 1f
+        yAxis.axisMinimum = 0f
+        yAxis.axisLineWidth= 1f
+        yAxis.setDrawLimitLinesBehindData(true)
+        yAxis.addLimitLine(limitLine)
 
 
         val data : LineData = LineData(wrinkleLineDataSet)
         data.setValueFormatter(ValueFormatter())
         mpLineChart.data = data
-        mpLineChart.animateX(5000)
+//        mpLineChart.animateX(1000)
         mpLineChart.invalidate()
     }
 
@@ -492,7 +579,7 @@ class ChartPageAmpleLineFragment : Fragment() {
             var time = dbLog[i].time?.split(" ")?.last()?.split(":")
 
             entry.add(Entry(i.toFloat(), dbLog[i].Wrinkle?.toFloat()!!))
-            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
+//            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
         }
         return entry
     }
@@ -510,7 +597,12 @@ class ChartPageAmpleLineFragment : Fragment() {
 
         mpLineChart.setDrawGridBackground(true)
         mpLineChart.setDrawBorders(true)
-        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16), Integer.parseInt("ED", 16), Integer.parseInt("ED", 16), Integer.parseInt("ED", 16)))
+        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16),
+            Integer.parseInt("ED", 16),
+            Integer.parseInt(
+                "ED",
+                16),
+            Integer.parseInt("ED", 16)))
         mpLineChart.setBorderWidth(4f)
 
         val description : Description = Description()
@@ -536,24 +628,41 @@ class ChartPageAmpleLineFragment : Fragment() {
         moistureLineDataSet.circleRadius = 3f
         moistureLineDataSet.circleHoleRadius = 2f
         moistureLineDataSet.fillAlpha = 50
+        moistureLineDataSet.fillFormatter
         moistureLineDataSet.setDrawFilled(true)
-        moistureLineDataSet.fillColor = Color.CYAN
+        moistureLineDataSet.fillDrawable = gradient
+        moistureLineDataSet.valueTextSize = 10f
 
         mpLineChart.setDrawGridBackground(true)
 
 
+        var limitLine = LimitLine(2f, "Average")
+        limitLine.lineWidth = 2f
+        limitLine.enableDashedLine(10f, 10f, 0f)
+        limitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
+        limitLine.textSize = 10f
+        limitLine.lineColor = Color.GREEN
 
         // ** Axis
         val xAxis : XAxis = mpLineChart.xAxis
         val yAxis : YAxis = mpLineChart.axisLeft
         mpLineChart.axisRight.isEnabled = false
-        xAxis.valueFormatter = AxisValueFormatter()
+        xAxis.valueFormatter = XAxisValueFormatter(5)
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+//        xAxis.textSize = 10f
+//        yAxis.textSize = 5f
+        yAxis.setDrawGridLines(true)
+        yAxis.axisMaximum = 1f
+        yAxis.axisMinimum = 0f
+        yAxis.axisLineWidth= 1f
+        yAxis.setDrawLimitLinesBehindData(true)
+        yAxis.addLimitLine(limitLine)
 
 
         val data : LineData = LineData(moistureLineDataSet)
         data.setValueFormatter(ValueFormatter())
         mpLineChart.data = data
-        mpLineChart.animateX(5000)
+//        mpLineChart.animateX(1000)
         mpLineChart.invalidate()
     }
 
@@ -566,7 +675,7 @@ class ChartPageAmpleLineFragment : Fragment() {
             var time = dbLog[i].time?.split(" ")?.last()?.split(":")
 
             entry.add(Entry(i.toFloat(), dbLog[i].Moisture?.toFloat()!!))
-            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
+//            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
         }
         return entry
     }
@@ -583,13 +692,18 @@ class ChartPageAmpleLineFragment : Fragment() {
         }
     }
 
-    private class AxisValueFormatter : IAxisValueFormatter {
+    private class XAxisValueFormatter(cnt: Int) : IAxisValueFormatter {
+        private val cnt: Int = cnt
+
         override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-            axis?.setLabelCount(5, true)
+            axis?.setLabelCount(this.cnt, true)
             return value.toString()
 
         }
     }
+
+
+
 
     companion object {
         // true is UpState, false is DownState

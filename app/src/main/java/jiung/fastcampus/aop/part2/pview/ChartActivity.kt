@@ -1,6 +1,7 @@
 package jiung.fastcampus.aop.part2.pview
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Paint
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +14,8 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.forEachIndexed
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
@@ -27,12 +30,19 @@ class ChartActivity : AppCompatActivity() {
         findViewById(R.id.mainHomeButton)
     }
 
+    private val mainPictureButton: AppCompatImageButton by lazy {
+        findViewById(R.id.mainPictureButton)
+    }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chart)
 
         setComponent()
     }
+
 
 
     private fun setComponent() {
@@ -44,6 +54,23 @@ class ChartActivity : AppCompatActivity() {
         mainHomeButton.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
+        mainPictureButton.setOnClickListener {
+            if (allPermissionGranted()) {
+                startActivity(Intent(this, PictureActivity::class.java))
+            } else {
+                ActivityCompat.requestPermissions(this,
+                    PictureActivity.REQUESTED_PERMISSIONS,
+                    PictureActivity.REQUEST_CODE_PERMISSIONS)
+            }
+
+
+        }
+    }
+
+    private fun allPermissionGranted() = PictureActivity.REQUESTED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(
+            baseContext, it
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
 
@@ -65,6 +92,7 @@ class ChartActivity : AppCompatActivity() {
             viewPager
         ) { tab, position -> tab.text = tabTitles[position] }.attach()
     }
+
 
 }
 
