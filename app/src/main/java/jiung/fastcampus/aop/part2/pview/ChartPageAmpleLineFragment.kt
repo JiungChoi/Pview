@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -192,17 +193,19 @@ class ChartPageAmpleLineFragment : Fragment() {
         this.chartPageWrinkleLineChart = view.findViewById(R.id.chartPageWrinkleLineChart)
         this.chartPageMoistureLineChart = view.findViewById(R.id.chartPageMoistureLineChart)
 
-        makeAcneChart(chartPageAcneLineChart)
-        makeStimulusChart(chartPageStimulusLineChart)
-        makeWhiteningChart(chartPageWhiteningLineChart)
-        makeWrinkleChart(chartPageWrinkleLineChart)
-        makeMoistureChart(chartPageMoistureLineChart)
+        makeWrinkleResultChart(chartPageAcneLineChart)
+
+    //TODO else Charts
+    //        makeStimulusChart(chartPageStimulusLineChart)
+//        makeWhiteningChart(chartPageWhiteningLineChart)
+//        makeWrinkleChart(chartPageWrinkleLineChart)
+//        makeMoistureChart(chartPageMoistureLineChart)
     }
 
 
-    private fun makeAcneChart(mpLineChart: LineChart) {
+    private fun makeWrinkleResultChart(mpLineChart: LineChart) {
 
-        val acneLineDataSet : LineDataSet = LineDataSet(ampleAcneDataValue(), "진정(여드름)")
+        val acneLineDataSet : LineDataSet = LineDataSet(resultWrinkleDataValue(), "주름")
         val dataSets : ArrayList<ILineDataSet> = arrayListOf()
         dataSets.add(acneLineDataSet)
 
@@ -227,12 +230,7 @@ class ChartPageAmpleLineFragment : Fragment() {
         description.textSize = 20f
         mpLineChart.description = description
 
-        acneLineDataSet.color =
-            Color.argb(
-                Integer.parseInt("85", 16),
-                Integer.parseInt("ED", 16),
-                Integer.parseInt("ED", 16),
-                Integer.parseInt("ED", 16))
+        acneLineDataSet.color = Color.CYAN
         acneLineDataSet.lineWidth = 2f
 //        acneLineDataSet.enableDashedLine(5F, 10F, 0F)
 
@@ -248,14 +246,15 @@ class ChartPageAmpleLineFragment : Fragment() {
         acneLineDataSet.setDrawFilled(true)
         acneLineDataSet.fillDrawable = gradient
         acneLineDataSet.valueTextSize = 10f
+        acneLineDataSet.lineWidth = 2f
 
         mpLineChart.setDrawGridBackground(true)
 
 
-        var limitLine = LimitLine(2f, "Average")
+        var limitLine = LimitLine(60f, "Average")
         limitLine.lineWidth = 2f
         limitLine.enableDashedLine(10f, 10f, 0f)
-        limitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
+        limitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_BOTTOM
         limitLine.textSize = 10f
         limitLine.lineColor = Color.GREEN
 
@@ -268,7 +267,7 @@ class ChartPageAmpleLineFragment : Fragment() {
 //        xAxis.textSize = 10f
 //        yAxis.textSize = 5f
         yAxis.setDrawGridLines(true)
-        yAxis.axisMaximum = 4f
+        yAxis.axisMaximum = 100f
         yAxis.axisMinimum = 0f
         yAxis.axisLineWidth= 1f
         yAxis.setDrawLimitLinesBehindData(true)
@@ -282,404 +281,20 @@ class ChartPageAmpleLineFragment : Fragment() {
         mpLineChart.invalidate()
     }
 
-
-    private fun ampleAcneDataValue() : ArrayList<Entry>{
-        val entry : ArrayList<Entry> = arrayListOf()
-
+    private fun resultWrinkleDataValue() : ArrayList<Entry>{
+        var entry : ArrayList<Entry> = arrayListOf()
 
         for (i in 0 until dbLog.size){
+
             var date = dbLog[i].time?.split(" ")?.first()?.split("/")
             var time = dbLog[i].time?.split(" ")?.last()?.split(":")
+            Log.d("mymymy", "${date}")
+            Log.d("mymymy", "${time}")
 
-            entry.add(Entry(i.toFloat(), dbLog[i].Acne?.toFloat()!!))
-//            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
+            entry.add(Entry(i.toFloat(), dbLog[dbLog.size-1-i].resultWrinkle?.toFloat()!!))
         }
         return entry
     }
-
-
-    private fun makeStimulusChart(mpLineChart: LineChart) {
-
-        val stimulusLineDataSet : LineDataSet = LineDataSet(ampleStimulusDataValue(), "진정(자극완화)")
-        val dataSets : ArrayList<ILineDataSet> = arrayListOf()
-        dataSets.add(stimulusLineDataSet)
-
-        // ** STYLE
-        mpLineChart.setNoDataText("No Data")
-        //mpLineChart.setNoDataTextColor(Color.RED)
-
-        mpLineChart.setDrawGridBackground(true)
-        mpLineChart.setDrawBorders(true)
-        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16),
-            Integer.parseInt("ED", 16),
-            Integer.parseInt(
-                "ED",
-                16),
-            Integer.parseInt("ED", 16)))
-        mpLineChart.setBorderWidth(4f)
-
-        val description : Description = Description()
-        description.text = "Pview"
-        description.textColor = Color.CYAN
-        description.textSize = 20f
-        mpLineChart.description = description
-
-        stimulusLineDataSet.color =
-            Color.argb(
-                Integer.parseInt("85", 16),
-                Integer.parseInt("ED", 16),
-                Integer.parseInt("ED", 16),
-                Integer.parseInt("ED", 16))
-        stimulusLineDataSet.lineWidth = 2f
-//        acneLineDataSet.enableDashedLine(5F, 10F, 0F)
-
-
-        stimulusLineDataSet.setDrawCircles(true)
-        stimulusLineDataSet.setDrawCircleHole(true)
-        stimulusLineDataSet.setCircleColor(Color.GRAY)
-        stimulusLineDataSet.setCircleColorHole(Color.CYAN)
-        stimulusLineDataSet.circleRadius = 3f
-        stimulusLineDataSet.circleHoleRadius = 2f
-        stimulusLineDataSet.fillAlpha = 50
-        stimulusLineDataSet.fillFormatter
-        stimulusLineDataSet.setDrawFilled(true)
-        stimulusLineDataSet.fillDrawable = gradient
-        stimulusLineDataSet.valueTextSize = 10f
-
-        mpLineChart.setDrawGridBackground(true)
-
-
-        var limitLine = LimitLine(2f, "Average")
-        limitLine.lineWidth = 2f
-        limitLine.enableDashedLine(10f, 10f, 0f)
-        limitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
-        limitLine.textSize = 10f
-        limitLine.lineColor = Color.GREEN
-
-        // ** Axis
-        val xAxis : XAxis = mpLineChart.xAxis
-        val yAxis : YAxis = mpLineChart.axisLeft
-        mpLineChart.axisRight.isEnabled = false
-        xAxis.valueFormatter = XAxisValueFormatter(5)
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-//        xAxis.textSize = 10f
-//        yAxis.textSize = 5f
-        yAxis.setDrawGridLines(true)
-        yAxis.axisMaximum = 3f
-        yAxis.axisMinimum = 0f
-        yAxis.axisLineWidth= 1f
-        yAxis.setDrawLimitLinesBehindData(true)
-        yAxis.addLimitLine(limitLine)
-
-
-        val data : LineData = LineData(stimulusLineDataSet)
-        data.setValueFormatter(ValueFormatter())
-        mpLineChart.data = data
-//        mpLineChart.animateX(1000)
-        mpLineChart.invalidate()
-    }
-
-    private fun ampleStimulusDataValue() : ArrayList<Entry>{
-        val entry : ArrayList<Entry> = arrayListOf()
-
-
-        for (i in 0 until dbLog.size){
-            var date = dbLog[i].time?.split(" ")?.first()?.split("/")
-            var time = dbLog[i].time?.split(" ")?.last()?.split(":")
-
-            entry.add(Entry(i.toFloat(), dbLog[i].Stimulus?.toFloat()!!))
-//            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
-        }
-        return entry
-    }
-
-    private fun makeWhiteningChart(mpLineChart: LineChart) {
-
-        val whiteningLineDataSet : LineDataSet = LineDataSet(ampleWhiteningDataValue(), "진정(자극완화)")
-        val dataSets : ArrayList<ILineDataSet> = arrayListOf()
-        dataSets.add(whiteningLineDataSet)
-
-// ** STYLE
-        mpLineChart.setNoDataText("No Data")
-        //mpLineChart.setNoDataTextColor(Color.RED)
-
-        mpLineChart.setDrawGridBackground(true)
-        mpLineChart.setDrawBorders(true)
-        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16),
-            Integer.parseInt("ED", 16),
-            Integer.parseInt(
-                "ED",
-                16),
-            Integer.parseInt("ED", 16)))
-        mpLineChart.setBorderWidth(4f)
-
-        val description : Description = Description()
-        description.text = "Pview"
-        description.textColor = Color.CYAN
-        description.textSize = 20f
-        mpLineChart.description = description
-
-        whiteningLineDataSet.color =
-            Color.argb(
-                Integer.parseInt("85", 16),
-                Integer.parseInt("ED", 16),
-                Integer.parseInt("ED", 16),
-                Integer.parseInt("ED", 16))
-        whiteningLineDataSet.lineWidth = 2f
-//        acneLineDataSet.enableDashedLine(5F, 10F, 0F)
-
-
-        whiteningLineDataSet.setDrawCircles(true)
-        whiteningLineDataSet.setDrawCircleHole(true)
-        whiteningLineDataSet.setCircleColor(Color.GRAY)
-        whiteningLineDataSet.setCircleColorHole(Color.CYAN)
-        whiteningLineDataSet.circleRadius = 3f
-        whiteningLineDataSet.circleHoleRadius = 2f
-        whiteningLineDataSet.fillAlpha = 50
-        whiteningLineDataSet.fillFormatter
-        whiteningLineDataSet.setDrawFilled(true)
-        whiteningLineDataSet.fillDrawable = gradient
-        whiteningLineDataSet.valueTextSize = 10f
-
-        mpLineChart.setDrawGridBackground(true)
-
-
-        var limitLine = LimitLine(2f, "Average")
-        limitLine.lineWidth = 2f
-        limitLine.enableDashedLine(10f, 10f, 0f)
-        limitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
-        limitLine.textSize = 10f
-        limitLine.lineColor = Color.GREEN
-
-        // ** Axis
-        val xAxis : XAxis = mpLineChart.xAxis
-        val yAxis : YAxis = mpLineChart.axisLeft
-        mpLineChart.axisRight.isEnabled = false
-        xAxis.valueFormatter = XAxisValueFormatter(5)
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-//        xAxis.textSize = 10f
-//        yAxis.textSize = 5f
-        yAxis.setDrawGridLines(true)
-        yAxis.axisMaximum = 2f
-        yAxis.axisMinimum = 0f
-        yAxis.axisLineWidth= 1f
-        yAxis.setDrawLimitLinesBehindData(true)
-        yAxis.addLimitLine(limitLine)
-
-
-        val data : LineData = LineData(whiteningLineDataSet)
-        data.setValueFormatter(ValueFormatter())
-        mpLineChart.data = data
-//        mpLineChart.animateX(1000)
-        mpLineChart.invalidate()
-    }
-
-    private fun ampleWhiteningDataValue() : ArrayList<Entry>{
-        val entry : ArrayList<Entry> = arrayListOf()
-
-
-        for (i in 0 until dbLog.size){
-            var date = dbLog[i].time?.split(" ")?.first()?.split("/")
-            var time = dbLog[i].time?.split(" ")?.last()?.split(":")
-
-            entry.add(Entry(i.toFloat(), dbLog[i].Whitening?.toFloat()!!))
-//            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
-        }
-        return entry
-    }
-
-    private fun makeWrinkleChart(mpLineChart: LineChart) {
-
-        val wrinkleLineDataSet : LineDataSet = LineDataSet(ampleWrinkleDataValue(), "진정(자극완화)")
-        val dataSets : ArrayList<ILineDataSet> = arrayListOf()
-        dataSets.add(wrinkleLineDataSet)
-
-
-        // ** STYLE
-        mpLineChart.setNoDataText("No Data")
-        //mpLineChart.setNoDataTextColor(Color.RED)
-
-        mpLineChart.setDrawGridBackground(true)
-        mpLineChart.setDrawBorders(true)
-        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16),
-            Integer.parseInt("ED", 16),
-            Integer.parseInt(
-                "ED",
-                16),
-            Integer.parseInt("ED", 16)))
-        mpLineChart.setBorderWidth(4f)
-
-        val description : Description = Description()
-        description.text = "Pview"
-        description.textColor = Color.CYAN
-        description.textSize = 20f
-        mpLineChart.description = description
-
-        wrinkleLineDataSet.color =
-            Color.argb(
-                Integer.parseInt("85", 16),
-                Integer.parseInt("ED", 16),
-                Integer.parseInt("ED", 16),
-                Integer.parseInt("ED", 16))
-        wrinkleLineDataSet.lineWidth = 2f
-//        acneLineDataSet.enableDashedLine(5F, 10F, 0F)
-
-
-        wrinkleLineDataSet.setDrawCircles(true)
-        wrinkleLineDataSet.setDrawCircleHole(true)
-        wrinkleLineDataSet.setCircleColor(Color.GRAY)
-        wrinkleLineDataSet.setCircleColorHole(Color.CYAN)
-        wrinkleLineDataSet.circleRadius = 3f
-        wrinkleLineDataSet.circleHoleRadius = 2f
-        wrinkleLineDataSet.fillAlpha = 50
-        wrinkleLineDataSet.fillFormatter
-        wrinkleLineDataSet.setDrawFilled(true)
-        wrinkleLineDataSet.fillDrawable = gradient
-        wrinkleLineDataSet.valueTextSize = 10f
-
-        mpLineChart.setDrawGridBackground(true)
-
-
-        var limitLine = LimitLine(2f, "Average")
-        limitLine.lineWidth = 2f
-        limitLine.enableDashedLine(10f, 10f, 0f)
-        limitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
-        limitLine.textSize = 10f
-        limitLine.lineColor = Color.GREEN
-
-        // ** Axis
-        val xAxis : XAxis = mpLineChart.xAxis
-        val yAxis : YAxis = mpLineChart.axisLeft
-        mpLineChart.axisRight.isEnabled = false
-        xAxis.valueFormatter = XAxisValueFormatter(5)
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-//        xAxis.textSize = 10f
-//        yAxis.textSize = 5f
-        yAxis.setDrawGridLines(true)
-        yAxis.axisMaximum = 1f
-        yAxis.axisMinimum = 0f
-        yAxis.axisLineWidth= 1f
-        yAxis.setDrawLimitLinesBehindData(true)
-        yAxis.addLimitLine(limitLine)
-
-
-        val data : LineData = LineData(wrinkleLineDataSet)
-        data.setValueFormatter(ValueFormatter())
-        mpLineChart.data = data
-//        mpLineChart.animateX(1000)
-        mpLineChart.invalidate()
-    }
-
-    private fun ampleWrinkleDataValue() : ArrayList<Entry>{
-        val entry : ArrayList<Entry> = arrayListOf()
-
-
-        for (i in 0 until dbLog.size){
-            var date = dbLog[i].time?.split(" ")?.first()?.split("/")
-            var time = dbLog[i].time?.split(" ")?.last()?.split(":")
-
-            entry.add(Entry(i.toFloat(), dbLog[i].Wrinkle?.toFloat()!!))
-//            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
-        }
-        return entry
-    }
-
-    private fun makeMoistureChart(mpLineChart: LineChart) {
-
-        val moistureLineDataSet : LineDataSet = LineDataSet(ampleMoistureDataValue(), "진정(자극완화)")
-        val dataSets : ArrayList<ILineDataSet> = arrayListOf()
-        dataSets.add(moistureLineDataSet)
-
-
-        // ** STYLE
-        mpLineChart.setNoDataText("No Data")
-        //mpLineChart.setNoDataTextColor(Color.RED)
-
-        mpLineChart.setDrawGridBackground(true)
-        mpLineChart.setDrawBorders(true)
-        mpLineChart.setBorderColor(Color.argb(Integer.parseInt("85", 16),
-            Integer.parseInt("ED", 16),
-            Integer.parseInt(
-                "ED",
-                16),
-            Integer.parseInt("ED", 16)))
-        mpLineChart.setBorderWidth(4f)
-
-        val description : Description = Description()
-        description.text = "Pview"
-        description.textColor = Color.CYAN
-        description.textSize = 20f
-        mpLineChart.description = description
-
-        moistureLineDataSet.color =
-            Color.argb(
-                Integer.parseInt("85", 16),
-                Integer.parseInt("ED", 16),
-                Integer.parseInt("ED", 16),
-                Integer.parseInt("ED", 16))
-        moistureLineDataSet.lineWidth = 2f
-//        acneLineDataSet.enableDashedLine(5F, 10F, 0F)
-
-
-        moistureLineDataSet.setDrawCircles(true)
-        moistureLineDataSet.setDrawCircleHole(true)
-        moistureLineDataSet.setCircleColor(Color.GRAY)
-        moistureLineDataSet.setCircleColorHole(Color.CYAN)
-        moistureLineDataSet.circleRadius = 3f
-        moistureLineDataSet.circleHoleRadius = 2f
-        moistureLineDataSet.fillAlpha = 50
-        moistureLineDataSet.fillFormatter
-        moistureLineDataSet.setDrawFilled(true)
-        moistureLineDataSet.fillDrawable = gradient
-        moistureLineDataSet.valueTextSize = 10f
-
-        mpLineChart.setDrawGridBackground(true)
-
-
-        var limitLine = LimitLine(2f, "Average")
-        limitLine.lineWidth = 2f
-        limitLine.enableDashedLine(10f, 10f, 0f)
-        limitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
-        limitLine.textSize = 10f
-        limitLine.lineColor = Color.GREEN
-
-        // ** Axis
-        val xAxis : XAxis = mpLineChart.xAxis
-        val yAxis : YAxis = mpLineChart.axisLeft
-        mpLineChart.axisRight.isEnabled = false
-        xAxis.valueFormatter = XAxisValueFormatter(5)
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-//        xAxis.textSize = 10f
-//        yAxis.textSize = 5f
-        yAxis.setDrawGridLines(true)
-        yAxis.axisMaximum = 1f
-        yAxis.axisMinimum = 0f
-        yAxis.axisLineWidth= 1f
-        yAxis.setDrawLimitLinesBehindData(true)
-        yAxis.addLimitLine(limitLine)
-
-
-        val data : LineData = LineData(moistureLineDataSet)
-        data.setValueFormatter(ValueFormatter())
-        mpLineChart.data = data
-//        mpLineChart.animateX(1000)
-        mpLineChart.invalidate()
-    }
-
-    private fun ampleMoistureDataValue() : ArrayList<Entry>{
-        val entry : ArrayList<Entry> = arrayListOf()
-
-
-        for (i in 0 until dbLog.size){
-            var date = dbLog[i].time?.split(" ")?.first()?.split("/")
-            var time = dbLog[i].time?.split(" ")?.last()?.split(":")
-
-            entry.add(Entry(i.toFloat(), dbLog[i].Moisture?.toFloat()!!))
-//            Log.d("mymy1", "${(date?.get(1) + date?.get(2) + "."+ time?.get(0) + time?.get(1)).toFloat()}")
-        }
-        return entry
-    }
-
 
     private class ValueFormatter : IValueFormatter {
         override fun getFormattedValue(

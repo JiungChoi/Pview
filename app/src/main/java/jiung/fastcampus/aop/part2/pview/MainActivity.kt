@@ -10,12 +10,14 @@ import android.view.View
 import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.room.ColumnInfo
 import androidx.room.Room
 import jiung.fastcampus.aop.part2.pview.model.History
 import kotlin.collections.ArrayList
@@ -167,16 +169,24 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
 
-                        recommendDataAry[0] = it.first().Acne.toString()
-                        recommendDataAry[1] = it.first().Whitening.toString()
-                        recommendDataAry[2] = it.first().Stimulus.toString()
-                        recommendDataAry[3] = it.first().Wrinkle.toString()
-                        recommendDataAry[4] = it.first().Moisture.toString()
-                        recommendDataAry[5] = it.first().Moisturizing.toString()
-                        recommendDataAry[6] = it.first().Oilly.toString()
+                        recommendDataAry[0] = it.first().recommendAcne.toString()
+                        recommendDataAry[1] = it.first().recommendWhitening.toString()
+                        recommendDataAry[2] = it.first().recommendStimulus.toString()
+                        recommendDataAry[3] = it.first().recommendWrinkle.toString()
+                        recommendDataAry[4] = it.first().recommendMoisture.toString()
+                        recommendDataAry[5] = it.first().recommendMoisturizing.toString()
+                        recommendDataAry[6] = it.first().recommendOilly.toString()
+
+                        skinDataAry[0] = it.first().resultWrinkle.toString()
+                        skinDataAry[1] = it.first().resultSkinTone.toString()
+                        skinDataAry[2] = it.first().resultPoreDetect.toString()
+                        skinDataAry[3] = it.first().resultDeadSkin.toString()
+                        skinDataAry[4] = it.first().resultOilly.toString()
+                        skinDataAry[5] = it.first().resultPih.toString()
 
                         mainCareDate = it.first().time.toString()
 
+                        Log.d("Jiung","$it")
                         // Update Sync
                         var wait = true
                         while (wait) {
@@ -230,7 +240,12 @@ class MainActivity : AppCompatActivity() {
 
         }
         mainChartButton.setOnClickListener {
-            startActivity(Intent(this, ChartActivity::class.java))
+            if (recommendDataAry[0] == "미측정"){
+                Toast.makeText(this, "진단 후 이용 가능한 서비스입니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                startActivity(Intent(this, ChartActivity::class.java))
+                Log.d("mymymy", "${recommendDataAry[0]+ " " + recommendDataAry[1]+ " " + recommendDataAry[2]+ " " + recommendDataAry[3]+ " "+ recommendDataAry[4]+ " "+ recommendDataAry[5] }")
+            }
         }
         mainPersonalButton.setOnClickListener {
             startActivity(Intent(this, PersonalActivity::class.java))
@@ -238,15 +253,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateSimpleInfoLayout() :Boolean{
-        updateTextView(mainSimpleSkinTextureInfo, 1)
-        updateTextView(mainSimpleSkinToneInfo, 2)
-        updateTextView(mainSimpleSkinOilInfo, 3)
+        if (recommendDataAry[0] != "미측정"){
+            updateTextView(mainSimpleSkinTextureInfo, 1)
+            updateTextView(mainSimpleSkinToneInfo, 2)
+            updateTextView(mainSimpleSkinOilInfo, 3)
 
-        mainCenterNumberPercentage.isVisible = true
-        mainCenterGuideTextView.isVisible = true
-        mainCenterNumberTextView.text = "36"
-        mainCenterNumberTextView.textSize = 55f
-        mainCenterNumberTextView.setTextColor(Color.rgb(30, 167, 172))
+            mainCenterNumberPercentage.isVisible = true
+            mainCenterGuideTextView.isVisible = true
+            mainCenterNumberTextView.text = "36"
+            mainCenterNumberTextView.textSize = 55f
+            mainCenterNumberTextView.setTextColor(Color.rgb(30, 167, 172))
+        } else {
+
+        }
         return false
     }
 

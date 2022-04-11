@@ -98,9 +98,9 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="bottom"
                 android:text="%"
-                android:visibility="gone"
                 android:textColor="@color/gradient_cyan_start"
                 android:textSize="25sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/mainCenterNumberTextView"
                 app:layout_constraintStart_toEndOf="@+id/mainCenterNumberTextView" />
 
@@ -112,8 +112,8 @@
                 android:text="피부나이 상위"
                 android:textColor="@color/gradient_cyan_start"
                 android:textSize="13sp"
-                android:visibility="gone"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/mainCenterNumberTextView"
                 app:layout_constraintEnd_toEndOf="@+id/mainCenterCircleImageView"
                 app:layout_constraintStart_toStartOf="@+id/mainCenterCircleImageView" />
@@ -175,9 +175,9 @@
                     android:textColor="@color/red_md_pick"
                     android:textSize="12sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
                     app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinTextureTextView"
                     app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinTextureTextView"
-                    app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
@@ -200,11 +200,10 @@
                     android:textColor="@color/red_md_pick"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinToneTextView"
-                    app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinToneTextView"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
-                    />
+                    app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinToneTextView"
+                    app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinToneTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <View
                     android:layout_width="2dp"
@@ -226,23 +225,22 @@
                     android:textColor="@color/red_md_pick"
                     android:textSize="12sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
                     app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinOilTextView"
                     app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinOilTextView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/mainSimpleSkinTextureTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    android:text="피부결"
                     android:layout_marginStart="36dp"
+                    android:text="피부결"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/mainSimpleSkinToneTextView"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/mainSimpleSkinTextureInfo" />
 
@@ -255,8 +253,8 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/mainSimpleSkinTextureTextView"
                     app:layout_constraintEnd_toStartOf="@+id/mainSimpleSkinOilTextView"
+                    app:layout_constraintStart_toEndOf="@+id/mainSimpleSkinTextureTextView"
                     app:layout_constraintTop_toBottomOf="@+id/mainSimpleSkinToneInfo" />
 
                 <TextView
@@ -267,8 +265,8 @@
                     android:text="유분수치"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    app:layout_constraintHorizontal_bias="1"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
                     app:layout_constraintStart_toEndOf="@+id/mainSimpleSkinToneTextView"
                     app:layout_constraintTop_toTopOf="@+id/mainSimpleSkinTextureTextView" />
 
@@ -344,14 +342,16 @@
                         android:layout_marginHorizontal="8dp"
                         android:elevation="3dp"
                         android:max="4"
-                        android:tickMark="@drawable/drawable_tick_mark"
                         android:progress="3"
                         android:progressDrawable="@drawable/seekbar_progressdrawable_1"
                         android:thumb="@drawable/ic_thumb_circle"
+                        android:tickMark="@drawable/drawable_tick_mark"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/ampleLineCalmAcneDetailTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:visibility="visible" />
 
 
                     <TableLayout
@@ -455,11 +455,13 @@
                         android:progress="1"
                         android:progressDrawable="@drawable/seekbar_progressdrawable_1"
                         android:thumb="@drawable/ic_thumb_circle"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:tickMark="@drawable/drawable_tick_mark"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/ampleLineCalmStimulusDetailTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:visibility="visible" />
 
                     <TableLayout
                         android:layout_width="0dp"
@@ -542,10 +544,12 @@
                         android:progressDrawable="@drawable/seekbar_progressdrawable_1"
                         android:thumb="@drawable/ic_thumb_circle"
                         android:tickMark="@drawable/drawable_tick_mark"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/ampleLineWhiteningTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:visibility="visible" />
 
                     <TableLayout
                         android:layout_width="0dp"
@@ -627,10 +631,12 @@
                         android:progressDrawable="@drawable/seekbar_progressdrawable_1"
                         android:thumb="@drawable/ic_thumb_circle"
                         android:tickMark="@drawable/drawable_tick_mark"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/ampleLineWrinkleTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:visibility="visible" />
 
                     <TableLayout
                         android:layout_width="0dp"
@@ -700,10 +706,12 @@
                         android:progressDrawable="@drawable/seekbar_progressdrawable_1"
                         android:thumb="@drawable/ic_thumb_circle"
                         android:tickMark="@drawable/drawable_tick_mark"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/ampleLineMoistureTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:visibility="visible" />
 
                     <TableLayout
                         android:layout_width="0dp"
@@ -796,6 +804,8 @@
                         android:layout_gravity="bottom"
                         android:layout_marginHorizontal="5dp"
                         android:max="5"
+                        android:visibility="gone"
+                        tools:visibility="visible"
                         android:progress="1"
                         android:progressDrawable="@drawable/seekbar_progressdrawable_1"
                         android:thumb="@drawable/ic_thumb_circle"
@@ -904,11 +914,13 @@
                         android:progressDrawable="@drawable/seekbar_progressdrawable_1"
                         android:thumb="@drawable/ic_thumb_circle"
                         android:tickMark="@drawable/drawable_tick_mark"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/skinLineOilTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:visibility="visible"
+                        />
                     <TableLayout
                         android:layout_width="0dp"
                         android:layout_height="11dp"
@@ -918,6 +930,7 @@
                         app:layout_constraintTop_toBottomOf="@id/skinLineOilSeekBar">
 
                         <TableRow>
+
                             <TextView
                                 android:layout_width="40dp"
                                 android:layout_height="wrap_content"
@@ -1559,11 +1572,11 @@
         android:id="@+id/mainHomeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
         android:layout_marginHorizontal="170dp"
+        android:layout_marginBottom="15dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/img_pview_btn"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

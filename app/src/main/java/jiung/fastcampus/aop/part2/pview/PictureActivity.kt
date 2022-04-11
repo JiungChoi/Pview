@@ -25,6 +25,8 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
+import androidx.room.ColumnInfo
+import androidx.room.PrimaryKey
 import androidx.room.Room
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -390,12 +392,19 @@ class PictureActivity : AppCompatActivity() {
                         .replace("}]", "")
                         .split(",")
 
+                    skinData.forEachIndexed { index, it ->
+                        if (index == 1){
+                            skinDataAry[index] = "${100-(it.split(":")[1].toFloat().div(6f)*100).toInt()}"
 
-                    skinData.forEachIndexed { index, it -> skinDataAry[index] = it.split(":")[1] }
-                    recommendData.forEachIndexed{ index, it -> recommendDataAry[index] = it.split(":")[1] }
+                        } else {
+                            skinDataAry[index] = "${100-(it.split(":")[1].toFloat()*100).toInt()}"
+                        }
+                    }
+                    recommendData.forEachIndexed{ index, it ->
+                        recommendDataAry[index] = it.split(":")[1] }
 
                     setAppdataBase()
-                    Log.d("myTag PostImg TEST2", "${skinDataAry[0]}" + "${skinDataAry[1]}")
+
                 }
 
                 override fun onFailure(call: Call<getResoponseDto>, t: Throwable) {
@@ -484,6 +493,13 @@ class PictureActivity : AppCompatActivity() {
                     recommendDataAry[4],
                     recommendDataAry[5],
                     recommendDataAry[6],
+
+                    skinDataAry[0],
+                    skinDataAry[1],
+                    skinDataAry[2],
+                    skinDataAry[3],
+                    skinDataAry[4],
+                    skinDataAry[5],
                     mainCareDate))
         }).start()
     }
