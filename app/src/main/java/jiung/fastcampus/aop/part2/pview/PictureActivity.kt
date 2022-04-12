@@ -1,6 +1,7 @@
 package jiung.fastcampus.aop.part2.pview
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.hardware.display.DisplayManager
@@ -63,6 +64,8 @@ class PictureActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var imageCapture: ImageCapture
 
+    private val mainActivity : MainActivity = MainActivity.mainActivity as MainActivity
+
     private var personalSex: String? = null
     private var personalAge: Int? = null
 
@@ -111,9 +114,17 @@ class PictureActivity : AppCompatActivity() {
         binding = ActivityPictureBinding.inflate(layoutInflater)
         root = binding.root
 
+        activityStackClear()
+
         setContentView(binding.root)
         startPictureContextPopup()
         startCamera(binding.viewFinder)
+    }
+
+    private fun activityStackClear() {
+        pictureActivity = this
+        MainActivity.pictureActivity = pictureActivity as PictureActivity
+        mainActivity?.finish()
     }
 
 
@@ -507,6 +518,7 @@ class PictureActivity : AppCompatActivity() {
     }
 
     companion object {
+        internal var pictureActivity: Activity? = null
         internal const val REQUEST_CODE_PERMISSIONS = 10
         internal val REQUESTED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA)
         private const val LENS_FACING: Int = CameraSelector.LENS_FACING_BACK

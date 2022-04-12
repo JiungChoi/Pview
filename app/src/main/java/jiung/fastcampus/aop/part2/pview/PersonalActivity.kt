@@ -1,5 +1,6 @@
 package jiung.fastcampus.aop.part2.pview
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,8 @@ import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.personalSex
 import jiung.fastcampus.aop.part2.pview.model.History
 
 class PersonalActivity:AppCompatActivity() {
+    private val mainActivity : MainActivity = MainActivity.mainActivity as MainActivity
+
     private val clearPersonalInfoButton: Button by lazy{
         findViewById(R.id.clearPersonalInfoButton)
     }
@@ -43,15 +46,24 @@ class PersonalActivity:AppCompatActivity() {
 
 
 
+        activityStackClear()
+        setButtons()
+    }
+
+
+    private fun activityStackClear() {
+        personalActivity = this
+        MainActivity.personalActivity = personalActivity as PersonalActivity
+        mainActivity?.finish()
+    }
+
+    private fun setButtons() {
         clearPersonalInfoButton.setOnClickListener {
             personalSex = sexSpinnerTextView.text.toString()
             personalAge = ageSpinnerTextView.text.toString()
 
             startActivity(Intent(this, MainActivity::class.java))
         }
-
-
-
     }
 
     private fun spinnerSet(spinner: Spinner, textView: TextView){
@@ -66,4 +78,8 @@ class PersonalActivity:AppCompatActivity() {
             }
         }
     }
+    companion object{
+        internal var personalActivity: Activity? = null
+    }
+
 }

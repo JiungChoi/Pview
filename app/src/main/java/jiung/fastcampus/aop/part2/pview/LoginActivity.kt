@@ -1,5 +1,6 @@
 package jiung.fastcampus.aop.part2.pview
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
@@ -14,6 +15,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
+    private val startAppActivity : StartAppActivity = StartAppActivity.startAppActivity as StartAppActivity
+
     private val findIdButton: AppCompatButton by lazy{
         findViewById(R.id.findIdButton)
     }
@@ -30,9 +33,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        loginActivity = this
+        startAppActivity.finish()
+
         findIdButton.paintFlags = findIdButton.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         findPwButton.paintFlags = findPwButton.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-
+        LoginActivity.loginActivity as LoginActivity
         loginButton.setOnClickListener {
             logInToServer()
             Log.d("myTag Login", "Login 완료")
@@ -76,6 +82,9 @@ class LoginActivity : AppCompatActivity() {
                 Log.e("myTag Login02", "${t.localizedMessage}")
             }
         })
+    }
+    companion object{
+        internal var loginActivity: Activity? = null
     }
 
 }

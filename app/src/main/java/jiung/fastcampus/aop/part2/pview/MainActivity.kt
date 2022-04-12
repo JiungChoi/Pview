@@ -1,5 +1,6 @@
 package jiung.fastcampus.aop.part2.pview
 
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -24,6 +25,8 @@ import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
+    private val loginActivity : LoginActivity = LoginActivity.loginActivity as LoginActivity
+
 
     private val mainCenterGuideTextView: TextView by lazy {
         findViewById(R.id.mainCenterGuideTextView)
@@ -119,12 +122,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mainActivity = this
+
+
+        activityStackClear()
         setGradients()
-
         initAppdataBase()
-
         loadAppdataBase()
         setComponent()
+
+    }
+
+    private fun activityStackClear(){
+
+        loginActivity?.finish()
+        pictureActivity?.finish()
+        chartActivity?.finish()
+        personalActivity?.finish()
 
     }
 
@@ -235,8 +249,6 @@ class MainActivity : AppCompatActivity() {
                     PictureActivity.REQUESTED_PERMISSIONS,
                     PictureActivity.REQUEST_CODE_PERMISSIONS)
             }
-
-
         }
         mainChartButton.setOnClickListener {
             if (recommendDataAry[0] == "미측정"){
@@ -245,6 +257,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, ChartActivity::class.java))
             }
         }
+
         mainPersonalButton.setOnClickListener {
             startActivity(Intent(this, PersonalActivity::class.java))
         }
@@ -258,7 +271,9 @@ class MainActivity : AppCompatActivity() {
 
             mainCenterNumberPercentage.isVisible = true
             mainCenterGuideTextView.isVisible = true
-            mainCenterNumberTextView.text = "36"
+
+            val skinStateScore = (skinDataAry[0].toInt()+skinDataAry[1].toInt()+skinDataAry[2].toInt()+skinDataAry[3].toInt()+skinDataAry[4].toInt()+skinDataAry[5].toInt()).toFloat()/6
+            mainCenterNumberTextView.text = (100 - skinStateScore.toInt()).toString()
             mainCenterNumberTextView.textSize = 55f
             mainCenterNumberTextView.setTextColor(Color.rgb(30, 167, 172))
         } else {
@@ -324,6 +339,15 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
+
+        // other Activity
+        internal var pictureActivity : PictureActivity? = null
+        internal var chartActivity : ChartActivity? = null
+        internal var personalActivity : PersonalActivity? = null
+
+        // this Activity
+        internal var mainActivity: Activity? = null
+
         internal var mainCareDate : String = "미측정"
         internal var personalSkinRank : String = "미측정"
 

@@ -1,5 +1,6 @@
 package jiung.fastcampus.aop.part2.pview
 
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Paint
@@ -24,6 +25,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 
 class ChartActivity : AppCompatActivity() {
+    private val mainActivity : MainActivity = MainActivity.mainActivity as MainActivity
 
     private val mainHomeButton: AppCompatImageButton by lazy {
         findViewById(R.id.mainHomeButton)
@@ -39,7 +41,14 @@ class ChartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chart)
 
+        activityStackClear()
         setComponent()
+    }
+
+    private fun activityStackClear() {
+        chartActivity = this
+        MainActivity.chartActivity = chartActivity as ChartActivity
+        mainActivity?.finish()
     }
 
 
@@ -92,6 +101,9 @@ class ChartActivity : AppCompatActivity() {
         ) { tab, position -> tab.text = tabTitles[position] }.attach()
     }
 
+    companion object{
+        internal var chartActivity: Activity? = null
+    }
 
 }
 
