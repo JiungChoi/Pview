@@ -291,7 +291,7 @@ class PictureActivity : AppCompatActivity() {
                 isCapturing = true
                 captureCamera()
                 isCaringSkinContextPopup()
-                Handler().postDelayed({ finishPictureContextPopup() }, 2000L)
+
             }
         }
     }
@@ -373,10 +373,12 @@ class PictureActivity : AppCompatActivity() {
                         Log.d("myTag PostImg01", response?.body().toString().split("^").toString())
 
                         parsingData(response?.body().toString().split("^"))
+                        finishPictureContextPopup()
                     } else {
                         Toast.makeText(applicationContext,
                             "Some error occurred...",
                             Toast.LENGTH_LONG).show()
+                        finishPictureContextPopup()
                     }
                 }
 

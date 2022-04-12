@@ -161,7 +161,7 @@ class MainActivity : AppCompatActivity() {
                             for (i in 0..4){
                                 dbLog.add(it[i])
                             }
-
+                            Log.d("mytag DBLog", "$dbLog")
                         } else {
                             dbLog.clear()
                             for (element in it) {
@@ -186,7 +186,6 @@ class MainActivity : AppCompatActivity() {
 
                         mainCareDate = it.first().time.toString()
 
-                        Log.d("Jiung","$it")
                         // Update Sync
                         var wait = true
                         while (wait) {
@@ -244,7 +243,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "진단 후 이용 가능한 서비스입니다.", Toast.LENGTH_SHORT).show()
             } else {
                 startActivity(Intent(this, ChartActivity::class.java))
-                Log.d("mymymy", "${recommendDataAry[0]+ " " + recommendDataAry[1]+ " " + recommendDataAry[2]+ " " + recommendDataAry[3]+ " "+ recommendDataAry[4]+ " "+ recommendDataAry[5] }")
             }
         }
         mainPersonalButton.setOnClickListener {

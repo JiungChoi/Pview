@@ -72,319 +72,19 @@
                 app:layout_constraintTop_toBottomOf="@id/userIconImageView" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chartPageAcneLayout"
-                android:background="@drawable/custom_ripple_effect"
+                android:id="@+id/chartPageResultWrinkleLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/custom_ripple_effect"
                 app:layout_constraintTop_toBottomOf="@id/chartPageTopLineView">
 
                 <ImageView
-                    android:id="@+id/chartPageAcneImageView"
+                    android:id="@+id/chartPageResultWrinkleImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/img_chart_acne"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="진정"
-                    android:textColor="@color/gradient_cyan_start"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageAcneImageView"
-                    app:layout_constraintStart_toEndOf="@+id/chartPageAcneImageView"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageAcneImageView" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="(여드름)"
-                    android:textColor="@color/gradient_cyan_start"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageAcneImageView"
-                    app:layout_constraintStart_toEndOf="@+id/chartPageAcneImageView" />
-
-                <TextView
-                    android:id="@+id/chartPageUserAcneResultTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="40dp"
-                    android:text="A3"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageAcneImageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/chartPageAcneImageView" />
-
-                <ImageView
-                    android:id="@+id/chartPageAcneUpDownImageView"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@color/white"
-                    android:rotation="270"
-                    android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageAcneImageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageAcneImageView" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chartPageAcneChartLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray_alpha2"
-                android:paddingBottom="20dp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/chartPageAcneLayout"
-                tools:visibility="visible">
-
-
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/chartPageAcneLineChart"
-                    android:exported="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginHorizontal="40dp"
-                    android:layout_marginTop="30dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/chartPageAcneLineView"
-                android:layout_width="0dp"
-                android:layout_height="0.5dp"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray_alpha"
-                android:elevation="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chartPageAcneChartLayout" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chartPageStimulusLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:background="@drawable/custom_ripple_effect"
-                android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@id/chartPageAcneChartLayout">
-
-
-                <ImageView
-                    android:id="@+id/chartPageStimulusImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/img_chart_stimulus"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="진정"
-                    android:textColor="@color/gradient_cyan_start"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageStimulusImageView"
-                    app:layout_constraintStart_toEndOf="@+id/chartPageStimulusImageView"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageStimulusImageView" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="(자극완화)"
-                    android:textColor="@color/gradient_cyan_start"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageStimulusImageView"
-                    app:layout_constraintStart_toEndOf="@+id/chartPageStimulusImageView" />
-
-                <TextView
-                    android:id="@+id/chartPageUserStimulusResultTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="40dp"
-                    android:text="B1"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/chartPageStimulusImageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageStimulusImageView" />
-
-
-                <ImageView
-                    android:id="@+id/chartPageStimulusUpDownImageView"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@color/white"
-                    android:rotation="270"
-                    android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintBottom_toBottomOf="@id/chartPageStimulusImageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageStimulusImageView" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chartPageStimulusChartLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray_alpha2"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/chartPageStimulusLayout"
-                tools:visibility="visible">
-
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/chartPageStimulusLineChart"
-                    android:exported="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginHorizontal="40dp"
-                    android:layout_marginTop="30dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    tools:visibility="gone"
-                    />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/chartPageStimulusLineView"
-                android:layout_width="0dp"
-                android:layout_height="0.5dp"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray_alpha"
-                android:elevation="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chartPageStimulusChartLayout" />
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chartPageWhiteningLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_ripple_effect"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@id/chartPageStimulusChartLayout"
-                tools:layout_editor_absoluteX="15dp">
-
-                <ImageView
-                    android:id="@+id/chartPageWhiteningImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/img_chart_whitening"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="미백"
-                    android:textColor="@color/gradient_cyan_start"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageWhiteningImageView"
-                    app:layout_constraintStart_toEndOf="@+id/chartPageWhiteningImageView"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageWhiteningImageView" />
-
-                <TextView
-                    android:id="@+id/chartPageUserWhiteningResultTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="40dp"
-                    android:text="C1"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageWhiteningImageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageWhiteningImageView" />
-
-                <ImageView
-                    android:id="@+id/chartPageWhiteningUpDownImageView"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@color/white"
-                    android:rotation="270"
-                    android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageWhiteningImageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageWhiteningImageView" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chartPageWhiteningChartLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/gray_alpha2"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/chartPageWhiteningLayout"
-                tools:visibility="visible">
-
-
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/chartPageWhiteningLineChart"
-                    android:exported="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginHorizontal="40dp"
-                    android:layout_marginTop="30dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    tools:visibility="gone"
-                    />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/chartPageWhiteningLineView"
-                android:layout_width="0dp"
-                android:layout_height="0.5dp"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray_alpha"
-                android:elevation="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chartPageWhiteningChartLayout" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chartPageWrinkleLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_ripple_effect"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@id/chartPageWhiteningChartLayout">
-
-                <ImageView
-                    android:id="@+id/chartPageWrinkleImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/img_chart_wrinkle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -395,64 +95,62 @@
                     android:textColor="@color/gradient_cyan_start"
                     android:textSize="25sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageWrinkleImageView"
-                    app:layout_constraintStart_toEndOf="@+id/chartPageWrinkleImageView"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageWrinkleImageView" />
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageResultWrinkleImageView"
+                    app:layout_constraintStart_toEndOf="@+id/chartPageResultWrinkleImageView"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageResultWrinkleImageView" />
 
                 <TextView
-                    android:id="@+id/chartPageUserWrinkleResultTextView"
+                    android:id="@+id/chartPageUserResultWrinkleResultTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="40dp"
-                    android:text="D1"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageWrinkleImageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageResultWrinkleImageView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageWrinkleImageView" />
+                    app:layout_constraintTop_toTopOf="@id/chartPageResultWrinkleImageView" />
 
                 <ImageView
-                    android:id="@+id/chartPageWrinkleUpDownImageView"
+                    android:id="@+id/chartPageResultWrinkleUpDownImageView"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_marginEnd="20dp"
                     android:background="@color/white"
                     android:rotation="270"
                     android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageWrinkleImageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageResultWrinkleImageView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageWrinkleImageView" />
-
+                    app:layout_constraintTop_toTopOf="@+id/chartPageResultWrinkleImageView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chartPageWrinkleChartLayout"
+                android:id="@+id/chartPageResultWrinkleChartLayout"
                 android:layout_width="match_parent"
-                tools:visibility="visible"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="8dp"
                 android:background="@color/gray_alpha2"
+                android:paddingBottom="20dp"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/chartPageWrinkleLayout">
+                app:layout_constraintTop_toBottomOf="@+id/chartPageResultWrinkleLayout"
+                tools:layout_editor_absoluteX="15dp"
+                tools:visibility="visible">
 
                 <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/chartPageWrinkleLineChart"
-                    android:exported="true"
+                    android:id="@+id/chartPageResultWrinkleLineChart"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_marginHorizontal="40dp"
                     android:layout_marginTop="30dp"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:exported="true"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    tools:visibility="gone"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
-                android:id="@+id/chartPageWrinkleLineView"
+                android:id="@+id/chartPageResultWrinkleLineView"
                 android:layout_width="0dp"
                 android:layout_height="0.5dp"
                 android:layout_marginHorizontal="15dp"
@@ -461,19 +159,294 @@
                 android:elevation="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chartPageWrinkleChartLayout" />
+                app:layout_constraintTop_toBottomOf="@id/chartPageResultWrinkleChartLayout" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chartPageMoistureLayout"
+                android:id="@+id/chartPageSkinToneLayout"
                 android:layout_width="match_parent"
-                android:background="@drawable/custom_ripple_effect"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@id/chartPageWrinkleChartLayout">
+                android:background="@drawable/custom_ripple_effect"
+                app:layout_constraintTop_toBottomOf="@id/chartPageResultWrinkleChartLayout">
+
 
                 <ImageView
-                    android:id="@+id/chartPageMoistureImageView"
+                    android:id="@+id/chartPageSkinToneImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_chart_stimulus"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="피부톤"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageSkinToneImageView"
+                    app:layout_constraintStart_toEndOf="@+id/chartPageSkinToneImageView"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageSkinToneImageView" />
+
+                <TextView
+                    android:id="@+id/chartPageUserSkinToneResultTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:text="B1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/chartPageSkinToneImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageSkinToneImageView" />
+
+
+                <ImageView
+                    android:id="@+id/chartPageSkinToneUpDownImageView"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/white"
+                    android:rotation="270"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="@id/chartPageSkinToneImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageSkinToneImageView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageSkinToneChartLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_alpha2"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/chartPageSkinToneLayout"
+                tools:visibility="visible">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chartPageSkinToneLineChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="30dp"
+                    android:exported="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/chartPageSkinToneLineView"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_alpha"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chartPageSkinToneChartLayout" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPagePoreDetectLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_ripple_effect"
+                app:layout_constraintTop_toBottomOf="@id/chartPageSkinToneChartLayout"
+                tools:layout_editor_absoluteX="15dp">
+
+                <ImageView
+                    android:id="@+id/chartPagePoreDetectImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_chart_whitening"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="모공"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPagePoreDetectImageView"
+                    app:layout_constraintStart_toEndOf="@+id/chartPagePoreDetectImageView"
+                    app:layout_constraintTop_toTopOf="@+id/chartPagePoreDetectImageView" />
+
+                <TextView
+                    android:id="@+id/chartPageUserPoreDetectResultTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:text="C1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPagePoreDetectImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPagePoreDetectImageView" />
+
+                <ImageView
+                    android:id="@+id/chartPagePoreDetectUpDownImageView"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/white"
+                    android:rotation="270"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPagePoreDetectImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPagePoreDetectImageView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPagePoreDetectChartLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/gray_alpha2"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/chartPagePoreDetectLayout"
+                tools:visibility="visible">
+
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chartPagePoreDetectLineChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="30dp"
+                    android:exported="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/chartPagePoreDetectLineView"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_alpha"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chartPagePoreDetectChartLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageDeadSkinLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_ripple_effect"
+                app:layout_constraintTop_toBottomOf="@id/chartPagePoreDetectChartLayout">
+
+                <ImageView
+                    android:id="@+id/chartPageDeadSkinImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_chart_wrinkle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="각질"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageDeadSkinImageView"
+                    app:layout_constraintStart_toEndOf="@+id/chartPageDeadSkinImageView"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageDeadSkinImageView" />
+
+                <TextView
+                    android:id="@+id/chartPageUserDeadSkinResultTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:text="D1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageDeadSkinImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageDeadSkinImageView" />
+
+                <ImageView
+                    android:id="@+id/chartPageDeadSkinUpDownImageView"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/white"
+                    android:rotation="270"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageDeadSkinImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageDeadSkinImageView" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageDeadSkinChartLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/gray_alpha2"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/chartPageDeadSkinLayout"
+                tools:visibility="visible">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chartPageDeadSkinLineChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="30dp"
+                    android:exported="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/chartPageDeadSkinLineView"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_alpha"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chartPageDeadSkinChartLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageResultOilLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_ripple_effect"
+                app:layout_constraintTop_toBottomOf="@id/chartPageDeadSkinChartLayout">
+
+                <ImageView
+                    android:id="@+id/chartPageResultOilImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/img_chart_moisture"
@@ -483,16 +456,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="수분"
+                    android:text="유분"
                     android:textColor="@color/gradient_cyan_start"
                     android:textSize="25sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageMoistureImageView"
-                    app:layout_constraintStart_toEndOf="@+id/chartPageMoistureImageView"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageMoistureImageView" />
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageResultOilImageView"
+                    app:layout_constraintStart_toEndOf="@+id/chartPageResultOilImageView"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageResultOilImageView" />
 
                 <TextView
-                    android:id="@+id/chartPageUserMoistureResultTextView"
+                    android:id="@+id/chartPageUserResultOilResultTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="40dp"
@@ -500,49 +473,48 @@
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageMoistureImageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageResultOilImageView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageMoistureImageView" />
+                    app:layout_constraintTop_toTopOf="@+id/chartPageResultOilImageView" />
 
                 <ImageView
-                    android:id="@+id/chartPageMoistureUpDownImageView"
+                    android:id="@+id/chartPageResultOilUpDownImageView"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_marginEnd="20dp"
                     android:background="@color/white"
                     android:rotation="270"
                     android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintBottom_toBottomOf="@+id/chartPageMoistureImageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageResultOilImageView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chartPageMoistureImageView" />
+                    app:layout_constraintTop_toTopOf="@+id/chartPageResultOilImageView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chartPageMoistureChartLayout"
+                android:id="@+id/chartPageResultOilChartLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:background="@color/gray_alpha2"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/chartPageMoistureLayout">
+                app:layout_constraintTop_toBottomOf="@+id/chartPageResultOilLayout">
 
                 <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/chartPageMoistureLineChart"
-                    android:exported="true"
+                    android:id="@+id/chartPageResultOilLineChart"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_marginHorizontal="40dp"
                     android:layout_marginTop="30dp"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:exported="true"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    tools:visibility="gone"
-                    />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
-                android:id="@+id/chartPageMoistureLineView"
+                android:id="@+id/chartPageResultOilLineView"
                 android:layout_width="0dp"
                 android:layout_height="0.5dp"
                 android:layout_marginHorizontal="15dp"
@@ -551,7 +523,96 @@
                 android:elevation="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chartPageMoistureChartLayout" />
+                app:layout_constraintTop_toBottomOf="@id/chartPageResultOilChartLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageResultPihLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_ripple_effect"
+                app:layout_constraintTop_toBottomOf="@id/chartPageResultOilChartLayout">
+
+                <ImageView
+                    android:id="@+id/chartPageResultPihImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_chart_stimulus"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="색소침착"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageResultPihImageView"
+                    app:layout_constraintStart_toEndOf="@+id/chartPageResultPihImageView"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageResultPihImageView" />
+
+                <TextView
+                    android:id="@+id/chartPageUserResultPihResultTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:text="E2"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageResultPihImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageResultPihImageView" />
+
+                <ImageView
+                    android:id="@+id/chartPageResultPihUpDownImageView"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/white"
+                    android:rotation="270"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="@+id/chartPageResultPihImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chartPageResultPihImageView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chartPageResultPihChartLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/gray_alpha2"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/chartPageResultPihLayout">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chartPageResultPihLineChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="30dp"
+                    android:exported="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/chartPageResultPihLineView"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_alpha"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chartPageResultPihChartLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

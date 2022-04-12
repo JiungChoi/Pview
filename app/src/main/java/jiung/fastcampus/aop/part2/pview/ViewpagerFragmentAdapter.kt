@@ -15,7 +15,7 @@ import androidx.viewpager2.adapter.FragmentViewHolder
 class ViewpagerFragmentAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
     // 1. ViewPager2에 연결할 Fragment 들을 생성
-    private val fragmentList = listOf<Fragment>(ChartPageAmpleLineFragment(),
+    private val fragmentList = listOf<Fragment>(ChartPageCareResultFragment(), ChartPageAmpleLineFragment(),
         ChartPageSkinLineFragment())
 
     // 2. ViesPager2에서 노출시킬 Fragment 의 갯수 설정

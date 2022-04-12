@@ -21,7 +21,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import jiung.fastcampus.aop.part2.pview.databinding.ActivityMainBinding
 
 
 class ChartActivity : AppCompatActivity() {
@@ -86,7 +85,7 @@ class ChartActivity : AppCompatActivity() {
 
         // ###### TabLayout과 ViewPager2를 연결
         // 1. 탭메뉴의 이름을 리스트로 생성해둔다.
-        val tabTitles = listOf<String>("앰플라인", "스킨라인")
+        val tabTitles = listOf<String>("진단 ", "앰플라인", "스킨라인")
         // 2. TabLayout과 ViewPager2를 연결하고, TabItem의 메뉴명을 설정한다.
         TabLayoutMediator(tabLayout,
             viewPager

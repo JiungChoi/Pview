@@ -47,7 +47,6 @@ class PersonalActivity:AppCompatActivity() {
             personalSex = sexSpinnerTextView.text.toString()
             personalAge = ageSpinnerTextView.text.toString()
 
-            setAppdataBase()
             startActivity(Intent(this, MainActivity::class.java))
         }
 
@@ -66,33 +65,5 @@ class PersonalActivity:AppCompatActivity() {
 
             }
         }
-    }
-
-    private fun setAppdataBase() {
-        MainActivity.db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "historyDB"
-        ).build()
-        Thread(Runnable {
-            MainActivity.db.historyDao().
-            insertHistory(
-                History(null, MainActivity.personalSex, MainActivity.personalAge,
-                    MainActivity.recommendDataAry[0],
-                    MainActivity.recommendDataAry[1],
-                    MainActivity.recommendDataAry[2],
-                    MainActivity.recommendDataAry[3],
-                    MainActivity.recommendDataAry[4],
-                    MainActivity.recommendDataAry[5],
-                    MainActivity.recommendDataAry[6],
-
-                    MainActivity.skinDataAry[0],
-                    MainActivity.skinDataAry[1],
-                    MainActivity.skinDataAry[2],
-                    MainActivity.skinDataAry[3],
-                    MainActivity.skinDataAry[4],
-                    MainActivity.skinDataAry[5],
-                    mainCareDate))
-        }).start()
     }
 }
