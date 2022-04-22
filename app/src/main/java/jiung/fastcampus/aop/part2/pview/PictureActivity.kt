@@ -16,6 +16,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ScaleGestureDetector
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -60,11 +61,12 @@ import android.content.Context as Context1
 
 @Suppress("DEPRECATION")
 class PictureActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityPictureBinding
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var imageCapture: ImageCapture
 
-    private val mainActivity : MainActivity = MainActivity.mainActivity as MainActivity
+    private val mainActivity: MainActivity = MainActivity.mainActivity as MainActivity
 
     private var personalSex: String? = null
     private var personalAge: Int? = null
@@ -75,6 +77,9 @@ class PictureActivity : AppCompatActivity() {
         ContextCompat.getMainExecutor(this)
     }
     private val cameraProviderFuture by lazy { ProcessCameraProvider.getInstance(this) }
+    private val cameraProvider by lazy{ cameraProviderFuture.get()}
+
+    private val switchCameraImageView: ImageView by lazy { findViewById(R.id.switchCameraImageView) }
 
     private val displayListener = object : DisplayManager.DisplayListener {
         override fun onDisplayChanged(displayId: Int) {
@@ -114,11 +119,19 @@ class PictureActivity : AppCompatActivity() {
         binding = ActivityPictureBinding.inflate(layoutInflater)
         root = binding.root
 
-        activityStackClear()
-
         setContentView(binding.root)
         startPictureContextPopup()
         startCamera(binding.viewFinder)
+        setButtons()
+    }
+
+    private fun setButtons() {
+        switchCameraImageView.setOnClickListener {
+            cameraId = !cameraId
+
+            startCamera(binding.viewFinder)
+        }
+
     }
 
     private fun activityStackClear() {
@@ -167,6 +180,7 @@ class PictureActivity : AppCompatActivity() {
 
     private fun finishPictureContextPopup() {
 
+        activityStackClear()
         val layoutInflater = LayoutInflater.from(this)
         val view = layoutInflater.inflate(R.layout.finish_picture_context_popup, null)
 
@@ -239,8 +253,15 @@ class PictureActivity : AppCompatActivity() {
 
     private fun bindCameraUseCase() = with(binding) {
         val rotation = viewFinder.display.rotation
-        val cameraSelector =
-            CameraSelector.Builder().requireLensFacing(LENS_FACING).build() // 카메라 설정 완료
+
+
+        var cameraSelector = if (cameraId){
+            CameraSelector.DEFAULT_BACK_CAMERA // 카메라 설정 완료
+        } else {
+            CameraSelector.DEFAULT_FRONT_CAMERA // 카메라 설정 완료
+        }
+
+
 
         cameraProviderFuture.addListener({
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
@@ -272,10 +293,12 @@ class PictureActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }, cameraMainExecutor)
+
+
     }
 
     //Tab to Focus
-    private fun bindFocusListener() = with(binding){
+    private fun bindFocusListener() = with(binding) {
 
     }
 
@@ -351,7 +374,6 @@ class PictureActivity : AppCompatActivity() {
     }
 
 
-
     private fun postUriToServer(filePath: String) {
         //creating a file
         val file = File(filePath)
@@ -369,7 +391,7 @@ class PictureActivity : AppCompatActivity() {
         val service = apiClient.getApiClient().create(RetrofitService::class.java)
 
         if (file.exists()) {
-            val call:Call<getResoponseDto> = service.postSkinImg(body)
+            val call: Call<getResoponseDto> = service.postSkinImg(body)
 
             call.enqueue(object : Callback<getResoponseDto> {
 
@@ -406,15 +428,18 @@ class PictureActivity : AppCompatActivity() {
                         .split(",")
 
                     skinData.forEachIndexed { index, it ->
-                        if (index == 1){
-                            skinDataAry[index] = "${100-(it.split(":")[1].toFloat().div(6f)*100).toInt()}"
+                        if (index == 1) {
+                            skinDataAry[index] =
+                                "${100 - (it.split(":")[1].toFloat().div(6f) * 100).toInt()}"
 
                         } else {
-                            skinDataAry[index] = "${100-(it.split(":")[1].toFloat()*100).toInt()}"
+                            skinDataAry[index] =
+                                "${100 - (it.split(":")[1].toFloat() * 100).toInt()}"
                         }
                     }
-                    recommendData.forEachIndexed{ index, it ->
-                        recommendDataAry[index] = it.split(":")[1] }
+                    recommendData.forEachIndexed { index, it ->
+                        recommendDataAry[index] = it.split(":")[1]
+                    }
 
                     setAppdataBase()
 
@@ -472,7 +497,6 @@ class PictureActivity : AppCompatActivity() {
     }
 
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -496,8 +520,7 @@ class PictureActivity : AppCompatActivity() {
         mainCareDate = nowTime().toString()
 
         Thread(Runnable {
-            MainActivity.db.historyDao().
-            insertHistory(
+            MainActivity.db.historyDao().insertHistory(
                 History(null, MainActivity.personalSex, MainActivity.personalAge,
                     recommendDataAry[0],
                     recommendDataAry[1],
@@ -518,6 +541,8 @@ class PictureActivity : AppCompatActivity() {
     }
 
     companion object {
+        // cameraId .. true : Back, false : Front
+        private var cameraId: Boolean = true
         internal var pictureActivity: Activity? = null
         internal const val REQUEST_CODE_PERMISSIONS = 10
         internal val REQUESTED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA)
