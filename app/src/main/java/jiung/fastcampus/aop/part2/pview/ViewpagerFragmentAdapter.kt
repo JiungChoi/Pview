@@ -31,4 +31,3 @@ class ViewpagerFragmentAdapter(fragmentActivity: FragmentActivity) :
         return fragmentList[position]
     }
 }
-

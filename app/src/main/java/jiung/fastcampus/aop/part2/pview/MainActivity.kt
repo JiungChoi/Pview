@@ -124,7 +124,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         mainActivity = this
 
-
         activityStackClear()
         setGradients()
         initAppdataBase()
@@ -134,12 +133,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun activityStackClear(){
-
         loginActivity?.finish()
         pictureActivity?.finish()
         chartActivity?.finish()
         personalActivity?.finish()
-
     }
 
     private fun setGradients() {

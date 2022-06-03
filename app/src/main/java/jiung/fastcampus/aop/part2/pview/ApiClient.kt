@@ -13,7 +13,7 @@ import java.io.IOException
 
 
 object ApiClient {
-    private const val BASE_URL = "http://34.64.203.11:5000/"
+    private const val BASE_URL = "http://34.64.153.122:5000/"
     private var retrofit: Retrofit? = null
     private var authToken: String? = " "
 
