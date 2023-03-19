@@ -2,9 +2,6 @@ package jiung.fastcampus.aop.part2.pview
 
 import com.google.gson.JsonObject
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.ResponseBody
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -17,7 +14,7 @@ public interface RetrofitService {
     @POST("/api/pview/skin")
     fun postSkinImg(
         @Part imageFile : MultipartBody.Part
-    ) : Call<getResoponseDto>
+    ) : Call<getResoponseDtoGlobal>
 
     @GET("{location}")
     fun getPosts(
@@ -28,6 +25,6 @@ public interface RetrofitService {
     fun login(@Body user: JsonObject): Call<getTokenDto>
 
     @POST("/api/pview/testjson")
-    fun test(): Call<getResoponseDto>
+    fun test(): Call<getResoponseDtoGlobal>
 
 }

@@ -27,12 +27,6 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
-import androidx.core.widget.TextViewCompat
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
-import androidx.room.Room
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.mainCareDate
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.personalSkinRank
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.recommendDataAry
@@ -44,20 +38,15 @@ import jiung.fastcampus.aop.part2.pview.util.PathUtil
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.FileNotFoundException
 import java.text.DateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import kotlin.collections.ArrayList
 import android.content.Context as Context1
 
 
@@ -115,11 +104,16 @@ class PictureActivity : AppCompatActivity() {
 
     private val uriList = mutableListOf<Uri>()
 
+
+    private var careType: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture)
         binding = ActivityPictureBinding.inflate(layoutInflater)
         root = binding.root
+
+        val intent:Intent = intent
+        careType = intent.getStringExtra("type")!!
 
         setContentView(binding.root)
         startPictureContextPopup()
@@ -206,9 +200,16 @@ class PictureActivity : AppCompatActivity() {
 
     private var currentCountDownTimer: CountDownTimer? = null
 
-    private fun startCountDown(caringPercentTextView: TextView, alertDialog: AlertDialog, scdTextView:TextView) {
+    private fun startCountDown(
+        caringPercentTextView: TextView,
+        alertDialog: AlertDialog,
+        scdTextView: TextView
+    ) {
 
-        currentCountDownTimer = createCountDownTimer(1000 + Random().nextInt(1000), caringPercentTextView, alertDialog, scdTextView)
+        currentCountDownTimer = createCountDownTimer(1000 + Random().nextInt(1000),
+            caringPercentTextView,
+            alertDialog,
+            scdTextView)
         currentCountDownTimer?.start()
     }
 
@@ -216,11 +217,14 @@ class PictureActivity : AppCompatActivity() {
         initialMillis: Int,
         caringPercentTextView: TextView,
         alertDialog: AlertDialog,
-        scdTextView : TextView,
+        scdTextView: TextView,
     ): android.os.CountDownTimer {
         return object : android.os.CountDownTimer(initialMillis.toLong(), 10L) {
             override fun onTick(millisUntilFinished: Long) {
-                updateRemainPercent(initialMillis, millisUntilFinished, caringPercentTextView, scdTextView)
+                updateRemainPercent(initialMillis,
+                    millisUntilFinished,
+                    caringPercentTextView,
+                    scdTextView)
             }
 
             override fun onFinish() {
@@ -231,9 +235,14 @@ class PictureActivity : AppCompatActivity() {
 
 
     private var skinCareTime: String? = null
-    private fun updateRemainPercent(initialMillis: Int, millisUntilFinished:Long, textView: TextView, scdTextView: TextView) {
+    private fun updateRemainPercent(
+        initialMillis: Int,
+        millisUntilFinished: Long,
+        textView: TextView,
+        scdTextView: TextView
+    ) {
         textView.text = "%02d".format(
-            ((initialMillis - millisUntilFinished)*100 / (initialMillis)))
+            ((initialMillis - millisUntilFinished) * 100 / (initialMillis)))
         skinCareTime = "%04dms".format(initialMillis - millisUntilFinished)
         scdTextView.text = skinCareTime
     }
@@ -402,64 +411,48 @@ class PictureActivity : AppCompatActivity() {
         val service = apiClient.getApiClient().create(RetrofitService::class.java)
 
         if (file.exists()) {
-            val call: Call<getResoponseDto> = service.postSkinImg(body)
+            val call: Call<getResoponseDtoGlobal> = service.postSkinImg(body)
 
-            call.enqueue(object : Callback<getResoponseDto> {
+            if (careType == "Global"){
+                call.enqueue(object : Callback<getResoponseDtoGlobal> {
 
-                override fun onResponse(
-                    call: Call<getResoponseDto>,
-                    response: Response<getResoponseDto>,
-                ) {
-                    if (response?.isSuccessful) {
-                        Toast.makeText(applicationContext,
-                            "File Uploaded Successfully...",
-                            Toast.LENGTH_LONG).show()
-                        Log.d("myTag PostImg01", response?.body().toString().split("^").toString())
+                    override fun onResponse(
+                        call: Call<getResoponseDtoGlobal>,
+                        response: Response<getResoponseDtoGlobal>,
+                    ) {
+                        if (response?.isSuccessful) {
+                            Toast.makeText(applicationContext,
+                                "File Uploaded Successfully...",
+                                Toast.LENGTH_LONG).show()
+                            Log.d("myTag PostImg01", response?.body().toString().split("^").toString())
 
-                        parsingData(response?.body().toString().split("^"))
-                        finishPictureContextPopup()
-                    } else {
-                        Toast.makeText(applicationContext,
-                            "Some error occurred...",
-                            Toast.LENGTH_LONG).show()
-                        finishPictureContextPopup()
-                    }
-                }
-
-                private fun parsingData(resultArray: List<String>) {
-                    personalSkinRank = resultArray[0]
-
-                    val skinData = resultArray[1]
-                        .replace("[{", "")
-                        .replace("}]", "")
-                        .split(",")
-                    val recommendData = resultArray[2]
-                        .replace("[{", "")
-                        .replace("}]", "")
-                        .split(",")
-
-                    skinData.forEachIndexed { index, it ->
-                        if (index == 1) {
-                            skinDataAry[index] =
-                                "${100 - (it.split(":")[1].toFloat().div(6f) * 100).toInt()}"
-
+                            parsingData(response?.body().toString().split("^"))
+                            finishPictureContextPopup()
                         } else {
-                            skinDataAry[index] =
-                                "${100 - (it.split(":")[1].toFloat() * 100).toInt()}"
+                            Toast.makeText(applicationContext,
+                                "Some error occurred...",
+                                Toast.LENGTH_LONG).show()
+                            finishPictureContextPopup()
                         }
                     }
-                    recommendData.forEachIndexed { index, it ->
-                        recommendDataAry[index] = it.split(":")[1]
+
+                    private fun parsingData(resultArray: List<String>) {
+                        personalSkinRank = resultArray[0]
+
+                        // FIXME 1. DATA Shape 다 변경하고 2. 디테일 이미지 진단 (dto랑 다 수정) 3. 불러오기도 적용 
+
+                        setAppdataBase()
+
                     }
 
-                    setAppdataBase()
-
-                }
-
-                override fun onFailure(call: Call<getResoponseDto>, t: Throwable) {
-                    Log.d("myTag PostImg02", "${t.localizedMessage}")
-                }
-            })
+                    override fun onFailure(call: Call<getResoponseDtoGlobal>, t: Throwable) {
+                        Log.d("myTag PostImg02", "${t.localizedMessage}")
+                    }
+                })
+            } else if (careType=="Detail"){
+                
+            }
+            
         } else {
             Log.d("myTAG PostImg03", "파일이 존재하지 않음")
         }

@@ -315,7 +315,7 @@ class MainActivity : AppCompatActivity() {
 
         pictureButton.setOnClickListener {
             if (allPermissionGranted()) {
-                startActivity(Intent(this, PictureActivity::class.java))
+                startActivity(Intent(this, PictureActivity::class.java).putExtra("type", type))
             } else {
                 ActivityCompat.requestPermissions(this,
                     PictureActivity.REQUESTED_PERMISSIONS,
@@ -468,13 +468,13 @@ class MainActivity : AppCompatActivity() {
         val service = apiClient.getApiClient().create(RetrofitService::class.java)
 
         if (file.exists()) {
-            val call: Call<getResoponseDto> = service.postSkinImg(body)
+            val call: Call<getResoponseDtoGlobal> = service.postSkinImg(body)
 
-            call.enqueue(object : Callback<getResoponseDto> {
+            call.enqueue(object : Callback<getResoponseDtoGlobal> {
 
                 override fun onResponse(
-                    call: Call<getResoponseDto>,
-                    response: Response<getResoponseDto>,
+                    call: Call<getResoponseDtoGlobal>,
+                    response: Response<getResoponseDtoGlobal>,
                 ) {
                     if (response?.isSuccessful) {
                         Toast.makeText(applicationContext,
@@ -522,7 +522,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
-                override fun onFailure(call: Call<getResoponseDto>, t: Throwable) {
+                override fun onFailure(call: Call<getResoponseDtoGlobal>, t: Throwable) {
                     Log.d("myTag PostImg02", "${t.localizedMessage}")
                 }
             })
