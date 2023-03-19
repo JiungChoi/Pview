@@ -27,6 +27,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
+import androidx.core.widget.TextViewCompat
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
 import androidx.room.Room
@@ -44,6 +45,7 @@ import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -172,9 +174,10 @@ class PictureActivity : AppCompatActivity() {
             .setView(view)
             .create()
 
+        val scdTextView = view.findViewById<TextView>(R.id.scdTextView)
         val caringPercentTextView = view.findViewById<TextView>(R.id.caringPercentTextView)
 
-        startCountDown(caringPercentTextView, alertDialog)
+        startCountDown(caringPercentTextView, alertDialog, scdTextView)
         alertDialog.show()
     }
 
@@ -189,8 +192,10 @@ class PictureActivity : AppCompatActivity() {
             .create()
 
         val buttonConfirm = view.findViewById<TextView>(R.id.button_confirm)
+        val scdTextView = view.findViewById<TextView>(R.id.scdTextView)
 
         buttonConfirm.text = "확인"
+        scdTextView.text = "걸린시간 : $skinCareTime"
         buttonConfirm.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
@@ -201,8 +206,9 @@ class PictureActivity : AppCompatActivity() {
 
     private var currentCountDownTimer: CountDownTimer? = null
 
-    private fun startCountDown(caringPercentTextView: TextView, alertDialog: AlertDialog) {
-        currentCountDownTimer = createCountDownTimer(1000, caringPercentTextView, alertDialog)
+    private fun startCountDown(caringPercentTextView: TextView, alertDialog: AlertDialog, scdTextView:TextView) {
+
+        currentCountDownTimer = createCountDownTimer(1000 + Random().nextInt(1000), caringPercentTextView, alertDialog, scdTextView)
         currentCountDownTimer?.start()
     }
 
@@ -210,10 +216,11 @@ class PictureActivity : AppCompatActivity() {
         initialMillis: Int,
         caringPercentTextView: TextView,
         alertDialog: AlertDialog,
+        scdTextView : TextView,
     ): android.os.CountDownTimer {
         return object : android.os.CountDownTimer(initialMillis.toLong(), 10L) {
             override fun onTick(millisUntilFinished: Long) {
-                updateRemainPercent(initialMillis - millisUntilFinished, caringPercentTextView)
+                updateRemainPercent(initialMillis, millisUntilFinished, caringPercentTextView, scdTextView)
             }
 
             override fun onFinish() {
@@ -223,9 +230,12 @@ class PictureActivity : AppCompatActivity() {
     }
 
 
-    private fun updateRemainPercent(percent: Long, textView: TextView) {
+    private var skinCareTime: String? = null
+    private fun updateRemainPercent(initialMillis: Int, millisUntilFinished:Long, textView: TextView, scdTextView: TextView) {
         textView.text = "%02d".format(
-            percent / 10)
+            ((initialMillis - millisUntilFinished)*100 / (initialMillis)))
+        skinCareTime = "%04dms".format(initialMillis - millisUntilFinished)
+        scdTextView.text = skinCareTime
     }
 
     private fun stopCountDown(alertDialog: AlertDialog) {
@@ -345,6 +355,7 @@ class PictureActivity : AppCompatActivity() {
     private fun updateSavedImageContent() {
         contentUri?.let {
             isCapturing = try {
+
                 val file = File(PathUtil.getPath(this, it) ?: throw FileNotFoundException())
                 MediaScannerConnection.scanFile(this,
                     arrayOf(file.path),
@@ -475,7 +486,6 @@ class PictureActivity : AppCompatActivity() {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val savedUri = outputFileResults.savedUri ?: Uri.fromFile(photoFile)
                     contentUri = savedUri
-
                     updateSavedImageContent()
 
                 }

@@ -4,27 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="322dp"
     android:layout_height="wrap_content"
+    android:paddingTop="20dp"
     android:layout_gravity="center"
-    android:background="@drawable/custom_alert_dialog_background">
-
-    <ImageView
-        android:id="@+id/alertImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:elevation="2dp"
-        android:src="@drawable/img_warning"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="@drawable/custom_alert_dialog_background_alpha">
 
     <TextView
         android:id="@+id/guideTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:elevation="2dp"
         android:gravity="center"
+        android:text="이미지를 불러올 방법을\n선택해주시기 바랍니다"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -32,29 +23,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/alertImageView" />
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:background="@drawable/circle_gradient1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_confirm"
+        android:id="@+id/button_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/button_background_blue2"
+        android:background="@drawable/button_background_blue3"
         android:elevation="2dp"
-        android:textSize="20sp"
+        android:text="사진찍기"
         android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_load"
+        app:layout_constraintTop_toBottomOf="@+id/guideTextView" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_background_blue3"
+        android:elevation="2dp"
+        android:text="불러오기"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_picture"
         app:layout_constraintTop_toBottomOf="@+id/guideTextView" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
