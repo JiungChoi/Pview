@@ -205,7 +205,7 @@ class PictureActivity : AppCompatActivity() {
         scdTextView: TextView
     ) {
 
-        currentCountDownTimer = createCountDownTimer(1000 + Random().nextInt(1000),
+        currentCountDownTimer = createCountDownTimer(2000 + Random().nextInt(500),
             caringPercentTextView,
             alertDialog,
             scdTextView)
@@ -424,9 +424,8 @@ class PictureActivity : AppCompatActivity() {
                             Toast.makeText(applicationContext,
                                 "File Uploaded Successfully...",
                                 Toast.LENGTH_LONG).show()
-                            Log.d("myTag PostImg01", response?.body().toString().split("^").toString())
 
-                            parsingData(response?.body().toString().split("^"))
+                            parsingData(response?.body().toString().split(","))
                             finishPictureContextPopup()
                         } else {
                             Toast.makeText(applicationContext,
@@ -438,15 +437,19 @@ class PictureActivity : AppCompatActivity() {
 
                     private fun parsingData(resultArray: List<String>) {
                         personalSkinRank = resultArray[0]
+                        Log.d("myTag PostImg010", "${personalSkinRank.split(',')}")
 
-                        var skinScore = personalSkinRank.split(',')
-                        skinScore.forEachIndexed { index, it ->
-                            if (index == 1){
+
+                        resultArray.forEachIndexed { index, it ->
+                            if (index == 2){
                                 globalSkinAry[index] = it
-                            } else if (index ==4){
+                            } else if (index ==3){
+                                globalSkinAry[index] = it
+                            } else if (index ==5){
+                                globalSkinAry[index] = it
+                            } else if (index ==6){
                                 globalSkinAry[index] = it
                             }
-
                         }
 
                         setAppdataBase()
@@ -471,7 +474,7 @@ class PictureActivity : AppCompatActivity() {
                                 Toast.LENGTH_LONG).show()
                             Log.d("myTag PostImg01", response?.body().toString().split(",").toString())
 
-                            parsingData(response?.body().toString().split("^"))
+                            parsingData(response?.body().toString().split(","))
                             finishPictureContextPopup()
                         } else {
                             Toast.makeText(applicationContext,
@@ -486,12 +489,12 @@ class PictureActivity : AppCompatActivity() {
 
                         // FIXME 1. DATA Shape 다 변경하고 2. 디테일 이미지 진단 (dto랑 다 수정) 3. 불러오기도 적용
                         // "$email,$wrinkle,$skin_tone,$pore_detect,$dead_skin,$oilly,$pih"
-                        var skinScore = personalSkinRank.split(',')
-                        skinScore.forEachIndexed { index, it ->
+
+                        resultArray.forEachIndexed { index, it ->
                             if (index == 1){
-                                globalSkinAry[index] = it
+                                globalSkinAry[index-1] = it
                             } else if (index ==4){
-                                globalSkinAry[index] = it
+                                globalSkinAry[index-1] = it
                             }
 
                         }

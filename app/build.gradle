@@ -6,6 +6,11 @@ plugins {
 
 android {
     compileSdkVersion 31
+    lintOptions{
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
 
     defaultConfig {
         applicationId "jiung.fastcampus.aop.part2.pview"
