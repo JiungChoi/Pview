@@ -1,1632 +1,1605 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<androidx.constraintlayout.widget.Guideline
+    android:id="@+id/guideLine"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent="0.9" />
+
+
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toTopOf="@+id/guideLine"
+    app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideLine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideLine"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <!--FIXME Top of The Background: Cyan -->
-            <View
-                android:id="@+id/mainTopView"
-                android:layout_width="match_parent"
-                android:layout_height="450dp"
-                android:background="@drawable/bg_gradient_cyan"
-                app:layout_constraintBottom_toTopOf="@+id/mainBottomView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_weight="1" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/alpha00"
-                android:src="@drawable/img_user_round_btn"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/alpha00"
-                android:src="@drawable/ic_settings2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/mainCenterCircleImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:src="@drawable/circle_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginStart="130dp"
-                android:layout_marginTop="80dp"
-                android:src="@drawable/circle_background_cyan2"
-                app:layout_constraintBottom_toBottomOf="@id/mainCenterCircleImageView"
-                app:layout_constraintEnd_toEndOf="@id/mainCenterCircleImageView"
-                app:layout_constraintStart_toStartOf="@id/mainCenterCircleImageView"
-                app:layout_constraintTop_toTopOf="@id/mainCenterCircleImageView" />
-
-            <TextView
-                android:id="@+id/mainCenterNumberTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="진단을 받고싶으신가요?\n하단의 측정 버튼을 눌러\n진단을 받아보세요!"
-                android:textColor="@color/red_md_pick"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/mainCenterCircleImageView"
-                app:layout_constraintEnd_toEndOf="@+id/mainCenterCircleImageView"
-                app:layout_constraintStart_toStartOf="@+id/mainCenterCircleImageView"
-                app:layout_constraintTop_toTopOf="@+id/mainCenterCircleImageView" />
-
-            <TextView
-                android:id="@+id/mainCenterNumberPercentage"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="bottom"
-                android:text="%"
-                android:textColor="@color/gradient_cyan_start"
-                android:textSize="25sp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/mainCenterNumberTextView"
-                app:layout_constraintStart_toEndOf="@+id/mainCenterNumberTextView" />
-
-            <TextView
-                android:id="@+id/mainCenterGuideTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="피부나이 상위"
-                android:textColor="@color/gradient_cyan_start"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/mainCenterNumberTextView"
-                app:layout_constraintEnd_toEndOf="@+id/mainCenterCircleImageView"
-                app:layout_constraintStart_toStartOf="@+id/mainCenterCircleImageView" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="인코님 오늘도 피뷰하세요!"
-                android:textColor="@color/buttonGray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mainCenterCircleImageView" />
-
-            <!--FIXME Bottom of The Background: White -->
-            <!--android:layout_height="790dp"-->
-            <View
-                android:id="@+id/mainBottomView"
-                android:layout_width="match_parent"
-                android:layout_height="460dp"
-                android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mainTopView"
-                app:layout_constraintVertical_weight="1" />
-
-
-            <!-- FIXME Center View Z is 2dp-->
-            <View
-                android:id="@+id/mainCenterRectangleView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginHorizontal="40dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/button_background_white"
-                android:translationZ="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mainCenterCircleImageView"
-                tools:layout_height="680dp" />
-
-            <!-- FIXME Simple Personal Info-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/simpleInfoLayout"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:elevation="2dp"
-                app:layout_constraintBottom_toTopOf="@+id/centerRectangleBottomLineView"
-                app:layout_constraintEnd_toEndOf="@id/mainCenterRectangleView"
-                app:layout_constraintStart_toStartOf="@id/mainCenterRectangleView"
-                app:layout_constraintTop_toBottomOf="@+id/centerRectangleTopLineView"
-                tools:visibility="gone">
-
-                <TextView
-                    android:id="@+id/mainSimpleSkinTextureInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="미측정"
-                    android:textColor="@color/red_md_pick"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
-                    app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinTextureTextView"
-                    app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinTextureTextView"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@color/gradient_cyan_start"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/mainSimpleSkinToneInfo"
-                    app:layout_constraintStart_toEndOf="@+id/mainSimpleSkinTextureInfo"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/mainSimpleSkinToneInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="미측정"
-                    android:textColor="@color/red_md_pick"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
-                    app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinToneTextView"
-                    app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinToneTextView"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@color/gradient_cyan_start"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/mainSimpleSkinOilInfo"
-                    app:layout_constraintStart_toEndOf="@id/mainSimpleSkinToneInfo"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/mainSimpleSkinOilInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="미측정"
-                    android:textColor="@color/red_md_pick"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
-                    app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinOilTextView"
-                    app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinOilTextView"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/mainSimpleSkinTextureTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
-                    android:text="피부결"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/mainSimpleSkinToneTextView"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mainSimpleSkinTextureInfo" />
-
-                <TextView
-                    android:id="@+id/mainSimpleSkinToneTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="피부톤"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/mainSimpleSkinOilTextView"
-                    app:layout_constraintStart_toEndOf="@+id/mainSimpleSkinTextureTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/mainSimpleSkinToneInfo" />
-
-                <TextView
-                    android:id="@+id/mainSimpleSkinOilTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="36dp"
-                    android:text="유분수치"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1"
-                    app:layout_constraintStart_toEndOf="@+id/mainSimpleSkinToneTextView"
-                    app:layout_constraintTop_toTopOf="@+id/mainSimpleSkinTextureTextView" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- FIXME Detail Personal Info-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/detailInfoLayout"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:elevation="2dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/centerRectangleBottomLineView"
-                app:layout_constraintEnd_toEndOf="@id/mainCenterRectangleView"
-                app:layout_constraintStart_toStartOf="@id/mainCenterRectangleView"
-                app:layout_constraintTop_toBottomOf="@+id/centerRectangleTopLineView"
-                tools:visibility="visible">
-
-                <TextView
-                    android:id="@+id/ampleLineTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="앰플라인"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ampleLineCalmAcneLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ampleLineTextView">
-
-                    <TextView
-                        android:id="@+id/ampleLineCalmAcneTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:fontFamily="@font/dongdong"
-                        android:text="진정"
-                        android:textColor="@color/gradient_cyan_start"
-                        android:textSize="25sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/ampleLineCalmAcneDetailTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="(여드름)"
-                        android:textColor="@color/gradient_cyan_start"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/ampleLineCalmAcneTextView"
-                        app:layout_constraintStart_toStartOf="@+id/ampleLineCalmAcneTextView"
-                        app:layout_constraintTop_toBottomOf="@+id/ampleLineCalmAcneTextView"
-                        app:layout_constraintVertical_bias="0.8" />
-
-                    <SeekBar
-                        android:id="@+id/ampleLineCalmAcneSeekBar"
-                        android:layout_width="0dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginHorizontal="8dp"
-                        android:elevation="3dp"
-                        android:max="4"
-                        android:progress="3"
-                        android:progressDrawable="@drawable/seekbar_progressdrawable_1"
-                        android:thumb="@drawable/ic_thumb_circle"
-                        android:tickMark="@drawable/drawable_tick_mark"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/ampleLineCalmAcneDetailTextView"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:visibility="visible" />
-
-
-                    <TableLayout
-                        android:layout_width="0dp"
-                        android:layout_height="11dp"
-                        android:layout_marginHorizontal="20dp"
-                        app:layout_constraintEnd_toEndOf="@id/ampleLineCalmAcneSeekBar"
-                        app:layout_constraintStart_toStartOf="@id/ampleLineCalmAcneSeekBar"
-                        app:layout_constraintTop_toBottomOf="@id/ampleLineCalmAcneSeekBar">
-
-                        <TableRow>
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="A4"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="A3"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="A2"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="A1"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-                        </TableRow>
-
-                    </TableLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ampleLineCalmStimulusLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ampleLineCalmAcneLayout">
-
-                    <TextView
-                        android:id="@+id/ampleLineCalmStimulusTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:fontFamily="@font/dongdong"
-                        android:text="진정"
-                        android:textColor="@color/gradient_cyan_start"
-                        android:textSize="25sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/ampleLineCalmStimulusDetailTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="(여드름)"
-                        android:textColor="@color/gradient_cyan_start"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/ampleLineCalmStimulusTextView"
-                        app:layout_constraintStart_toStartOf="@+id/ampleLineCalmStimulusTextView"
-                        app:layout_constraintTop_toBottomOf="@+id/ampleLineCalmStimulusTextView"
-                        app:layout_constraintVertical_bias="0.8" />
-
-                    <SeekBar
-                        android:id="@+id/ampleLineCalmStimulusSeekBar"
-                        android:layout_width="0dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginHorizontal="10dp"
-                        android:max="3"
-                        android:progress="1"
-                        android:progressDrawable="@drawable/seekbar_progressdrawable_1"
-                        android:thumb="@drawable/ic_thumb_circle"
-                        android:tickMark="@drawable/drawable_tick_mark"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/ampleLineCalmStimulusDetailTextView"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:visibility="visible" />
-
-                    <TableLayout
-                        android:layout_width="0dp"
-                        android:layout_height="11dp"
-                        android:layout_marginHorizontal="20dp"
-                        app:layout_constraintEnd_toEndOf="@id/ampleLineCalmStimulusSeekBar"
-                        app:layout_constraintStart_toStartOf="@id/ampleLineCalmStimulusSeekBar"
-                        app:layout_constraintTop_toBottomOf="@id/ampleLineCalmStimulusSeekBar">
-
-                        <TableRow>
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="B3"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="B2"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="B1"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                        </TableRow>
-
-                    </TableLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ampleLineWhiteningLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ampleLineCalmStimulusLayout">
-
-                    <TextView
-                        android:id="@+id/ampleLineWhiteningTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/dongdong"
-                        android:text="미백"
-                        android:textColor="@color/gradient_cyan_start"
-                        android:textSize="25sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <SeekBar
-                        android:id="@+id/ampleLineWhiteningSeekBar"
-                        android:layout_width="0dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginHorizontal="5dp"
-                        android:max="3"
-                        android:progress="1"
-                        android:progressDrawable="@drawable/seekbar_progressdrawable_1"
-                        android:thumb="@drawable/ic_thumb_circle"
-                        android:tickMark="@drawable/drawable_tick_mark"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/ampleLineWhiteningTextView"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:visibility="visible" />
-
-                    <TableLayout
-                        android:layout_width="0dp"
-                        android:layout_height="11dp"
-                        android:layout_marginHorizontal="20dp"
-                        app:layout_constraintEnd_toEndOf="@id/ampleLineWhiteningSeekBar"
-                        app:layout_constraintStart_toStartOf="@id/ampleLineWhiteningSeekBar"
-                        app:layout_constraintTop_toBottomOf="@id/ampleLineWhiteningSeekBar">
-
-                        <TableRow>
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="C3"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="C2"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="C1"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                        </TableRow>
-
-                    </TableLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ampleLineWrinkleLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ampleLineWhiteningLayout">
-
-                    <TextView
-                        android:id="@+id/ampleLineWrinkleTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/dongdong"
-                        android:text="주름"
-                        android:textColor="@color/gradient_cyan_start"
-                        android:textSize="25sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <SeekBar
-                        android:id="@+id/ampleLineWrinkleSeekBar"
-                        android:layout_width="0dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginHorizontal="5dp"
-                        android:max="2"
-                        android:progress="1"
-                        android:progressDrawable="@drawable/seekbar_progressdrawable_1"
-                        android:thumb="@drawable/ic_thumb_circle"
-                        android:tickMark="@drawable/drawable_tick_mark"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/ampleLineWrinkleTextView"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:visibility="visible" />
-
-                    <TableLayout
-                        android:layout_width="0dp"
-                        android:layout_height="11dp"
-                        android:layout_marginHorizontal="20dp"
-                        app:layout_constraintEnd_toEndOf="@id/ampleLineWrinkleSeekBar"
-                        app:layout_constraintStart_toStartOf="@id/ampleLineWrinkleSeekBar"
-                        app:layout_constraintTop_toBottomOf="@id/ampleLineWrinkleSeekBar">
-
-                        <TableRow>
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="D2"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="D1"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-                        </TableRow>
-                    </TableLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ampleLineMoistureLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ampleLineWrinkleLayout">
-
-                    <TextView
-                        android:id="@+id/ampleLineMoistureTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/dongdong"
-                        android:text="수분"
-                        android:textColor="@color/gradient_cyan_start"
-                        android:textSize="25sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <SeekBar
-                        android:id="@+id/ampleLineMoistureSeekBar"
-                        android:layout_width="0dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginHorizontal="5dp"
-                        android:max="2"
-                        android:progress="2"
-                        android:progressDrawable="@drawable/seekbar_progressdrawable_1"
-                        android:thumb="@drawable/ic_thumb_circle"
-                        android:tickMark="@drawable/drawable_tick_mark"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/ampleLineMoistureTextView"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:visibility="visible" />
-
-                    <TableLayout
-                        android:layout_width="0dp"
-                        android:layout_height="11dp"
-                        android:layout_marginHorizontal="20dp"
-                        app:layout_constraintEnd_toEndOf="@id/ampleLineMoistureSeekBar"
-                        app:layout_constraintStart_toStartOf="@id/ampleLineMoistureSeekBar"
-                        app:layout_constraintTop_toBottomOf="@id/ampleLineMoistureSeekBar">
-
-                        <TableRow>
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="E2"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="E1"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-                        </TableRow>
-                    </TableLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <View
-                    android:id="@+id/centerRectangleMidLineView"
-                    android:layout_width="0dp"
-                    android:layout_height="0.05dp"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@color/gray_alpha"
-                    android:translationZ="2dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ampleLineMoistureLayout" />
-
-
-                <TextView
-                    android:id="@+id/skinLineTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="스킨라인"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/centerRectangleMidLineView" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/skinLineMoisturizingLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/skinLineTextView">
-
-                    <TextView
-                        android:id="@+id/skinLineMoisturizingTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/dongdong"
-                        android:text="보습"
-                        android:textColor="@color/gradient_cyan_start"
-                        android:textSize="25sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <SeekBar
-                        android:id="@+id/skinLineMoisturizingSeekBar"
-                        android:layout_width="0dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginHorizontal="5dp"
-                        android:max="5"
-                        android:visibility="gone"
-                        tools:visibility="visible"
-                        android:progress="1"
-                        android:progressDrawable="@drawable/seekbar_progressdrawable_1"
-                        android:thumb="@drawable/ic_thumb_circle"
-                        android:tickMark="@drawable/drawable_tick_mark"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/skinLineMoisturizingTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TableLayout
-                        android:layout_width="0dp"
-                        android:layout_height="11dp"
-                        android:layout_marginHorizontal="20dp"
-                        app:layout_constraintEnd_toEndOf="@id/skinLineMoisturizingSeekBar"
-                        app:layout_constraintStart_toStartOf="@id/skinLineMoisturizingSeekBar"
-                        app:layout_constraintTop_toBottomOf="@id/skinLineMoisturizingSeekBar">
-
-                        <TableRow>
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="a5"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="a4"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="a3"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="a2"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="a1"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-                        </TableRow>
-
-                    </TableLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/skinLineOilLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/skinLineMoisturizingLayout">
-
-                    <TextView
-                        android:id="@+id/skinLineOilTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/dongdong"
-                        android:text="유분"
-                        android:textColor="@color/gradient_cyan_start"
-                        android:textSize="25sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <SeekBar
-                        android:id="@+id/skinLineOilSeekBar"
-                        android:layout_width="0dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginHorizontal="5dp"
-                        android:max="5"
-                        android:progress="1"
-                        android:progressDrawable="@drawable/seekbar_progressdrawable_1"
-                        android:thumb="@drawable/ic_thumb_circle"
-                        android:tickMark="@drawable/drawable_tick_mark"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/skinLineOilTextView"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:visibility="visible"
-                        />
-                    <TableLayout
-                        android:layout_width="0dp"
-                        android:layout_height="11dp"
-                        android:layout_marginHorizontal="20dp"
-                        app:layout_constraintEnd_toEndOf="@id/skinLineOilSeekBar"
-                        app:layout_constraintStart_toStartOf="@id/skinLineOilSeekBar"
-                        app:layout_constraintTop_toBottomOf="@id/skinLineOilSeekBar">
-
-                        <TableRow>
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="b5"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="b4"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="b3"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="b2"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="b1"
-                                android:textColor="@color/textColor"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-                        </TableRow>
-
-                    </TableLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/mainCareDateTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="미측정"
-                android:textColor="@color/textColor_light"
-                android:translationZ="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mainCenterRectangleView" />
-
-            <View
-                android:id="@+id/centerRectangleTopLineView"
-                android:layout_width="0dp"
-                android:layout_height="0.05dp"
-                android:layout_marginHorizontal="70dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/textColor_light"
-                android:translationZ="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/mainCareDateTextView" />
-
-            <View
-                android:id="@+id/centerRectangleBottomLineView"
-                android:layout_width="0dp"
-                android:layout_height="0.5dp"
-                android:layout_marginHorizontal="70dp"
-                android:layout_marginBottom="30dp"
-                android:background="@color/textColor_light"
-                android:translationZ="3dp"
-                app:layout_constraintBottom_toBottomOf="@id/mainCenterRectangleView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/mainCenterRectangleControllerTextView"
-                style="style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginBottom="5dp"
-                android:background="#00ff0000"
-                android:text="상세보기"
-                android:textColor="@color/textColor_light"
-                android:translationZ="2dp"
-                app:layout_constraintBottom_toBottomOf="@id/mainCenterRectangleView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/centerRectangleBottomLineView" />
-
-
-            <!--FIXME Recommend Cosmetics Layout -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/recommendCosmeticsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mainCenterRectangleView">
-
-                <TextView
-                    android:id="@+id/aiCareTextView"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="40dp"
-                    android:background="@drawable/button_background_blue2"
-                    android:gravity="center"
-                    android:text="AI 진단"
-                    android:textColor="@color/white"
-                    android:textSize="15dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/personalCustomInfoTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="3dp"
-                    android:gravity="center_vertical"
-                    android:text="피부 진정에 도움을 주는 앰플"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/aiCareTextView"
-                    app:layout_constraintStart_toEndOf="@+id/aiCareTextView"
-                    app:layout_constraintTop_toTopOf="@+id/aiCareTextView" />
-
-                <ImageButton
-                    android:id="@+id/personalCustomDetailInfoImageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:background="@color/white"
-                    android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintBottom_toBottomOf="@+id/aiCareTextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/aiCareTextView" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/recommendCosmeticsImageLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/aiCareTextView">
-
-                    <ImageView
-                        android:id="@+id/recommendCosmeticsFirstImageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/img_pview_ample_mid"
-                        app:layout_constraintEnd_toStartOf="@+id/recommendCosmeticsSecondImageView"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/recommendCosmeticsAmpleFirstTextView"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center"
-                        android:text="앰플"
-                        android:textColor="@color/textColor"
-                        android:textSize="12dp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/recommendCosmeticsFirstImageView"
-                        app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsFirstImageView"
-                        app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsFirstImageView" />
-
-                    <TextView
-                        android:id="@+id/recommendCosmeticsFirstNameTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="티트리 에센셜"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@id/recommendCosmeticsFirstImageView"
-                        app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsFirstImageView"
-                        app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsAmpleFirstTextView" />
-
-                    <TextView
-                        android:id="@+id/recommendCosmeticsFirstHighlighterTextView"
-                        android:layout_width="60dp"
-                        android:layout_height="15dp"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/button_background_red2"
-                        android:gravity="center"
-                        android:text="MD PICK"
-                        android:textColor="@color/white"
-                        android:textSize="10dp"
-                        app:layout_constraintEnd_toEndOf="@+id/recommendCosmeticsFirstImageView"
-                        app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsFirstImageView"
-                        app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsFirstNameTextView" />
-
-                    <ImageView
-                        android:id="@+id/recommendCosmeticsSecondImageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/img_pview_ample_mid"
-                        app:layout_constraintEnd_toStartOf="@+id/recommendCosmeticsThirdImageView"
-                        app:layout_constraintStart_toEndOf="@+id/recommendCosmeticsFirstImageView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/recommendCosmeticsAmpleSecondTextView"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center"
-                        android:text="앰플"
-                        android:textColor="@color/textColor"
-                        android:textSize="12dp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/recommendCosmeticsSecondImageView"
-                        app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsSecondImageView"
-                        app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsSecondImageView" />
-
-                    <TextView
-                        android:id="@+id/recommendCosmeticsSecondNameTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="약산성 어성초"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@id/recommendCosmeticsSecondImageView"
-                        app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsSecondImageView"
-                        app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsAmpleSecondTextView" />
-
-                    <TextView
-                        android:id="@+id/recommendCosmeticsSecondHighlighterTextView"
-                        android:layout_width="60dp"
-                        android:layout_height="15dp"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/button_background_red2"
-                        android:gravity="center"
-                        android:text="BEST"
-                        android:textColor="@color/white"
-                        android:textSize="10dp"
-                        app:layout_constraintEnd_toEndOf="@+id/recommendCosmeticsSecondImageView"
-                        app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsSecondImageView"
-                        app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsSecondNameTextView" />
-
-                    <ImageView
-                        android:id="@+id/recommendCosmeticsThirdImageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/img_pview_ample_mid"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/recommendCosmeticsSecondImageView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/recommendCosmeticsAmpleThirdTextView"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center"
-                        android:text="앰플"
-                        android:textColor="@color/textColor"
-                        android:textSize="12dp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/recommendCosmeticsThirdImageView"
-                        app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsThirdImageView"
-                        app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsThirdImageView" />
-
-                    <TextView
-                        android:id="@+id/recommendCosmeticsThirdNameTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="캐모마일 수딩"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@id/recommendCosmeticsThirdImageView"
-                        app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsThirdImageView"
-                        app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsAmpleThirdTextView" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/recommendCosmeticsBoundaryView"
-                android:layout_width="0dp"
-                android:layout_height="7dp"
-                android:layout_marginTop="30dp"
-                android:background="@color/black_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recommendCosmeticsLayout" />
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/mainPviewTalkLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recommendCosmeticsBoundaryView">
-
-                <TextView
-                    android:id="@+id/mainPviewTalkBlackTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:text="오늘의 피뷰"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/mainPviewTalkCyanTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="Talk"
-                    android:textColor="@color/gradient_cyan_alpha"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/mainPviewTalkBlackTextView"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/mainPviewTalkDetailInfoImageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:background="@color/white"
-                    android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/mainPviewTalkBoundary"
-                    android:layout_width="0dp"
-                    android:layout_height="0.05dp"
-                    android:layout_marginHorizontal="35dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/gray_alpha"
-                    android:translationZ="2dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mainPviewTalkBlackTextView" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/mainPviewFirstTalkLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/mainPviewTalkBlackTextView">
-
-                    <TextView
-                        android:id="@+id/mainPviewTalkFirstNumberTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dongdong"
-                        android:text="1"
-                        android:textColor="@color/gradient_cyan_alpha"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mainPviewTalkFirstTitleTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:text="내가 써본 앰플별 리뷰 남겨본다"
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp"
-                        app:layout_constraintStart_toEndOf="@id/mainPviewTalkFirstNumberTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp"
-                        android:background="@color/white"
-                        android:src="@drawable/ic_chat"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkFirstChatTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mainPviewTalkFirstChatTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:text="2,281"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkFirstHeartTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp"
-                        android:background="@color/white"
-                        android:src="@drawable/ic_favorite"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkFirstHeartTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mainPviewTalkFirstHeartTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="25,451"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <View
-                    android:id="@+id/mainPviewTalkFirstBoundary"
-                    android:layout_width="0dp"
-                    android:layout_height="0.05dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/gray_alpha"
-                    android:translationZ="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mainPviewFirstTalkLayout" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/mainPviewSecondTalkLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/mainPviewTalkFirstBoundary">
-
-                    <TextView
-                        android:id="@+id/mainPviewTalkSecondNumberTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dongdong"
-                        android:text="2"
-                        android:textColor="@color/gradient_cyan_alpha"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mainPviewTalkSecondTitleTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:text="건성예민피부 좋아진 방법"
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp"
-                        app:layout_constraintStart_toEndOf="@id/mainPviewTalkSecondNumberTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp"
-                        android:background="@color/white"
-                        android:src="@drawable/ic_chat"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkSecondChatTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mainPviewTalkSecondChatTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:text="874"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkSecondHeartTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp"
-                        android:background="@color/white"
-                        android:src="@drawable/ic_favorite"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkSecondHeartTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mainPviewTalkSecondHeartTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="19,746"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <View
-                    android:id="@+id/mainPviewTalkSecondBoundary"
-                    android:layout_width="0dp"
-                    android:layout_height="0.05dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/gray_alpha"
-                    android:translationZ="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mainPviewSecondTalkLayout" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/mainPviewThirdTalkLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/mainPviewTalkSecondBoundary">
-
-                    <TextView
-                        android:id="@+id/mainPviewTalkThirdNumberTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dongdong"
-                        android:text="3"
-                        android:textColor="@color/gradient_cyan_alpha"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mainPviewTalkThirdTitleTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:text="지성+예민 모두 모여서 풀어보자"
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp"
-                        app:layout_constraintStart_toEndOf="@id/mainPviewTalkThirdNumberTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp"
-                        android:background="@color/white"
-                        android:src="@drawable/ic_chat"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkThirdChatTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mainPviewTalkThirdChatTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:text="982"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkThirdHeartTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp"
-                        android:background="@color/white"
-                        android:src="@drawable/ic_favorite"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkThirdHeartTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mainPviewTalkThirdHeartTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="14,050"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <View
-                    android:id="@+id/mainPviewTalkThirdBoundary"
-                    android:layout_width="0dp"
-                    android:layout_height="0.05dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/gray_alpha"
-                    android:translationZ="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mainPviewThirdTalkLayout" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-
-    <ImageButton
-        android:id="@+id/mainPictureButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/img_pview_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/gray_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideLine">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/mainHomeButton"
+
+        <!--FIXME Top of The Background: Cyan -->
+        <View
+            android:id="@+id/mainTopView"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:background="@drawable/bg_gradient_cyan"
+            app:layout_constraintBottom_toTopOf="@+id/mainBottomView"
+            android:layout_marginBottom="720dp"
+            android:paddingBottom="300dp"
+
+            app:layout_constraintVertical_weight="1" />
+
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:src="@drawable/ic_home_btn"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/alpha00"
+            android:src="@drawable/img_user_round_btn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/mainChartButton"
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:src="@drawable/ic_chart_btn"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/mainHomeButton"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/mainPviewshopButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/ic_pviewshop_btn"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/mainPersonalButton"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/mainPersonalButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="50dp"
-            android:src="@drawable/ic_personal_btn"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/alpha00"
+            android:src="@drawable/ic_settings2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/mainCenterCircleImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/circle_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/circle_background_cyan2"
+            app:layout_constraintBottom_toBottomOf="@id/mainCenterCircleImageView"
+            app:layout_constraintEnd_toEndOf="@id/mainCenterCircleImageView"
+            app:layout_constraintStart_toStartOf="@id/mainCenterCircleImageView"
+            app:layout_constraintTop_toTopOf="@id/mainCenterCircleImageView" />
+
+        <TextView
+            android:id="@+id/mainCenterNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="진단을 받고싶으신가요?\n하단의 측정 버튼을 눌러\n진단을 받아보세요!"
+            android:textColor="@color/red_md_pick"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/mainCenterCircleImageView"
+            app:layout_constraintEnd_toEndOf="@+id/mainCenterCircleImageView"
+            app:layout_constraintStart_toStartOf="@+id/mainCenterCircleImageView"
+            app:layout_constraintTop_toTopOf="@+id/mainCenterCircleImageView" />
+
+        <TextView
+            android:id="@+id/mainCenterNumberPercentage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="bottom"
+            android:text="%"
+            android:textColor="@color/gradient_cyan_start"
+            android:textSize="25sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/mainCenterNumberTextView"
+            app:layout_constraintStart_toEndOf="@+id/mainCenterNumberTextView" />
+
+        <TextView
+            android:id="@+id/mainCenterGuideTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="피부나이 상위"
+            android:textColor="@color/gradient_cyan_start"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/mainCenterNumberTextView"
+            app:layout_constraintEnd_toEndOf="@+id/mainCenterCircleImageView"
+            app:layout_constraintStart_toStartOf="@+id/mainCenterCircleImageView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="인코님 오늘도 피뷰하세요!"
+            android:textColor="@color/buttonGray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainCenterCircleImageView" />
+
+        <!--FIXME Bottom of The Background: White -->
+        <!--android:layout_height="790dp"-->
+        <View
+            android:id="@+id/mainBottomView"
+            android:layout_width="match_parent"
+            android:layout_height="460dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintVertical_weight="1" />
+
+
+        <!-- FIXME Center View Z is 2dp-->
+        <View
+            android:id="@+id/mainCenterRectangleView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_background_white"
+            android:translationZ="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainCenterCircleImageView"
+            tools:layout_height="420dp" />
+
+        <!-- FIXME Simple Personal Info-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/simpleInfoLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/centerRectangleBottomLineView"
+            app:layout_constraintEnd_toEndOf="@id/mainCenterRectangleView"
+            app:layout_constraintStart_toStartOf="@id/mainCenterRectangleView"
+            app:layout_constraintTop_toBottomOf="@+id/centerRectangleTopLineView"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/mainSimpleSkinTextureInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="미측정"
+                android:textColor="@color/red_md_pick"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
+                app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinTextureTextView"
+                app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinTextureTextView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/gradient_cyan_start"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/mainSimpleSkinToneInfo"
+                app:layout_constraintStart_toEndOf="@+id/mainSimpleSkinTextureInfo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/mainSimpleSkinToneInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="미측정"
+                android:textColor="@color/red_md_pick"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
+                app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinToneTextView"
+                app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinToneTextView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/gradient_cyan_start"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/mainSimpleSkinOilInfo"
+                app:layout_constraintStart_toEndOf="@id/mainSimpleSkinToneInfo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/mainSimpleSkinOilInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="미측정"
+                android:textColor="@color/red_md_pick"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/mainSimpleSkinTextureTextView"
+                app:layout_constraintEnd_toEndOf="@+id/mainSimpleSkinOilTextView"
+                app:layout_constraintStart_toStartOf="@+id/mainSimpleSkinOilTextView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/mainSimpleSkinTextureTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:text="피부결"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/mainSimpleSkinToneTextView"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mainSimpleSkinTextureInfo" />
+
+            <TextView
+                android:id="@+id/mainSimpleSkinToneTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="피부톤"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/mainSimpleSkinOilTextView"
+                app:layout_constraintStart_toEndOf="@+id/mainSimpleSkinTextureTextView"
+                app:layout_constraintTop_toBottomOf="@+id/mainSimpleSkinToneInfo" />
+
+            <TextView
+                android:id="@+id/mainSimpleSkinOilTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="36dp"
+                android:text="유분수치"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@+id/mainSimpleSkinToneTextView"
+                app:layout_constraintTop_toTopOf="@+id/mainSimpleSkinTextureTextView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- FIXME Detail Personal Info-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detailInfoLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="2dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/centerRectangleBottomLineView"
+            app:layout_constraintEnd_toEndOf="@id/mainCenterRectangleView"
+            app:layout_constraintStart_toStartOf="@id/mainCenterRectangleView"
+            app:layout_constraintTop_toBottomOf="@+id/centerRectangleTopLineView"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/ampleLineTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="앰플라인"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ampleLineCalmAcneLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ampleLineTextView">
+
+                <TextView
+                    android:id="@+id/ampleLineCalmAcneTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/dongdong"
+                    android:text="주름"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ampleLineCalmAcneDetailTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text=""
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ampleLineCalmAcneTextView"
+                    app:layout_constraintStart_toStartOf="@+id/ampleLineCalmAcneTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/ampleLineCalmAcneTextView"
+                    app:layout_constraintVertical_bias="0.8" />
+
+                <SeekBar
+                    android:id="@+id/ampleLineCalmAcneSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginHorizontal="8dp"
+                    android:elevation="3dp"
+                    android:max="5"
+                    android:progress="3"
+                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
+                    android:thumb="@drawable/ic_thumb_circle"
+                    android:tickMark="@drawable/drawable_tick_mark"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ampleLineCalmAcneDetailTextView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+
+                <TableLayout
+                    android:layout_width="0dp"
+                    android:layout_height="11dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintEnd_toEndOf="@id/ampleLineCalmAcneSeekBar"
+                    app:layout_constraintStart_toStartOf="@id/ampleLineCalmAcneSeekBar"
+                    app:layout_constraintTop_toBottomOf="@id/ampleLineCalmAcneSeekBar">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="A1"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="A2"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="A3"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="A4"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="A5"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ampleLineCalmStimulusLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ampleLineCalmAcneLayout">
+
+                <TextView
+                    android:id="@+id/ampleLineCalmStimulusTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/dongdong"
+                    android:text="피부톤"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ampleLineCalmStimulusDetailTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text=""
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ampleLineCalmStimulusTextView"
+                    app:layout_constraintStart_toStartOf="@+id/ampleLineCalmStimulusTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/ampleLineCalmStimulusTextView"
+                    app:layout_constraintVertical_bias="0.8" />
+
+                <SeekBar
+                    android:id="@+id/ampleLineCalmStimulusSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginHorizontal="10dp"
+                    android:max="5"
+                    android:progress="1"
+                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
+                    android:thumb="@drawable/ic_thumb_circle"
+                    android:tickMark="@drawable/drawable_tick_mark"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ampleLineCalmStimulusDetailTextView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <TableLayout
+                    android:layout_width="0dp"
+                    android:layout_height="11dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintEnd_toEndOf="@id/ampleLineCalmStimulusSeekBar"
+                    app:layout_constraintStart_toStartOf="@id/ampleLineCalmStimulusSeekBar"
+                    app:layout_constraintTop_toBottomOf="@id/ampleLineCalmStimulusSeekBar">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="B1"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="B2"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="B3"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="B4"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="B5"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+
+                    </TableRow>
+
+                </TableLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ampleLineWhiteningLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ampleLineCalmStimulusLayout">
+
+                <TextView
+                    android:id="@+id/ampleLineWhiteningTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/dongdong"
+                    android:text="모공"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <SeekBar
+                    android:id="@+id/ampleLineWhiteningSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginHorizontal="5dp"
+                    android:max="5"
+                    android:progress="1"
+                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
+                    android:thumb="@drawable/ic_thumb_circle"
+                    android:tickMark="@drawable/drawable_tick_mark"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ampleLineWhiteningTextView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <TableLayout
+                    android:layout_width="0dp"
+                    android:layout_height="11dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintEnd_toEndOf="@id/ampleLineWhiteningSeekBar"
+                    app:layout_constraintStart_toStartOf="@id/ampleLineWhiteningSeekBar"
+                    app:layout_constraintTop_toBottomOf="@id/ampleLineWhiteningSeekBar">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="C1"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="C2"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="C3"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="C4"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="C5"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+
+                    </TableRow>
+
+                </TableLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ampleLineWrinkleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ampleLineWhiteningLayout">
+
+                <TextView
+                    android:id="@+id/ampleLineWrinkleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/dongdong"
+                    android:text="각질"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <SeekBar
+                    android:id="@+id/ampleLineWrinkleSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginHorizontal="5dp"
+                    android:max="5"
+                    android:progress="1"
+                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
+                    android:thumb="@drawable/ic_thumb_circle"
+                    android:tickMark="@drawable/drawable_tick_mark"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ampleLineWrinkleTextView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <TableLayout
+                    android:layout_width="0dp"
+                    android:layout_height="11dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintEnd_toEndOf="@id/ampleLineWrinkleSeekBar"
+                    app:layout_constraintStart_toStartOf="@id/ampleLineWrinkleSeekBar"
+                    app:layout_constraintTop_toBottomOf="@id/ampleLineWrinkleSeekBar">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="D1"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="D2"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="D3"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="D4"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="D5"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+                </TableLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ampleLineMoistureLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ampleLineWrinkleLayout">
+
+                <TextView
+                    android:id="@+id/ampleLineMoistureTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/dongdong"
+                    android:text="유분"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <SeekBar
+                    android:id="@+id/ampleLineMoistureSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginHorizontal="5dp"
+                    android:max="5"
+                    android:progress="2"
+                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
+                    android:thumb="@drawable/ic_thumb_circle"
+                    android:tickMark="@drawable/drawable_tick_mark"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ampleLineMoistureTextView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <TableLayout
+                    android:layout_width="0dp"
+                    android:layout_height="11dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintEnd_toEndOf="@id/ampleLineMoistureSeekBar"
+                    app:layout_constraintStart_toStartOf="@id/ampleLineMoistureSeekBar"
+                    app:layout_constraintTop_toBottomOf="@id/ampleLineMoistureSeekBar">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="E1"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="E2"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="E3"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="E4"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="E5"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+                </TableLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/testMoistureLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ampleLineMoistureLayout">
+
+                <TextView
+                    android:id="@+id/testMoistureTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/dongdong"
+                    android:text="색소\n침착"
+                    android:textColor="@color/gradient_cyan_start"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <SeekBar
+                    android:id="@+id/testMoistureSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginHorizontal="5dp"
+                    android:max="5"
+                    android:progress="2"
+                    android:progressDrawable="@drawable/seekbar_progressdrawable_1"
+                    android:thumb="@drawable/ic_thumb_circle"
+                    android:tickMark="@drawable/drawable_tick_mark"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/testMoistureTextView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <TableLayout
+                    android:layout_width="0dp"
+                    android:layout_height="11dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintEnd_toEndOf="@id/testMoistureSeekBar"
+                    app:layout_constraintStart_toStartOf="@id/testMoistureSeekBar"
+                    app:layout_constraintTop_toBottomOf="@id/testMoistureSeekBar">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="E1"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="E2"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="E3"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="E4"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="E5"
+                            android:textColor="@color/textColor"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+                </TableLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/mainCareDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="미측정"
+            android:textColor="@color/textColor_light"
+            android:translationZ="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mainCenterRectangleView" />
+
+        <View
+            android:id="@+id/centerRectangleTopLineView"
+            android:layout_width="0dp"
+            android:layout_height="0.05dp"
+            android:layout_marginHorizontal="70dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/textColor_light"
+            android:translationZ="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mainCareDateTextView" />
+
+        <View
+            android:id="@+id/centerRectangleBottomLineView"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="70dp"
+            android:layout_marginBottom="30dp"
+            android:background="@color/textColor_light"
+            android:translationZ="3dp"
+            app:layout_constraintBottom_toBottomOf="@id/mainCenterRectangleView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mainCenterRectangleControllerTextView"
+            style="style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
+            android:background="#00ff0000"
+            android:text="상세보기"
+            android:textColor="@color/textColor_light"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/mainCenterRectangleView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/centerRectangleBottomLineView" />
+
+
+        <!--FIXME Recommend Cosmetics Layout -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/recommendCosmeticsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainCenterRectangleView">
+
+            <TextView
+                android:id="@+id/aiCareTextView"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="40dp"
+                android:background="@drawable/button_background_blue2"
+                android:gravity="center"
+                android:text="AI 진단"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/personalCustomInfoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="3dp"
+                android:gravity="center_vertical"
+                android:text="피부 진정에 도움을 주는 앰플"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/aiCareTextView"
+                app:layout_constraintStart_toEndOf="@+id/aiCareTextView"
+                app:layout_constraintTop_toTopOf="@+id/aiCareTextView" />
+
+            <ImageButton
+                android:id="@+id/personalCustomDetailInfoImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:background="@color/white"
+                android:src="@drawable/ic_arrow_right"
+                app:layout_constraintBottom_toBottomOf="@+id/aiCareTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/aiCareTextView" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/recommendCosmeticsImageLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aiCareTextView">
+
+                <ImageView
+                    android:id="@+id/recommendCosmeticsFirstImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_pview_ample_mid"
+                    app:layout_constraintEnd_toStartOf="@+id/recommendCosmeticsSecondImageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/recommendCosmeticsAmpleFirstTextView"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="앰플"
+                    android:textColor="@color/textColor"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendCosmeticsFirstImageView"
+                    app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsFirstImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsFirstImageView" />
+
+                <TextView
+                    android:id="@+id/recommendCosmeticsFirstNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="티트리 에센셜"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/recommendCosmeticsFirstImageView"
+                    app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsFirstImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsAmpleFirstTextView" />
+
+                <TextView
+                    android:id="@+id/recommendCosmeticsFirstHighlighterTextView"
+                    android:layout_width="60dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/button_background_red2"
+                    android:gravity="center"
+                    android:text="MD PICK"
+                    android:textColor="@color/white"
+                    android:textSize="10dp"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendCosmeticsFirstImageView"
+                    app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsFirstImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsFirstNameTextView" />
+
+                <ImageView
+                    android:id="@+id/recommendCosmeticsSecondImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_pview_ample_mid"
+                    app:layout_constraintEnd_toStartOf="@+id/recommendCosmeticsThirdImageView"
+                    app:layout_constraintStart_toEndOf="@+id/recommendCosmeticsFirstImageView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/recommendCosmeticsAmpleSecondTextView"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="앰플"
+                    android:textColor="@color/textColor"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendCosmeticsSecondImageView"
+                    app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsSecondImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsSecondImageView" />
+
+                <TextView
+                    android:id="@+id/recommendCosmeticsSecondNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="약산성 어성초"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/recommendCosmeticsSecondImageView"
+                    app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsSecondImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsAmpleSecondTextView" />
+
+                <TextView
+                    android:id="@+id/recommendCosmeticsSecondHighlighterTextView"
+                    android:layout_width="60dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/button_background_red2"
+                    android:gravity="center"
+                    android:text="BEST"
+                    android:textColor="@color/white"
+                    android:textSize="10dp"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendCosmeticsSecondImageView"
+                    app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsSecondImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsSecondNameTextView" />
+
+                <ImageView
+                    android:id="@+id/recommendCosmeticsThirdImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_pview_ample_mid"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/recommendCosmeticsSecondImageView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/recommendCosmeticsAmpleThirdTextView"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="앰플"
+                    android:textColor="@color/textColor"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendCosmeticsThirdImageView"
+                    app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsThirdImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsThirdImageView" />
+
+                <TextView
+                    android:id="@+id/recommendCosmeticsThirdNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="캐모마일 수딩"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/recommendCosmeticsThirdImageView"
+                    app:layout_constraintStart_toStartOf="@+id/recommendCosmeticsThirdImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/recommendCosmeticsAmpleThirdTextView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/recommendCosmeticsBoundaryView"
+            android:layout_width="0dp"
+            android:layout_height="7dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/black_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recommendCosmeticsLayout" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainPviewTalkLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recommendCosmeticsBoundaryView">
+
+            <TextView
+                android:id="@+id/mainPviewTalkBlackTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:text="오늘의 피뷰"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/mainPviewTalkCyanTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Talk"
+                android:textColor="@color/gradient_cyan_alpha"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/mainPviewTalkBlackTextView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/mainPviewTalkDetailInfoImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:background="@color/white"
+                android:src="@drawable/ic_arrow_right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/mainPviewTalkBoundary"
+                android:layout_width="0dp"
+                android:layout_height="0.05dp"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray_alpha"
+                android:translationZ="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mainPviewTalkBlackTextView" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mainPviewFirstTalkLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mainPviewTalkBlackTextView">
+
+                <TextView
+                    android:id="@+id/mainPviewTalkFirstNumberTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dongdong"
+                    android:text="1"
+                    android:textColor="@color/gradient_cyan_alpha"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/mainPviewTalkFirstTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="내가 써본 앰플별 리뷰 남겨본다"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@id/mainPviewTalkFirstNumberTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_chat"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkFirstChatTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/mainPviewTalkFirstChatTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:text="2,281"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkFirstHeartTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_favorite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkFirstHeartTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/mainPviewTalkFirstHeartTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25,451"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/mainPviewTalkFirstBoundary"
+                android:layout_width="0dp"
+                android:layout_height="0.05dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray_alpha"
+                android:translationZ="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mainPviewFirstTalkLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mainPviewSecondTalkLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mainPviewTalkFirstBoundary">
+
+                <TextView
+                    android:id="@+id/mainPviewTalkSecondNumberTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dongdong"
+                    android:text="2"
+                    android:textColor="@color/gradient_cyan_alpha"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/mainPviewTalkSecondTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="건성예민피부 좋아진 방법"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@id/mainPviewTalkSecondNumberTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_chat"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkSecondChatTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/mainPviewTalkSecondChatTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:text="874"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkSecondHeartTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_favorite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkSecondHeartTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/mainPviewTalkSecondHeartTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="19,746"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/mainPviewTalkSecondBoundary"
+                android:layout_width="0dp"
+                android:layout_height="0.05dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray_alpha"
+                android:translationZ="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mainPviewSecondTalkLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mainPviewThirdTalkLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mainPviewTalkSecondBoundary">
+
+                <TextView
+                    android:id="@+id/mainPviewTalkThirdNumberTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dongdong"
+                    android:text="3"
+                    android:textColor="@color/gradient_cyan_alpha"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/mainPviewTalkThirdTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="지성+예민 모두 모여서 풀어보자"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@id/mainPviewTalkThirdNumberTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_chat"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkThirdChatTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/mainPviewTalkThirdChatTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:text="982"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkThirdHeartTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_favorite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/mainPviewTalkThirdHeartTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/mainPviewTalkThirdHeartTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14,050"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/mainPviewTalkThirdBoundary"
+                android:layout_width="0dp"
+                android:layout_height="0.05dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray_alpha"
+                android:translationZ="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mainPviewThirdTalkLayout" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+<ImageButton
+    android:id="@+id/mainPictureButton"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:src="@drawable/img_pview_btn"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:background="@color/gray_24"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/guideLine">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/mainHomeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:src="@drawable/ic_home_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/mainChartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/ic_chart_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mainHomeButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/mainPviewshopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/ic_pviewshop_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mainPersonalButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/mainPersonalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="50dp"
+        android:src="@drawable/ic_personal_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

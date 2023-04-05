@@ -27,10 +27,9 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
+import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.globalSkinAry
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.mainCareDate
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.personalSkinRank
-import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.recommendDataAry
-import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.skinDataAry
 import jiung.fastcampus.aop.part2.pview.databinding.ActivityPictureBinding
 import jiung.fastcampus.aop.part2.pview.extensions.loadCenterCrop
 import jiung.fastcampus.aop.part2.pview.model.History
@@ -411,9 +410,10 @@ class PictureActivity : AppCompatActivity() {
         val service = apiClient.getApiClient().create(RetrofitService::class.java)
 
         if (file.exists()) {
-            val call: Call<getResoponseDtoGlobal> = service.postSkinImg(body)
+
 
             if (careType == "Global"){
+                var call: Call<getResoponseDtoGlobal> = service.postGlobalSkinImg(body)
                 call.enqueue(object : Callback<getResoponseDtoGlobal> {
 
                     override fun onResponse(
@@ -439,7 +439,15 @@ class PictureActivity : AppCompatActivity() {
                     private fun parsingData(resultArray: List<String>) {
                         personalSkinRank = resultArray[0]
 
-                        // FIXME 1. DATA Shape 다 변경하고 2. 디테일 이미지 진단 (dto랑 다 수정) 3. 불러오기도 적용 
+                        var skinScore = personalSkinRank.split(',')
+                        skinScore.forEachIndexed { index, it ->
+                            if (index == 1){
+                                globalSkinAry[index] = it
+                            } else if (index ==4){
+                                globalSkinAry[index] = it
+                            }
+
+                        }
 
                         setAppdataBase()
 
@@ -450,7 +458,55 @@ class PictureActivity : AppCompatActivity() {
                     }
                 })
             } else if (careType=="Detail"){
-                
+                var call: Call<getResoponseDtoDetail> = service.postDetailSkinImg(body)
+                call.enqueue(object : Callback<getResoponseDtoDetail> {
+
+                    override fun onResponse(
+                        call: Call<getResoponseDtoDetail>,
+                        response: Response<getResoponseDtoDetail>,
+                    ) {
+                        if (response?.isSuccessful) {
+                            Toast.makeText(applicationContext,
+                                "File Uploaded Successfully...",
+                                Toast.LENGTH_LONG).show()
+                            Log.d("myTag PostImg01", response?.body().toString().split(",").toString())
+
+                            parsingData(response?.body().toString().split("^"))
+                            finishPictureContextPopup()
+                        } else {
+                            Toast.makeText(applicationContext,
+                                "Some error occurred...",
+                                Toast.LENGTH_LONG).show()
+                            finishPictureContextPopup()
+                        }
+                    }
+
+                    private fun parsingData(resultArray: List<String>) {
+                        personalSkinRank = resultArray[0]
+
+                        // FIXME 1. DATA Shape 다 변경하고 2. 디테일 이미지 진단 (dto랑 다 수정) 3. 불러오기도 적용
+                        // "$email,$wrinkle,$skin_tone,$pore_detect,$dead_skin,$oilly,$pih"
+                        var skinScore = personalSkinRank.split(',')
+                        skinScore.forEachIndexed { index, it ->
+                            if (index == 1){
+                                globalSkinAry[index] = it
+                            } else if (index ==4){
+                                globalSkinAry[index] = it
+                            }
+
+                        }
+
+                        setAppdataBase()
+
+                    }
+
+
+                    @Override
+                    override fun onFailure(call: Call<getResoponseDtoDetail>, t: Throwable) {
+                        Log.d("myTag PostImg02", "${t.localizedMessage}")
+                    }
+
+                })
             }
             
         } else {
@@ -525,20 +581,13 @@ class PictureActivity : AppCompatActivity() {
         Thread(Runnable {
             MainActivity.db.historyDao().insertHistory(
                 History(null, MainActivity.personalSex, MainActivity.personalAge,
-                    recommendDataAry[0],
-                    recommendDataAry[1],
-                    recommendDataAry[2],
-                    recommendDataAry[3],
-                    recommendDataAry[4],
-                    recommendDataAry[5],
-                    recommendDataAry[6],
 
-                    skinDataAry[0],
-                    skinDataAry[1],
-                    skinDataAry[2],
-                    skinDataAry[3],
-                    skinDataAry[4],
-                    skinDataAry[5],
+                    globalSkinAry[0],
+                    globalSkinAry[1],
+                    globalSkinAry[2],
+                    globalSkinAry[3],
+                    globalSkinAry[4],
+                    globalSkinAry[5],
                     mainCareDate))
         }).start()
     }

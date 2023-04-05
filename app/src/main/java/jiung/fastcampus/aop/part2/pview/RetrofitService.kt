@@ -11,17 +11,23 @@ public interface RetrofitService {
     // @GET( 전체 URL 에서 URI 제외한 EndPoint )
 
     @Multipart
-    @POST("/api/pview/skin")
-    fun postSkinImg(
+    @POST("/api/rpview/globalskin")
+    fun postGlobalSkinImg(
         @Part imageFile : MultipartBody.Part
     ) : Call<getResoponseDtoGlobal>
+
+    @Multipart
+    @POST("/api/rpview/detailskin")
+    fun postDetailSkinImg(
+        @Part imageFile : MultipartBody.Part
+    ) : Call<getResoponseDtoDetail>
 
     @GET("{location}")
     fun getPosts(
         @Path("location") post: String?
     ): Call<getTokenDto?>?
 
-    @POST("api/auth/login/email")
+    @POST("api/rauth/login/email")
     fun login(@Body user: JsonObject): Call<getTokenDto>
 
     @POST("/api/pview/testjson")

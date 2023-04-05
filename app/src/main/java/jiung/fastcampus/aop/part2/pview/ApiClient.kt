@@ -17,7 +17,7 @@ object ApiClient {
     //private const val BASE_URL = "http://54.180.218.7:5000/"
 
     //Pview DiDimDol
-    private const val BASE_URL = "http://43.200.49.213:5000/"
+    private const val BASE_URL = "http://3.36.149.88:5000/"
     private var retrofit: Retrofit? = null
     private var authToken: String? = " "
 

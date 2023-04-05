@@ -292,7 +292,7 @@ class ChartPageAmpleLineFragment : Fragment() {
 //            Log.d("mymymy", "${date}")
 //            Log.d("mymymy", "${time}")
 
-            entry.add(Entry(i.toFloat(), 5-dbLog[dbLog.size-1-i].recommendAcne?.toFloat()!!))
+            // entry.add(Entry(i.toFloat(), 5-dbLog[dbLog.size-1-i].recommendAcne?.toFloat()!!))
         }
         return entry
     }
@@ -385,7 +385,7 @@ class ChartPageAmpleLineFragment : Fragment() {
 //            Log.d("mymymy", "${date}")
 //            Log.d("mymymy", "${time}")
 
-            entry.add(Entry(i.toFloat(), 4-dbLog[dbLog.size-1-i].recommendStimulus?.toFloat()!!))
+            // entry.add(Entry(i.toFloat(), 4-dbLog[dbLog.size-1-i].recommendStimulus?.toFloat()!!))
         }
         return entry
     }
@@ -478,7 +478,7 @@ class ChartPageAmpleLineFragment : Fragment() {
 //            Log.d("mymymy", "${date}")
 //            Log.d("mymymy", "${time}")
 
-            entry.add(Entry(i.toFloat(), 4-dbLog[dbLog.size-1-i].recommendWhitening?.toFloat()!!))
+            // entry.add(Entry(i.toFloat(), 4-dbLog[dbLog.size-1-i].recommendWhitening?.toFloat()!!))
         }
         return entry
     }
@@ -571,7 +571,7 @@ class ChartPageAmpleLineFragment : Fragment() {
 //            Log.d("mymymy", "${date}")
 //            Log.d("mymymy", "${time}")
 
-            entry.add(Entry(i.toFloat(), 3-dbLog[dbLog.size-1-i].recommendWrinkle?.toFloat()!!))
+            // entry.add(Entry(i.toFloat(), 3-dbLog[dbLog.size-1-i].recommendWrinkle?.toFloat()!!))
         }
         return entry
     }
@@ -664,7 +664,7 @@ class ChartPageAmpleLineFragment : Fragment() {
 //            Log.d("mymymy", "${date}")
 //            Log.d("mymymy", "${time}")
 
-            entry.add(Entry(i.toFloat(), 3-dbLog[dbLog.size-1-i].recommendMoisture?.toFloat()!!))
+            // entry.add(Entry(i.toFloat(), 3-dbLog[dbLog.size-1-i].recommendMoisture?.toFloat()!!))
         }
         return entry
     }

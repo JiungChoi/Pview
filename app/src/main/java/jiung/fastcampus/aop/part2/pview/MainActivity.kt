@@ -109,13 +109,10 @@ class MainActivity : AppCompatActivity() {
         findViewById(R.id.ampleLineMoistureSeekBar)
     }
 
-    private val skinLineMoisturizingSeekBar: SeekBar by lazy {
-        findViewById(R.id.skinLineMoisturizingSeekBar)
+    private val testMoistureSeekBar: SeekBar by lazy {
+        findViewById(R.id.testMoistureSeekBar)
     }
 
-    private val skinLineOilSeekBar: SeekBar by lazy {
-        findViewById(R.id.skinLineOilSeekBar)
-    }
 
     // Bottom Buttons
     private val mainPictureButton: AppCompatImageButton by lazy {
@@ -193,20 +190,12 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
 
-                        recommendDataAry[0] = it.first().recommendAcne.toString()
-                        recommendDataAry[1] = it.first().recommendWhitening.toString()
-                        recommendDataAry[2] = it.first().recommendStimulus.toString()
-                        recommendDataAry[3] = it.first().recommendWrinkle.toString()
-                        recommendDataAry[4] = it.first().recommendMoisture.toString()
-                        recommendDataAry[5] = it.first().recommendMoisturizing.toString()
-                        recommendDataAry[6] = it.first().recommendOilly.toString()
-
-                        skinDataAry[0] = it.first().resultWrinkle.toString()
-                        skinDataAry[1] = it.first().resultSkinTone.toString()
-                        skinDataAry[2] = it.first().resultPoreDetect.toString()
-                        skinDataAry[3] = it.first().resultDeadSkin.toString()
-                        skinDataAry[4] = it.first().resultOilly.toString()
-                        skinDataAry[5] = it.first().resultPih.toString()
+                        globalSkinAry[0] = it.first().resultWrinkle.toString()
+                        globalSkinAry[1] = it.first().resultSkinTone.toString()
+                        globalSkinAry[2] = it.first().resultPoreDetect.toString()
+                        globalSkinAry[3] = it.first().resultDeadSkin.toString()
+                        globalSkinAry[4] = it.first().resultOilly.toString()
+                        globalSkinAry[5] = it.first().resultPih.toString()
 
                         mainCareDate = it.first().time.toString()
 
@@ -223,7 +212,7 @@ class MainActivity : AppCompatActivity() {
         }).start()
     }
 
-
+    var pictureType: String = "None"
     private var mainBottomSimpleHeight: Int? = null
     private var mainCenterRectangleViewSimpleHeight: Int? = null
     private fun setComponent() {
@@ -252,12 +241,12 @@ class MainActivity : AppCompatActivity() {
 
         }
         mainPictureButton.setOnClickListener {
-            var pictureType: String = "None"
+
             pictureType = selectPictureTypeContextPopup()
 
         }
         mainChartButton.setOnClickListener {
-            if (recommendDataAry[0] == "미측정"){
+            if (globalSkinAry[0] == "미측정"){
                 Toast.makeText(this, "진단 후 이용 가능한 서비스입니다.", Toast.LENGTH_SHORT).show()
             } else {
                 startActivity(Intent(this, ChartActivity::class.java))
@@ -269,6 +258,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    var type = "None"
     private fun selectPictureTypeContextPopup() :String {
         val layoutInflater = LayoutInflater.from(this)
         val view = layoutInflater.inflate(R.layout.select_picture_context_popup, null)
@@ -280,18 +270,16 @@ class MainActivity : AppCompatActivity() {
         val globalCareButton = view.findViewById<TextView>(R.id.global_care_button)
         val detailCareButton = view.findViewById<TextView>(R.id.detail_care_button)
 
-        var type = "None"
-        var loadType: String = "None"
 
         globalCareButton.setOnClickListener {
             "Global".also { type = it }
-            loadType = selectLoadTypeContextPopup(type)
+            selectLoadTypeContextPopup()
             alertDialog.dismiss()
         }
 
         detailCareButton.setOnClickListener {
             "Detail".also { type = it }
-            loadType = selectLoadTypeContextPopup(type)
+            selectLoadTypeContextPopup()
             alertDialog.dismiss()
         }
 
@@ -299,7 +287,8 @@ class MainActivity : AppCompatActivity() {
         return type
     }
 
-    private fun selectLoadTypeContextPopup(type: String) :String {
+
+    private fun selectLoadTypeContextPopup() {
         val layoutInflater = LayoutInflater.from(this)
         val view = layoutInflater.inflate(R.layout.select_load_context_popup, null)
 
@@ -354,7 +343,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         alertDialog.show()
-        return type
     }
 
     private fun navigatePhoto() {
@@ -402,6 +390,7 @@ class MainActivity : AppCompatActivity() {
             .setView(loadSkinView)
             .create()
         alertDialogLoadAndSend.show()
+
         loadSkinImageImageView.loadCenterCrop(url = uri, corner = 4f)
 
         val scdTextView = loadSkinView.findViewById<TextView>(R.id.scdTextView)
@@ -450,6 +439,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
     private fun postUriToServer(filePath: String) {
         //creating a file
         val file = File(filePath)
@@ -468,64 +458,97 @@ class MainActivity : AppCompatActivity() {
         val service = apiClient.getApiClient().create(RetrofitService::class.java)
 
         if (file.exists()) {
-            val call: Call<getResoponseDtoGlobal> = service.postSkinImg(body)
+            if (type == "Global"){
+                var call: Call<getResoponseDtoGlobal> = service.postGlobalSkinImg(body)
+                call.enqueue(object : Callback<getResoponseDtoGlobal> {
 
-            call.enqueue(object : Callback<getResoponseDtoGlobal> {
+                    override fun onResponse(
+                        call: Call<getResoponseDtoGlobal>,
+                        response: Response<getResoponseDtoGlobal>,
+                    ) {
+                        if (response?.isSuccessful) {
+                            Toast.makeText(applicationContext,
+                                "File Uploaded Successfully...",
+                                Toast.LENGTH_LONG).show()
+                            Log.d("myTag PostImg01", response?.body().toString().split("^").toString())
 
-                override fun onResponse(
-                    call: Call<getResoponseDtoGlobal>,
-                    response: Response<getResoponseDtoGlobal>,
-                ) {
-                    if (response?.isSuccessful) {
-                        Toast.makeText(applicationContext,
-                            "File Uploaded Successfully...",
-                            Toast.LENGTH_LONG).show()
-                        Log.d("myTag PostImg01", response?.body().toString().split("^").toString())
-
-                        parsingData(response?.body().toString().split("^"))
-                        finishPictureContextPopup()
-                    } else {
-                        Toast.makeText(applicationContext,
-                            "Some error occurred...",
-                            Toast.LENGTH_LONG).show()
-                        finishPictureContextPopup()
-                    }
-                }
-
-                private fun parsingData(resultArray: List<String>) {
-                    personalSkinRank = resultArray[0]
-
-                    val skinData = resultArray[1]
-                        .replace("[{", "")
-                        .replace("}]", "")
-                        .split(",")
-                    val recommendData = resultArray[2]
-                        .replace("[{", "")
-                        .replace("}]", "")
-                        .split(",")
-
-                    skinData.forEachIndexed { index, it ->
-                        if (index == 1) {
-                            skinDataAry[index] =
-                                "${100 - (it.split(":")[1].toFloat().div(6f) * 100).toInt()}"
-
+                            parsingData(response?.body().toString().split("^"))
+                            finishPictureContextPopup()
                         } else {
-                            skinDataAry[index] =
-                                "${100 - (it.split(":")[1].toFloat() * 100).toInt()}"
+                            Toast.makeText(applicationContext,
+                                "Some error occurred...",
+                                Toast.LENGTH_LONG).show()
+                            finishPictureContextPopup()
                         }
                     }
-                    recommendData.forEachIndexed { index, it ->
-                        recommendDataAry[index] = it.split(":")[1]
+
+                    private fun parsingData(resultArray: List<String>) {
+                        personalSkinRank = resultArray[0]
+
+                        // "$email,$wrinkle,$skin_tone,$pore_detect,$dead_skin,$oilly,$pih"
+                        Log.d("HEHEHE", "$personalSkinRank")
+                        Log.d("HEHEHE", "${personalSkinRank.split(',')}")
+
+                        setAppdataBase()
+
                     }
 
-                    setAppdataBase()
+                    override fun onFailure(call: Call<getResoponseDtoGlobal>, t: Throwable) {
+                        Log.d("myTag PostImg02", "${t.localizedMessage}")
+                    }
+                })
+            } else if (type=="Detail"){
+                var call: Call<getResoponseDtoDetail> = service.postDetailSkinImg(body)
+                call.enqueue(object : Callback<getResoponseDtoDetail> {
 
-                }
+                    override fun onResponse(
+                        call: Call<getResoponseDtoDetail>,
+                        response: Response<getResoponseDtoDetail>,
+                    ) {
+                        if (response?.isSuccessful) {
+                            Toast.makeText(applicationContext,
+                                "File Uploaded Successfully...",
+                                Toast.LENGTH_LONG).show()
+                            Log.d("myTag PostImg01", response?.body().toString().split(",").toString())
 
-                override fun onFailure(call: Call<getResoponseDtoGlobal>, t: Throwable) {
-                    Log.d("myTag PostImg02", "${t.localizedMessage}")
-                }
-            })
+                            parsingData(response?.body().toString().split("^"))
+                            finishPictureContextPopup()
+                        } else {
+                            Toast.makeText(applicationContext,
+                                "Some error occurred...",
+                                Toast.LENGTH_LONG).show()
+                            finishPictureContextPopup()
+                        }
+                    }
+
+                    private fun parsingData(resultArray: List<String>) {
+                        personalSkinRank = resultArray[0]
+
+                        // FIXME 1. DATA Shape 다 변경하고 2. 디테일 이미지 진단 (dto랑 다 수정) 3. 불러오기도 적용
+                        // "$email,$wrinkle,$skin_tone,$pore_detect,$dead_skin,$oilly,$pih"
+                        var skinScore = personalSkinRank.split(',')
+                        skinScore.forEachIndexed { index, it ->
+                            if (index == 1){
+                                globalSkinAry[index] = it
+                            } else if (index ==4){
+                                globalSkinAry[index] = it
+                            }
+                        }
+
+                        setAppdataBase()
+
+                    }
+
+
+                    @Override
+                    override fun onFailure(call: Call<getResoponseDtoDetail>, t: Throwable) {
+                        Log.d("myTag PostImg02", "${t.localizedMessage}")
+                    }
+
+                })
+            }
+
+
         } else {
             Log.d("myTAG PostImg03", "파일이 존재하지 않음")
         }
@@ -560,20 +583,13 @@ class MainActivity : AppCompatActivity() {
         Thread(Runnable {
             MainActivity.db.historyDao().insertHistory(
                 History(null, MainActivity.personalSex, MainActivity.personalAge,
-                    recommendDataAry[0],
-                    recommendDataAry[1],
-                    recommendDataAry[2],
-                    recommendDataAry[3],
-                    recommendDataAry[4],
-                    recommendDataAry[5],
-                    recommendDataAry[6],
 
-                    skinDataAry[0],
-                    skinDataAry[1],
-                    skinDataAry[2],
-                    skinDataAry[3],
-                    skinDataAry[4],
-                    skinDataAry[5],
+                    globalSkinAry[0],
+                    globalSkinAry[1],
+                    globalSkinAry[2],
+                    globalSkinAry[3],
+                    globalSkinAry[4],
+                    globalSkinAry[5],
                     mainCareDate))
         }).start()
     }
@@ -598,7 +614,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateSimpleInfoLayout() :Boolean{
-        if (recommendDataAry[0] != "미측정"){
+        if (globalSkinAry[0] != "미측정"){
             updateTextView(mainSimpleSkinTextureInfo, 1)
             updateTextView(mainSimpleSkinToneInfo, 2)
             updateTextView(mainSimpleSkinOilInfo, 3)
@@ -606,7 +622,7 @@ class MainActivity : AppCompatActivity() {
             mainCenterNumberPercentage.isVisible = true
             mainCenterGuideTextView.isVisible = true
 
-            val skinStateScore = (skinDataAry[0].toInt()+skinDataAry[1].toInt()+skinDataAry[2].toInt()+skinDataAry[3].toInt()+skinDataAry[4].toInt()+skinDataAry[5].toInt()).toFloat()/6
+            val skinStateScore = (globalSkinAry[0].toInt()+globalSkinAry[1].toInt()+globalSkinAry[2].toInt()+globalSkinAry[3].toInt()+globalSkinAry[4].toInt()+globalSkinAry[5].toInt()).toFloat()/6
             mainCenterNumberTextView.text = (100 - skinStateScore.toInt()).toString()
             mainCenterNumberTextView.textSize = 55f
             mainCenterNumberTextView.setTextColor(Color.rgb(30, 167, 172))
@@ -630,13 +646,31 @@ class MainActivity : AppCompatActivity() {
             ampleLineCalmStimulusSeekBar,
             ampleLineWrinkleSeekBar,
             ampleLineMoistureSeekBar,
-            skinLineMoisturizingSeekBar,
-            skinLineOilSeekBar)
+            testMoistureSeekBar)
 
-        recommendDataAry.forEachIndexed { index, it ->
-            upData(careDataSeekBars[index], it)
+
+
+        globalSkinAry.forEachIndexed { index, it ->
+            if (index==0){
+            }else{
+                Log.d("HEHEHE@@@", index.toString())
+                Log.d("HEHEHE@@@", it)
+                upData(careDataSeekBars[index-1], saturate6class(it))
+            }
         }
 
+    }
+
+    private fun saturate6class(score: String): String {
+        var scoreInt = score.toDouble()
+        scoreInt += 20
+        scoreInt /= 100
+        scoreInt *= 5
+        if (scoreInt.toInt() == 6){
+            scoreInt -= 1
+        }
+        Log.d("HEHEHEHE@@@", scoreInt.toInt().toString())
+        return scoreInt.toInt().toString()
     }
 
     private fun upData(seekBar: SeekBar, it: String) {
@@ -644,7 +678,7 @@ class MainActivity : AppCompatActivity() {
             seekBar.isVisible = false
         } else {
             seekBar.isVisible = true
-            seekBar.progress =  seekBar.max - it.toInt()
+            seekBar.progress =  it.toInt()
         }
     }
 
@@ -714,22 +748,15 @@ class MainActivity : AppCompatActivity() {
         internal var mainCareDate : String = "미측정"
         internal var personalSkinRank : String = "미측정"
 
-        // Acne, Whitening, Stimulus, Wrinkle, Moisture, Moisturizing, Oilly
-        internal var recommendDataAry: Array<String> = arrayOf("미측정",
-            "미측정",
-            "미측정",
-            "미측정",
-            "미측정",
-            "미측정",
-            "미측정")
 
-        // Wrinkle, SkinTone, PoreDetect, DeadSkin, Oilly, Pih
-        internal var skinDataAry: Array<String> = arrayOf("None",
-            "None",
-            "None",
-            "None",
-            "None",
-            "None")
+        // email, wrinkle, skin_tone, pore_detect, dead_skin, oilly, pih
+        internal var globalSkinAry: Array<String> = arrayOf("0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0")
 
         internal var personalSex = "여"
         internal var personalAge = "24"

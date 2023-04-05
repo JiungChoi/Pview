@@ -24,7 +24,7 @@ import com.github.mikephil.charting.utils.ViewPortHandler
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.dbLog
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.gradient
 import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.mainCareDate
-import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.skinDataAry
+import jiung.fastcampus.aop.part2.pview.MainActivity.Companion.globalSkinAry
 
 class ChartPageCareResultFragment : Fragment() {
 
@@ -96,12 +96,12 @@ class ChartPageCareResultFragment : Fragment() {
         chartPageUserResultOilResultTextView = view.findViewById(R.id.chartPageUserResultOilResultTextView)
         chartPageUserResultPihResultTextView = view.findViewById(R.id.chartPageUserResultPihResultTextView)
 
-        chartPageUserResultWrinkleResultTextView.text = skinDataAry[0]
-        chartPageUserSkinToneResultTextView.text = skinDataAry[1]
-        chartPageUserPoreDetectResultTextView.text = skinDataAry[2]
-        chartPageUserDeadSkinResultTextView.text = skinDataAry[3]
-        chartPageUserResultOilResultTextView.text = skinDataAry[4]
-        chartPageUserResultPihResultTextView.text = skinDataAry[5]
+        chartPageUserResultWrinkleResultTextView.text = globalSkinAry[0]
+        chartPageUserSkinToneResultTextView.text = globalSkinAry[1]
+        chartPageUserPoreDetectResultTextView.text = globalSkinAry[2]
+        chartPageUserDeadSkinResultTextView.text = globalSkinAry[3]
+        chartPageUserResultOilResultTextView.text = globalSkinAry[4]
+        chartPageUserResultPihResultTextView.text = globalSkinAry[5]
 
     }
 

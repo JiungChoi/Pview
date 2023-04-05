@@ -48,8 +48,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     // Login To Server && Get JWT
-    private val id: String = "123@123.com"
-    private val password: String = "123"
+    private val id: String = "test@test.com"
+    private val password: String = "test"
     private fun logInToServer() {
         //1. Json 문자열
         val user = ("{\"email\":\"${id}\","

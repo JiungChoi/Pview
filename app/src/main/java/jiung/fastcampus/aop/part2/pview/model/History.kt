@@ -10,14 +10,6 @@ data class History(
     @ColumnInfo(name= "sex")val sex: String?,
     @ColumnInfo(name= "age")val age: String?,
 
-    @ColumnInfo(name= "recommendAcne")val recommendAcne: String?,
-    @ColumnInfo(name= "recommendWhitening")val recommendWhitening: String?,
-    @ColumnInfo(name= "recommendStimulus")val recommendStimulus: String?,
-    @ColumnInfo(name= "recommendWrinkle")val recommendWrinkle: String?,
-    @ColumnInfo(name= "recommendMoisture")val recommendMoisture: String?,
-    @ColumnInfo(name= "recommendMoisturizing")val recommendMoisturizing: String?,
-    @ColumnInfo(name= "recommendOilly")val recommendOilly: String?,
-
     @ColumnInfo(name= "resultWrinkle")val resultWrinkle: String?,
     @ColumnInfo(name= "resultSkinTone")val resultSkinTone: String?,
     @ColumnInfo(name= "resultPoreDetect")val resultPoreDetect: String?,
